@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<orders>
+  <order>
+    <orderNumber>31</orderNumber>
+    <FIO>admin +7 (812) 244-08-80</FIO>
+    <country>Москва</country>
+    <region></region>
+    <city>Россия</city>
+    <adress>46564</adress>
+    <email>user475@realweb.ru</email>
+    <tel>+7 (812) 244-08-80</tel>
+    <comment></comment>
+    <created>23-01-2018 14:47:30</created>
+    <prepayment></prepayment>
+    <summ>14065.5000</summ>
+    <delivery>Курьером по Москве</delivery>
+    <trackingNumber></trackingNumber>
+    <pickupStore></pickupStore>
+    <deliveryCost>300.0000</deliveryCost>
+    <status>Нет в наличии</status>
+    <item>
+      <code1c>UT-00049690</code1c>
+      <article>849557-011</article>
+      <brand>Nike</brand>
+      <size>6.5</size>
+      <price>14490.0000</price>
+      <discount_percent></discount_percent>
+      <discount_summ>724.5</discount_summ>
+      <quantity>1</quantity>
+      <change_time>23-01-2018 18:32:58</change_time>
+    </item>
+  </order>
+</orders>

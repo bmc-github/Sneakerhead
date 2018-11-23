@@ -1,0 +1,19 @@
+.cart-info{width:100%;}
+.cart-info thead{display:none;}
+.cart-info td, .account_wr .favorite-page .wishlist-info td{vertical-align:top !important;}
+.cart .cartBox .listItems .item .imgBox{float:none !important;}
+.cart .cartBox .listItems .item .des{float:none !important; position:relative;}
+form.coup input {
+    background: #F20113;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 5px;
+}
+.bx_ordercart_coupon input.good {
+    width: auto;
+    display: inline-block;
+    text-align: center;
+}

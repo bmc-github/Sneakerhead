@@ -1,0 +1,82 @@
+  .choose-size-wrap {
+    margin-bottom: 16px;
+}
+  .flex-row{
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+
+      -webkit-flex-flow: row wrap;
+      justify-content: start;
+    }
+ 
+    .choose-size-wrap {
+      margin-bottom: 16px;
+    }
+
+    .sizes-chart-item {
+      width: 46px;
+      line-height: 46px;
+      text-align: center;
+      border: 1px #ddd solid;
+      position: relative;
+    }
+
+    .sizes-chart-item:hover{
+      color: red;
+      cursor: pointer;
+    }
+
+    .selected{
+      color: red;
+    }
+
+
+ 
+ .sizes-chart-header {
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .size_range_name {
+      font-size: 11px;
+      letter-spacing: 1px;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    .size_range_name.selected {
+      color: red;
+    }
+
+    .sizes-chart-item_shops {
+      display: none;
+      position: absolute;
+      z-index: 1;
+      width: 200px;
+      left: -206px;
+      top: 0;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: black;
+      text-transform: uppercase;
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+      line-height: 20px;
+        text-align: left;
+        padding: 12px;
+        	background-color: white;
+    }
+   
+a.show_size_grid_trigger {
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: #f20113;
+    margin-bottom: 12px;
+}

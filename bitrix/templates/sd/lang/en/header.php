@@ -1,0 +1,40 @@
+<?
+$MESS['H_LOGGED_AS'] = 'You are logged in as';
+$MESS['H_LOGOUT'] = 'Logout';
+$MESS['H_LOGIN'] = 'Login';
+$MESS['H_OR'] = 'or';
+$MESS['H_REGISTER'] = 'Register';
+$MESS['H_DELIVERY_AND_PAYMENT'] = 'Delivery and Payment';
+$MESS['H_SHOP_ADDRESSES'] = 'Shop addresses';
+$MESS['H_LOGO_TITLE'] = 'Sneakerhead - online store for sports shoes and clothes';
+$MESS['H_LOGO_ALT'] = 'Selling shoes, sneakers, athletic shoes and clothing in Sneakerhead online store';
+$MESS['H_ISNEW'] = 'New';
+$MESS['H_BRANDS'] = 'Brands';
+$MESS['H_SNEAKERS'] = 'Sneakers';
+$MESS['H_CLOTHES'] = 'Clothing';
+$MESS['H_SHOES'] = 'Shoes';
+$MESS['H_SALE'] = 'Sale';
+$MESS['H_BLOG'] = 'Blog';
+$MESS['H_ISNEW_ALL'] = 'All new';
+$MESS['H_BRANDS_ALL'] = 'All brands';
+$MESS['H_SUPPORT'] = 'Customer support 24/7';
+$MESS['H_SUPPORT_TITLE'] = 'We do not abandon our clients';
+$MESS['H_SUBSCRIBE'] = 'Subscribe to newsletter';
+$MESS['H_AGREEMENT'] = 'I have read and agree to the terms of this';
+$MESS['H_AGREEMENT_PRIVACY'] = 'Privacy Policy';
+$MESS['H_NEW_IN_BLOG'] = 'New in blog';
+$MESS['H_VIEW_ALL'] = 'View all';
+$MESS['H_OFFLINE_STORES'] = 'Moscow offline stores';
+$MESS['H_HOW_TO_ORDER'] = 'How to order';
+$MESS['H_RETURN'] = 'Return policy';
+$MESS['H_FAQ'] = 'FAQ';
+$MESS['H_SPECIALS'] = 'Specials';
+$MESS['H_CONTACTS'] = 'Contact information';
+$MESS['H_PRIVACY'] = 'Terms & Conditions';
+$MESS['H_OFERTA'] = 'Offer contract';
+$MESS['H_SITEMAP'] = 'Sitemap';
+$MESS['H_SORT'] = 'Default';
+$MESS['H_PRICE_ASC'] = 'Price (Low > High)';
+$MESS['H_PRICE_DESC'] = 'Price (High > Low)';
+
+?>

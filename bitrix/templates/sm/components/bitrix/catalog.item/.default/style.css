@@ -1,0 +1,5 @@
+.product-grid .item{display:grid;position:relative;}
+.items .item a .img{padding-top:0% !important;}
+@media (max-width: 400px){
+  .product-grid .item img {}
+}

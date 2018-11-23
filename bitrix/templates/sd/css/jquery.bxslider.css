@@ -1,0 +1,120 @@
+ul.bxslider{margin:0;padding:0;}
+.bx-wrapper{position:relative;margin:0 auto 10px;padding:0;}
+.bx-wrapper img{width:100%;display:block;}
+.bx-wrapper .bx-viewport{background:#fff;-webkit-transform:translatez(0);-moz-transform:translatez(0);-ms-transform:translatez(0);-o-transform:translatez(0);transform:translatez(0);}
+.bx-wrapper .bx-loading{min-height:50px;background:url(../images/bx_loader.gif) center center no-repeat #fff;height:100%;width:100%;position:absolute;top:0;left:0;z-index:2000;}
+
+.bx-wrapper .bx-controls-auto,.bx-wrapper .bx-pager{
+    position:absolute;
+    bottom:40px;
+    left: 24px;
+}
+.bx-wrapper .bx-pager{
+    text-align:center;
+    font-size:.85em;
+    font-family:Arial;
+    font-weight:700;
+    color:#666;
+    padding-top:20px;
+}
+.bx-wrapper .bx-controls-auto .bx-controls-auto-item,.bx-wrapper .bx-pager .bx-pager-item{
+    display:inline-block;
+}
+.bx-wrapper .bx-pager.bx-default-pager a{    
+    width: 32px;
+    height: 32px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background: none;
+    text-indent:-9999px;
+    display:block;
+    outline:0;
+    position: relative;
+    margin-right: 2px;
+}
+.bx-wrapper .bx-pager.bx-default-pager a:after{
+    content: '';
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    left: 6px;
+    top: 6px;
+}
+
+
+.bx-wrapper .bx-pager.bx-default-pager a.active,.bx-wrapper .bx-pager.bx-default-pager a:hover{border-color: white;}
+
+
+
+.bx-wrapper .bx-prev{left:10px;background:url(../images/bx-controls.png) no-repeat 0 0;}
+.bx-wrapper .bx-next{right:10px;background:url(../images/bx-controls.png) no-repeat -34px;}
+.bx-wrapper .bx-prev:hover{opacity:1;}
+.bx-wrapper .bx-next:hover{opacity:1;}
+.bx-wrapper .bx-controls-direction a{position:absolute;top:50%;margin-top:-35px;outline:0;width:34px;height:70px;text-indent:-9999px;z-index:99;opacity:0.75;}
+.bx-wrapper .bx-controls-direction a.disabled{display:none;}
+.bx-wrapper .bx-controls-auto{text-align:center;}
+.bx-wrapper .bx-controls-auto .bx-start{display:block;text-indent:-9999px;width:10px;height:11px;outline:0;background:url(../images/bx-controls.png) -86px -11px no-repeat;margin:0 3px;}
+.bx-wrapper .bx-controls-auto .bx-start.active,.bx-wrapper .bx-controls-auto .bx-start:hover{background-position:-86px 0;}
+.bx-wrapper .bx-controls-auto .bx-stop{display:block;text-indent:-9999px;width:9px;height:11px;outline:0;background:url(../images/bx-controls.png) -86px -44px no-repeat;margin:0 3px;}
+.bx-wrapper .bx-controls-auto .bx-stop.active,.bx-wrapper .bx-controls-auto .bx-stop:hover{background-position:-86px -33px;}
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager{text-align:left;width:80%;}
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto{right:0;width:35px;}
+.bx-wrapper .bx-caption{position:absolute;bottom:0;left:0;background:rgba(80,80,80,.75);width:100%;}
+.bx-wrapper .bx-caption span{color:#fff;font-family:Arial;display:block;font-size:.85em;padding:10px;}
+.bx-wrapper .descSlide{
+    position: absolute;
+    top: 28%;
+    left: 24px;
+    font-family: 'Roboto';
+    max-width: 800px;
+    color: #fff;;
+}
+.bx-wrapper .titleSlide{
+    font-size: 64px;
+    line-height: 64px;
+    letter-spacing: 1.5px;
+    font-weight: 100;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.bx-wrapper .labelSlide{
+    padding: 8px 0;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-bottom: 3px solid #ef0d22;
+    margin-bottom: 15px;
+}
+
+.bx-wrapper .textSlide{
+    padding: 8px 0;
+    display: block;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-family: 'Roboto';
+    font-weight: 300;
+}
+
+.bx-wrapper .buySlide{
+    padding: 23px 60px;
+    float: left;
+    background: #ef0d22;
+    border: 1px solid #ef0d22;
+    color: white;
+    font-size: 10px;
+    line-height: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all linear .2s;
+}
+.bx-wrapper .buySlide:hover{
+    background: none;
+    color: #ef0d22;
+}
+.bx-wrapper .bx-controls-direction a{
+    display: none;
+}

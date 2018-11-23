@@ -1,0 +1,87 @@
+.socialBox {
+    margin-bottom: 0;
+}
+
+.round-icon-link {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    border-radius: 100%;
+    position: relative;
+}
+
+.socialBox a {
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    margin: 0 4px;
+    background-image: url(/catalog/view/theme/default/image/sprite.svg);
+    background-repeat: no-repeat;
+    text-decoration: none;
+}
+
+.socialBox a.vk {
+    background-position: -420px 0;
+}
+.socialBox a.vk:hover {
+    background-position: -462px 0;
+}
+
+.socialBox a.in:hover {
+    background-position: -210px 0;
+}
+.socialBox a.in {
+    background-position: -168px 0;
+}
+
+.socialBox a.fb:hover {
+    background-position: -126px 0;
+}
+.socialBox a.fb {
+    background-position: -84px 0;
+}
+
+.socialBox a.yo:hover {
+    background-position: -546px 0;
+}
+.socialBox a.yo {
+    background-position: -504px 0;
+}
+
+.techBox {
+        float: right;
+    width: 14%;
+    text-align: right;
+    padding-right: 26px;
+    display: inline-block;
+}
+
+.techBox a {
+    width:  26px;
+    height: 26px;
+    margin: 0 4px;
+    background-image: url(/catalog/view/theme/default/image/sprite.svg);
+    background-repeat: no-repeat;
+    text-decoration: none;
+}
+
+.ri-search {
+    background-position: -252px 0;
+}
+.ri-search:hover {
+    background-position: -294px 0;
+}
+
+ .ri-cart {
+    background-position: 0 0;
+}
+ .ri-cart:hover {
+    background-position: -42px 0;
+}
+ .ri-star {
+    background-position: -588px 0;
+}
+ .ri-star:hover {
+    background-position: -630px 0;
+}
