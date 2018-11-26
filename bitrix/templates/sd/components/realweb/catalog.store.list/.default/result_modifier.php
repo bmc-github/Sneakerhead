@@ -51,9 +51,9 @@ CModule::IncludeModule("grain.tables");
 				 	$PROP[101][$_POST['ID_LINE']]['stat']='approved=1';
 				 };  
 			 } else if ($_POST['Q_NUM']=='N'&&!isset($_POST['SV'])){
-				 $PROP[101][$_POST['ID_LINE']]['stat']='Pre_denied=22';   
+				 $PROP[101][$_POST['ID_LINE']]['stat']='denied=2';   
 			 } else if ($_POST['Q_NUM']=='N'&&isset($_POST['SV'])){
-				 $PROP[101][$_POST['ID_LINE']]['stat']='Pre_denied=22';   
+				 $PROP[101][$_POST['ID_LINE']]['stat']='denied=2';   
 			 };
 		 };
 		 if ($_POST['WHO']=='M'){// менеджер
@@ -72,7 +72,7 @@ CModule::IncludeModule("grain.tables");
 				 	$PROP[101][$_POST['ID_LINE']]['stat']='approved=1';
 				 };   
 			 } else if ($_POST['Q_NUM']=='N'&&!isset($_POST['SV'])){
-			 	$PROP[101][$_POST['ID_LINE']]['stat']='denied=2';   
+			 	$PROP[101][$_POST['ID_LINE']]['stat']='Pre_denied=22';   
 			 } else if ($_POST['Q_NUM']=='N'&&isset($_POST['SV'])){
 			 	$PROP[101][$_POST['ID_LINE']]['stat']='Pre_denied=22';   
 		 	 };
@@ -134,8 +134,8 @@ CModule::IncludeModule("grain.tables");
 	//Для конкретного случая - проверяем все статусы позиций в заказе (для изменения общего статуса) 
 	} else if (in_array("denied=2", $Z)) {
 		//Если хотя бы одна единица в статусе - Отменен
-		$PROP[94]=92;
-	} else if (in_array("Pre_denied=22", $Z)) {
+		$PROP[94]=91;
+} else if (in_array("Pre_denied=22", $Z)) {
 		//Если хотя бы одна единица в статусе - Нет в наличии
 		$PROP[94]=91;
 	} else if ($Zc==$Z4c) {
