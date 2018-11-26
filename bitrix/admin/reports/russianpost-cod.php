@@ -380,7 +380,8 @@ switch ($arOrder['DELIVERY_ID']) {
 				}
 				return false;
 			});
-	function Printed(id) {	
+	function Printed(id) {
+	$('#form_tbl_sale_order input',window.opener.document).prop('checked', false);
 	$('input[value="'+id+'"]',window.opener.document).prop('checked', true);
 	$('#form_tbl_sale_order option[value="status_OF"]',window.opener.document).prop('selected', true);
 $('#form_tbl_sale_order input[name="apply"]',window.opener.document).prop('disabled', false);
