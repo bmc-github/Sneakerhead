@@ -273,6 +273,7 @@ if(!empty($id_OP)){
 		//ID магазина самовывоза
 		$shop = $shipment->getStoreId();
 	};
+	$prM->setfield('COMMENTS', '(');
 	if($USER->IsAdmin()||$arUser['UF_DOSTUP']==0 || $shop == $arUser['UF_DOSTUP']){
 		$comment = $prM->getfield('COMMENTS').'\n'.$commentOP;
 		
@@ -293,9 +294,10 @@ if(!empty($id_OP)){
 		$prM->setfield('COMMENTS', $comment);
 		//Изменение общего статуса заказа на выбранный
 		$prM->setfield('STATUS_ID', 'OP');
-		$prM->save();
+		
 		
 	};
+	$prM->save();
 	exit();
 }
 
