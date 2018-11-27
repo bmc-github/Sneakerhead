@@ -314,6 +314,7 @@ $orderM = array();
 while($orderOne = $roM->GetNext()){
 	$orderMFull[] = $orderOne;
 }
+var_dump($orderMFull);
 
 foreach($orderMFull as $orderM) {
 	$prM = \Bitrix\Sale\Order::load($orderM['ID']);
