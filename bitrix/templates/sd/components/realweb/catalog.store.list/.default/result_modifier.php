@@ -386,6 +386,8 @@ foreach($orderMFull as $orderM) {
 };
 }
 
+var_dump($arResult['Z-ITEM']);
+
 
 $arResult["ITEMS"] = array();
 if ($_GET['sort']){
