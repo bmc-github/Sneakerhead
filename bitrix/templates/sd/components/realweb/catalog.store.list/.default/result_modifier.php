@@ -254,7 +254,7 @@ if(!empty($id_OT)){
 		$prM->save();
 		
 	};
-	die();
+	exit();
 }
 //END
 
@@ -296,7 +296,7 @@ if(!empty($id_OP)){
 		$prM->save();
 		
 	};
-	die();
+	exit();
 }
 
 
