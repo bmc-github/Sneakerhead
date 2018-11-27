@@ -318,88 +318,75 @@ $id_OP=htmlspecialchars($_POST['id-OP']);
 
 $id_OK=htmlspecialchars($_POST['id-OK']);
 
-if ($id_track!=''&&$track!=''||$commentOT!=''&&$id_OT!=''||$commentOP!=''&&$id_OP!=''||$id_OK!=''){
-if ($id_track!=''){
-$prM = \Bitrix\Sale\Order::load($id_track);   
-} else if ($id_OT!='') {
-$prM = \Bitrix\Sale\Order::load($id_OT);    
-} else if ($id_OP!='') {
-$prM = \Bitrix\Sale\Order::load($id_OP);  
-} else if ($id_OK!='') {
-$prM = \Bitrix\Sale\Order::load($id_OK);    
-};
+if (($id_track!=''&&$track!='')||($commentOT!=''&&$id_OT!='')||($commentOP!=''&&$id_OP!='')||$id_OK!=''){
+	if ($id_track!=''){
+		$prM = \Bitrix\Sale\Order::load($id_track);   
+	} else if ($id_OT!='') {
+		$prM = \Bitrix\Sale\Order::load($id_OT);    
+	} else if ($id_OP!='') {
+		$prM = \Bitrix\Sale\Order::load($id_OP);  
+	} else if ($id_OK!='') {
+		$prM = \Bitrix\Sale\Order::load($id_OK);    
+	};
 //Дата последнего изменения и Статус заказа
 $fields = $prM->getfields();
 $comment=$fields["COMMENTS"];
 //Кнопка отмена
 if ($commentOT!=''&&$id_OT!=''){
-//Общий комментарий
-$prM->setfield('COMMENTS', $commentOT);
-//Изменение общего статуса заказа на выбранный
-$prM->setfield('STATUS_ID', $OT);
-$prM->save();
+	//Общий комментарий
+	$prM->setfield('COMMENTS', $comment.'\n'.$commentOT);
+	//Изменение общего статуса заказа на выбранный
+	$prM->setfield('STATUS_ID', $OT);
+	$prM->save();
+	exit();
 };
-//END
-
-$propertyCollection = $prM->getPropertyCollection();
-//Получение email заказа
-$email=$propertyCollection->getUserEmail();
-$email=$email->getfields();
-//Получение ФИО пользователя
-$FIO=$propertyCollection->getPayerName();
-$FIO=$FIO->getfields();
-//Получение телефона пользователя
-$phone=$propertyCollection->getPhone();
-
-$phone=$phone->getfields();
-$paymentCollection = $prM->getPaymentCollection();
-foreach ($paymentCollection as $payment){
-    
-//Кнопка оплаченно
 
 if ($id_OK!=''){
-//Изменение общего статуса заказа на - отправлен
-$prM->setfield('STATUS_ID', 'F');
-$prM->save();
+	//Изменение общего статуса заказа на выбранный
+	$prM->setfield('STATUS_ID', 'F');
+	$prM->save();
+	exit();
 };
 //END
 
-//Кнопка отправлен
+if($id_OP){//Кнопка оплачено
+	$paymentCollection = $prM->getPaymentCollection();
+	foreach ($paymentCollection as $payment){	    
 
-if ($commentOP!=''&&$id_OP!=''){
-//Общий комментарий
-$prM->setfield('COMMENTS', $commentOP);
-//Комментарий в редактировании оплаты
-$payment->setfield('COMMENTS', $commentOP);
-//Изменени статуса оплачен - в редактировании оплаты
-$payment->setfield('PAID', 'Y');
-//Изменение общего статуса заказа на оплаченно
-$prM->setfield('STATUS_ID', 'OP');
-$prM->save();
-};
-//END
+		$prM->setfield('COMMENTS', $comment.'\n'.$commentOP);
+		//Комментарий в редактировании оплаты
+		$payment->setfield('COMMENTS', $comment.'\n'.$commentOP);
+		//Изменени статуса оплачен - в редактировании оплаты
+		$payment->setfield('PAID', 'Y');
+		//Изменение общего статуса заказа на оплаченно
+		
+		};
+		//END
 
+	$prM->setfield('STATUS_ID', 'OP');
+	$prM->save();
+	exit();
+}
+
+
+if($id_track!=''){//номер
+	$shipmentCollection = $prM->getShipmentCollection();    
+	foreach($shipmentCollection as $shipment)
+	{
+		//Пропуск системных значений
+		if ($shipment->isSystem())
+		continue;
+		
+		//Изменение трек номера
+		if ($track!=''&&$id_track!=''){
+			$shipment->setfield('DELIVERY_DOC_NUM', $_POST['track']);
+		};
+		//END
+		
+	};
+	$prM->setfield('STATUS_ID', 'F');
+	$prM->save();
+	exit();
 };
-$shipmentCollection = $prM->getShipmentCollection();    
-foreach($shipmentCollection as $shipment)
-{   
-//Пропуск системных значений
-if ($shipment->isSystem())
-continue;
-//Изменение трек номера
-if ($track!=''&&$id_track!=''){
-$shipment->setfield('DELIVERY_DOC_NUM', $_POST['track']);
-$prM->setfield('STATUS_ID', 'F');
-$prM->save();
-};
-//END
-//Способ отправки
-$deliverystat=$shipment->getfields();
-//ID магазина
-$shop=$shipment->getStoreId();
-//Номер почтового отправления
-$numberpost=$shipment->getfields();
-};
-};
-endif;
+}
 ?>

@@ -3,6 +3,7 @@
 CModule::IncludeModule("sale");
 CModule::IncludeModule('catalog');
 CModule::IncludeModule("grain.tables");
+use \Bitrix\Main\Diag\Debug;
 
 $rsUser = CUser::GetByID($USER->GetID());
 $arUser = $rsUser->Fetch();
@@ -205,7 +206,7 @@ exit();
 
 //////UPDATE statuses
 //Изменение трек номера
-$track=htmlspecialchars($_POST['track']);
+$track = htmlspecialchars($_POST['track']);
 $id_track=htmlspecialchars($_POST['id-track']);
 if(($USER->IsAdmin()||$arUser['UF_DOSTUP']==0) && $id_track){
 	$prM = \Bitrix\Sale\Order::load($id_track);
@@ -235,7 +236,7 @@ $OT=htmlspecialchars($_POST['OT']);
 $id_OT=htmlspecialchars($_POST['id-OT']);
 $commentOT=htmlspecialchars($_POST['commentOT']);
 if(!empty($id_OT)){
-	$prM = \Bitrix\Sale\Order::load($id_track);
+	$prM = \Bitrix\Sale\Order::load($id_OT);
 	$shipmentCollection = $prM->getShipmentCollection();
 	foreach($shipmentCollection as $shipment){
 		//Пропуск системных значений
@@ -262,8 +263,8 @@ if(!empty($id_OT)){
 $commentOP=htmlspecialchars($_POST['commentOP']);
 $id_OP=htmlspecialchars($_POST['id-OP']);
 if(!empty($id_OP)){
-	
-	$prM = \Bitrix\Sale\Order::load($id_track);
+
+	$prM = \Bitrix\Sale\Order::load($id_OP);
 	$shipmentCollection = $prM->getShipmentCollection();
 	foreach($shipmentCollection as $shipment){
 		//Пропуск системных значений
@@ -273,9 +274,10 @@ if(!empty($id_OP)){
 		//ID магазина самовывоза
 		$shop = $shipment->getStoreId();
 	};
-	$prM->setfield('COMMENTS', '(');
+
 	if($USER->IsAdmin()||$arUser['UF_DOSTUP']==0 || $shop == $arUser['UF_DOSTUP']){
 		$comment = $prM->getfield('COMMENTS').'\n'.$commentOP;
+
 		
 		$paymentCollection = $prM->getPaymentCollection();
 		foreach ($paymentCollection as $payment){
@@ -283,17 +285,12 @@ if(!empty($id_OP)){
 			$payment->setfield('COMMENTS', $comment);
 			//Изменени статуса оплачен - в редактировании оплаты
 			$payment->setfield('PAID', 'Y');
-			//Изменение общего статуса заказа на оплаченно
-			$prM->setfield('STATUS_ID', 'OP');
-			$prM->save();
-		
-		
+
 			//END
 		};
-		
-		$prM->setfield('COMMENTS', $comment);
+		$prM->setField('COMMENTS', $comment);
 		//Изменение общего статуса заказа на выбранный
-		$prM->setfield('STATUS_ID', 'OP');
+		$prM->setField('STATUS_ID', 'OP');
 		
 		
 	};
