@@ -242,7 +242,7 @@ if(!empty($id_OT)){
 		$shop = $shipment->getStoreId();
 	};
 	if($USER->IsAdmin()||$arUser['UF_DOSTUP']==0 || $shop == $arUser['UF_DOSTUP']){
-		$comment = prM->getfield('COMMENTS');
+		$comment = $prM->getfield('COMMENTS');
 
 		$prM->setfield('COMMENTS', $comment. '<br>'.$commentOT);
 		//Изменение общего статуса заказа на выбранный
@@ -270,7 +270,7 @@ if(!empty($id_OP)){
 		$shop = $shipment->getStoreId();
 	};
 	if($USER->IsAdmin()||$arUser['UF_DOSTUP']==0 || $shop == $arUser['UF_DOSTUP']){
-		$comment = prM->getfield('COMMENTS');
+		$comment = $prM->getfield('COMMENTS');
 		
 		$paymentCollection = $prM->getPaymentCollection();
 		foreach ($paymentCollection as $payment){
