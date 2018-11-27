@@ -3,6 +3,10 @@
 CModule::IncludeModule("sale");
 CModule::IncludeModule('catalog');
 CModule::IncludeModule("grain.tables");
+
+$rsUser = CUser::GetByID($USER->GetID());
+$arUser = $rsUser->Fetch();
+
 //Обновление позиций при действии из логистического модуля
  if (isset($_POST['ID'])){
 	 $ID_UP = $_POST['ID']; 
