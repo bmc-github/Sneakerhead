@@ -308,6 +308,8 @@ if (isset($sT)){
 
 //Получаем список заказав для менеджеров интернет магазина - со статусом отправлен
 //TODO добавить отбор по менеджерам/админ
+var_dump($USER);
+var_dump($arUser);
 if(!$USER->IsAdmin()&&$arUser['UF_DOSTUP']!=0){
 $roM = CSaleOrder::GetList(array($sT[0]=>$sT[1]), array('STATUS_ID'=>'F','DELIVERY_ID'=>3), false, false, array("ID","STATUS_ID","DELIVERY_ID",'ACCOUNT_NUMBER'));
 $orderM = array();
