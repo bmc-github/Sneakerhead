@@ -329,8 +329,8 @@ if (($id_track!=''&&$track!='')||($commentOT!=''&&$id_OT!='')||($commentOP!=''&&
 		$prM = \Bitrix\Sale\Order::load($id_OK);    
 	};
 //Дата последнего изменения и Статус заказа
-$fields = $prM->getfields();
-$comment=$fields["COMMENTS"];
+$comment = $prM->getfield("COMMENTS");
+
 //Кнопка отмена
 if ($commentOT!=''&&$id_OT!=''){
 	//Общий комментарий
@@ -352,8 +352,6 @@ if ($id_OK!=''){
 if($id_OP){//Кнопка оплачено
 	$paymentCollection = $prM->getPaymentCollection();
 	foreach ($paymentCollection as $payment){	    
-
-		$prM->setfield('COMMENTS', $comment.'\n'.$commentOP);
 		//Комментарий в редактировании оплаты
 		$payment->setfield('COMMENTS', $comment.'\n'.$commentOP);
 		//Изменени статуса оплачен - в редактировании оплаты
@@ -362,7 +360,7 @@ if($id_OP){//Кнопка оплачено
 		
 		};
 		//END
-
+	$prM->setfield('COMMENTS', $comment.'\n'.$commentOP);	
 	$prM->setfield('STATUS_ID', 'OP');
 	$prM->save();
 	exit();
