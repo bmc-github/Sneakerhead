@@ -246,9 +246,9 @@ if(!empty($id_OT)){
 		$shop = $shipment->getStoreId();
 	};
 	if($USER->IsAdmin()||$arUser['UF_DOSTUP']==0 || $shop == $arUser['UF_DOSTUP']){
-		$comment = $prM->getfield('COMMENTS');
+		$comment = $prM->getfield('COMMENTS').'<br>'.$commentOT;
 
-		$prM->setfield('COMMENTS', $comment. '<br>'.$commentOT);
+		$prM->setfield('COMMENTS', $comment);
 		//Изменение общего статуса заказа на выбранный
 		$prM->setfield('STATUS_ID', $OT);
 		$prM->save();
@@ -274,12 +274,12 @@ if(!empty($id_OP)){
 		$shop = $shipment->getStoreId();
 	};
 	if($USER->IsAdmin()||$arUser['UF_DOSTUP']==0 || $shop == $arUser['UF_DOSTUP']){
-		$comment = $prM->getfield('COMMENTS');
+		$comment = $prM->getfield('COMMENTS').'\n'.$commentOP;
 		
 		$paymentCollection = $prM->getPaymentCollection();
 		foreach ($paymentCollection as $payment){
 
-			$payment->setfield('COMMENTS', $comment. '<br>'.$commentOP);
+			$payment->setfield('COMMENTS', $comment);
 			//Изменени статуса оплачен - в редактировании оплаты
 			$payment->setfield('PAID', 'Y');
 			//Изменение общего статуса заказа на оплаченно
@@ -290,7 +290,7 @@ if(!empty($id_OP)){
 			//END
 		};
 		
-		$prM->setfield('COMMENTS', $comment. '<br>'.$commentOP);
+		$prM->setfield('COMMENTS', $comment);
 		//Изменение общего статуса заказа на выбранный
 		$prM->setfield('STATUS_ID', 'OP');
 		$prM->save();
