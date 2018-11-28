@@ -1,9 +1,10 @@
-<? if (stristr($_SERVER['REQUEST_URI'], '/bitrix/admin/sale_order.php')): ?>
+<? 
+/*if (stristr($_SERVER['REQUEST_URI'], '/bitrix/admin/sale_order.php')): ?>
+
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 
 <style>
-/* Стилизация модалок */
 .modal-log {
     position: fixed;
     width:  100%;
@@ -390,5 +391,5 @@ if($id_track!=''){//номер
 	$prM->save();
 	exit();
 };
-}
+}*/
 ?>
