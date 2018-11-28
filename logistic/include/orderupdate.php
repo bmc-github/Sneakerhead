@@ -306,6 +306,10 @@ $(document).ready(function () {
 </form>
 </div>
 <?
+use     \Bitrix\Main\Diag\Debug;
+
+Debug::writeToFile($_POST, "", "/upload/import/1.txt");
+
 $id_track=htmlspecialchars($_POST['id-track']);
 $track=htmlspecialchars($_POST['track']);
 
