@@ -14,6 +14,13 @@ CModule::IncludeModule("catalog");
 $component = $this->getComponent();
 $arParams = $component->applyTemplateModifications();
 
+$gend = mb_strtolower(mb_substr(strip_tags($arResult['DISPLAY_PROPERTIES']['GENDER']['DISPLAY_VALUE']), 0, 1, "UTF-8"), "UTF-8");
+if(!$gend){
+	$gend = 'м';
+}
+
+$gender_from_basket = array('м'=>88,'ж'=>89,'д'=>90);
+
 $brand = CIBlockElement::GetList(array(), array('IBLOCK_ID' => 6, 'ID' => $arResult['DISPLAY_PROPERTIES']['BRAND']['VALUE']), false, false,
     array(
     'ID',
@@ -25,16 +32,16 @@ $brand = CIBlockElement::GetList(array(), array('IBLOCK_ID' => 6, 'ID' => $arRes
 
 
 global $DB;
-$strSql = "SELECT * FROM cat_category_sizecharts WHERE brand_id=" . $brand['EXTERNAL_ID'];
+$strSql = "SELECT * FROM cat_category_sizecharts WHERE brand_id=" . $brand['EXTERNAL_ID'] . " && gender=".$gender_from_basket[$gend];
 $res = $DB->Query($strSql, false, $err_mess . __line__);
 
+if(!$res->SelectedRowsCount()){
+	$strSql = "SELECT * FROM cat_category_sizecharts WHERE brand_id=49  && gender=".$gender_from_basket[$gend];
+	$res = $DB->Query($strSql, false, $err_mess . __line__);
+}
 $sizes_u = array();
-
 while ($arElement = $res->GetNext()) {
-
     $sizes_u[] = $arElement;
-
-
 }
 
 
