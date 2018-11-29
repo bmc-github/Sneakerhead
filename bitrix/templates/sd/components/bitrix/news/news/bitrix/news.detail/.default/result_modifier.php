@@ -9,6 +9,7 @@ $arResult['DETAIL_TEXT'] = str_replace(array(' style=""',' rel=""',' rel="noopen
 $arResult['DETAIL_TEXT'] = preg_replace('/<h1(.*)>(.*)<\/h1>/isU', '<div$1>$2</div>', $arResult['DETAIL_TEXT']);
 
 $name = trim(str_replace(array('  ','« ',' »'),array(' ','«','»'),$arResult['NAME']));
+/*
 $arResult['DETAIL_TEXT'] = preg_replace_callback(array(
 	'/<div class="t001__title t-title t-title_xl" field="title">(.*)<\/div>/isU',
 	'/<div class="t001__title t-title t-title_xl " field="title">(.*)<\/div>/isU'), 
@@ -32,7 +33,7 @@ $arResult['DETAIL_TEXT'] = preg_replace_callback('#<a([^>]+?)href\s*=\s*(["\']*)
 		$matches[4] = str_replace("sneakerhead.ru","",$matches[4]);
 		return "<a$matches[1]href=$matches[2]$matches[4]$matches[2]>$matches[6]</a>";
 	}'), $arResult['DETAIL_TEXT']);
-
+*/
 $dateP = new DateTime($arResult['ACTIVE_FROM']);
 $dateM = new DateTime($arResult['TIMESTAMP_X']);
 $arResult['datePublished'] = $dateP->format('c');
