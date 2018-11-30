@@ -446,12 +446,12 @@ $arr_pickup = array('8'=>'s11','9'=>'s12','4'=>'s5','7'=>'s10','3'=>'s4','5'=>'s
                     }
                 }
 
-                if ($delivery['PARENT_ID']) {
+				/* if ($delivery['PARENT_ID']) {
                     $servise = explode(':', $delivery['CODE']);
                     $shipment = array('id' => $delivery['PARENT_ID'], 'service' => $servise[1]);
-                } else {
+} else {*/
                     $shipment = array('id' => $delivery['ID']);
-                }
+				//}
 			if($delivery['ID'] == 3){
 					$sklad =  $shipmentData->getStoreId();
 					$shipment['pickup'] = $arr_pickup[$sklad];

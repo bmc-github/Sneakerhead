@@ -17,6 +17,7 @@
 /*.*
 !/.gitignore
 !/README.md
+!/index.php
 
 *.log
 *.txt
