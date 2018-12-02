@@ -41,7 +41,7 @@ class Import
         $this->obElement = new \CIBlockElement();
         $this->BASE_PRICE = \CCatalogGroup::GetBaseGroup();
 		//$this->BDB = Application::getConnection();
-Debug::writeToFile("start", "", "/upload/import/1.txt");
+
     }
 
     public function clearLog()
@@ -55,6 +55,9 @@ Debug::writeToFile("start", "", "/upload/import/1.txt");
 
     public function getRemnants()
     {
+    	$this->DB->query("SET collation_connection = utf8_general_ci");
+    	$this->DB->query("SET NAMES utf8");
+    	 
         $sql = "SELECT * FROM catalog_1c_codes WHERE `q` > 0";
         $rows = $this->DB->query($sql)->fetchAll();
         $arData = array();
