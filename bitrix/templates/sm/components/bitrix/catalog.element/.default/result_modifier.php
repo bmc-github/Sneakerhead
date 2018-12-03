@@ -11,13 +11,25 @@ $arParams = $component->applyTemplateModifications();
 $brand = CIBlockElement::GetList(array(), array('IBLOCK_ID'=>6,'ID'=>$arResult['DISPLAY_PROPERTIES']['BRAND']['VALUE']), false, false, array('ID','IBLOCK_ID','NAME','DETAIL_PAGE_URL','PROPERTY_SIZE_CHART','PROPERTY_SIZE_TABLES'))->GetNext(false,false);
 $category = CIBlockSection::GetByID($arResult['~IBLOCK_SECTION_ID'])->GetNext(false,false);
 $stock_status = CIBlockElement::GetList(array(), array('IBLOCK_ID'=>18,'ID'=>$arResult['PROPERTIES']['STOCK_STATUS']['VALUE']), false, false, array('PREVIEW_TEXT'))->GetNext(false,false);
+$gend = mb_strtolower(mb_substr(strip_tags($arResult['DISPLAY_PROPERTIES']['GENDER']['DISPLAY_VALUE']),0,1,"UTF-8"),"UTF-8");
+if(!$gend){
+	$gend = 'м';
+}
+
+$gender_from_basket = array('м'=>88,'ж'=>89,'д'=>90);
 
 global $DB;
-$strSql = "SELECT * FROM cat_category_sizecharts WHERE brand_id=" . $brand['EXTERNAL_ID'];
+$strSql = "SELECT * FROM cat_category_sizecharts WHERE brand_id=" . $brand['EXTERNAL_ID'] . " && gender=".$gender_from_basket[$gend];
 $res = $DB->Query($strSql, false, $err_mess . __line__);
+
+if(!$res->SelectedRowsCount()){
+	$strSql = "SELECT * FROM cat_category_sizecharts WHERE brand_id=49  && gender=".$gender_from_basket[$gend];
+	$res = $DB->Query($strSql, false, $err_mess . __line__);
+}
 $sizes_u = array();
-while($arElement = $res->GetNext())
+while ($arElement = $res->GetNext()) {
     $sizes_u[] = $arElement;
+}
 
 if(empty($sizes_u)) {
     $sizes_u = array(
@@ -199,7 +211,6 @@ $arResult['STORES'] = array();
 $arResult['STORES_MAP'] = array();
 $arResult['SIZES_TABLE'] = array();
 $aSizes = array();
-$gend = mb_strtolower(mb_substr(strip_tags($arResult['DISPLAY_PROPERTIES']['GENDER']['DISPLAY_VALUE']),0,1,"UTF-8"),"UTF-8");
 
 foreach($arResult['OFFERS'] as $i=>$offer){
   $arResult['CATALOG_QUANTITY']+= $offer['CATALOG_QUANTITY'];
