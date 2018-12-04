@@ -284,12 +284,30 @@ use Bitrix\Main\ModuleManager;
 					array("HIDE_ICONS" => "Y")
 				);
 			}*/
+/*Вывод товаров унисекс*/
+if ($GLOBALS['arFilter']["=PROPERTY_51"]) {
+    $cf = $GLOBALS['arFilter']["=PROPERTY_51"][0];
 
+    $GLOBALS['arFilter'][] = array(
+        "LOGIC" => "OR",
+        array("PROPERTY_51" => false),
+        array("PROPERTY_51" => $cf));
+
+    unset($GLOBALS['arFilter']["=PROPERTY_51"]);
+}
+
+/*Вывод товаров унисекс*/
+		
+		
+		
 if($GLOBALS['arFilterSection']) {
 	$arResult["VARIABLES"]["SECTION_ID"] = ''; 
 	$arResult["VARIABLES"]["SECTION_CODE"] = end($GLOBALS['arFilterSection']);
 }
 //pr($arResult);
+		
+		
+		
 			$intSectionID = $APPLICATION->IncludeComponent(
 				"bitrix:catalog.section",
 				"",
