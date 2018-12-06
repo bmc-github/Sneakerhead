@@ -260,6 +260,7 @@ class RetailCrmHistory
 
 $optionsDelivTypes['dpd'] = 218;
 $optionsDelivTypes['pickpoint'] = 183;
+$optionsDelivTypes['cdek'] = 280;
 
         $api = new RetailCrm\ApiClient($api_host, $api_key);
 
@@ -1047,6 +1048,14 @@ $somePropValue = $propertyCollection->getItemByOrderPropertyId(4);
         $shipmentColl = $order->getShipmentCollection();
 
         if ($delivery) {
+        	$arStores = \Bitrix\Catalog\StoreTable::getList([
+        		'select' => ['ID','XML_ID']
+        	]);
+        	$arResultStores = [];
+        	while($arStore = $arStores->fetch()) {
+        		$arr_pickup['s'.$arStore['XML_ID']] = $arStore['ID'];
+        	}
+        	
             if (!$update) {
                     $shipment = $shipmentColl->createItem($delivery);
                     $shipment->setFields(array(
@@ -1055,11 +1064,10 @@ $somePropValue = $propertyCollection->getItemByOrderPropertyId(4);
                         'DELIVERY_NAME' => $delivery->getName(),
                         'CUSTOM_PRICE_DELIVERY' => 'Y'
                     ));
-$arr_pickup = array('s11'=>'8','s12'=>'9','s5'=>'4','s10'=>'7','s4'=>'3','s6'=>'5');
-	if($deliveryId == 3 && $arr_pickup[$orderCrm['shipmentStore']]){
-
-   		$shipment->setStoreId($arr_pickup[$orderCrm['shipmentStore']]);
-   }
+				if($deliveryId == 3 && $arr_pickup[$orderCrm['shipmentStore']]){
+			
+			   		$shipment->setStoreId($arr_pickup[$orderCrm['shipmentStore']]);
+			   }
             } else {
                 foreach ($shipmentColl as $shipment) {
                     if (!$shipment->isSystem()) {
@@ -1070,11 +1078,11 @@ $arr_pickup = array('s11'=>'8','s12'=>'9','s5'=>'4','s10'=>'7','s4'=>'3','s6'=>'
                             'DELIVERY_NAME' => $delivery->getName(),
                             'CUSTOM_PRICE_DELIVERY' => 'Y'
                         ));
-$arr_pickup = array('s11'=>'8','s12'=>'9','s5'=>'4','s10'=>'7','s4'=>'3','s6'=>'5');
-	if($deliveryId == 3 && $arr_pickup[$orderCrm['shipmentStore']]){
 
-   		$shipment->setStoreId($arr_pickup[$orderCrm['shipmentStore']]);
-   }
+						if($deliveryId == 3 && $arr_pickup[$orderCrm['shipmentStore']]){
+					
+					   		$shipment->setStoreId($arr_pickup[$orderCrm['shipmentStore']]);
+					   }
                     }
                 }
             }

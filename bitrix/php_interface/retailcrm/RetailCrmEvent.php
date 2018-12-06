@@ -141,6 +141,7 @@ class RetailCrmEvent
 
 			$optionsDelivTypes['218'] = 'dpd';
 			$optionsDelivTypes['183'] = 'pickpoint';
+			$optionsDelivTypes['280'] = 'cdek';
 
             $arParams = RCrmActions::clearArr(array(
                 'optionsOrderTypes'     => $optionsOrderTypes,
@@ -154,10 +155,7 @@ class RetailCrmEvent
                 'optionsSitesList'      => $optionsSitesList,
                 'optionsCustomFields'   => $optionsCustomFields
             ));
-			/*$arParams['shipmentCollection'] = $obOrder->getShipmentCollection();
-			foreach ($arParams['shipmentCollection'] as $shipment) {
-				$arParams['store_id'][] =  $shipment->getStoreId();
-}*/
+
 
             //many sites?
             if ($optionsSitesList) {
@@ -179,9 +177,7 @@ class RetailCrmEvent
                 $methodApi = 'ordersCreate';
                 $GLOBALS['RETAILCRM_ORDER_NEW_ORDER'] = true;
             }
-			//mail('dimm4ik@yandex.ru','',print_r($arOrder,true));
             //user
-			//$arUser = Bitrix\Main\UserTable::getById($arOrder['USER_ID'])->fetch();
             $userCrm = RCrmActions::apiMethod($api, 'customersGet', __METHOD__, $arOrder['USER_ID'], $site);
 
 			if (!isset($userCrm['customer'])) {
@@ -214,7 +210,8 @@ class RetailCrmEvent
      * @param object $event - Payment object
      */
     function paymentSave($event)
-    {
+	{
+/*
         $apiVersion = COption::GetOptionString(self::$MODULE_ID, 'api_version', 0);
 
         if ((isset($GLOBALS['RETAIL_CRM_HISTORY']) && $GLOBALS['RETAIL_CRM_HISTORY']) || $apiVersion != 'v5') {
@@ -286,7 +283,7 @@ class RetailCrmEvent
             if (!empty($arPayment['PAY_SYSTEM_ID']) && isset($optionsPaymentTypes[$arPayment['PAY_SYSTEM_ID']])) {
                 $paymentToCrm = array(
 					'type' => $optionsPaymentTypes[$arPayment['PAY_SYSTEM_ID']]/*,
-'amount' => $arPayment['SUM']*/
+'amount' => $arPayment['SUM']*//*
                 );
 
                 if (!empty($arPayment['ID'])) {
@@ -312,7 +309,7 @@ class RetailCrmEvent
             } else {
                 RCrmActions::eventLog('RetailCrmEvent::paymentSave', 'payments', 'OrderID = ' . $arPayment['ID'] . '. Payment not found.');
             }
-
+RCrmActions::eventLog('RetailCrmEvent::paymentSave', 'payments', print_r($paymentToCrm,true));
             if (!array_key_exists($arPayment['ID'], $paymentsExternalIds)) {
                 RCrmActions::apiMethod($api, 'ordersPaymentCreate', __METHOD__, $paymentToCrm, $site);
             } elseif (array_key_exists($arPayment['ID'], $paymentsExternalIds) && $paymentsExternalIds[$arPayment['ID']]['type'] == $optionsPaymentTypes[$arPayment['PAY_SYSTEM_ID']]) {
@@ -321,7 +318,7 @@ class RetailCrmEvent
                 RCrmActions::apiMethod($api, 'ordersPaymentDelete', __METHOD__, $paymentsExternalIds[$arPayment['ID']]['id']);
                 RCrmActions::apiMethod($api, 'ordersPaymentCreate', __METHOD__, $paymentToCrm, $site);
             }
-        }
+}*/
     }
 
     /**

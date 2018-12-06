@@ -172,7 +172,8 @@ if($status != 'N' && $status !=    'NS' && $status !=  'NZ' && $status !=  'ZO' 
 
         //basket
         foreach ($arFields['BASKET'] as $product) {
-			//mail('dimm4ik@yandex.ru','text',print_r($product,true));
+			$discount =0;
+
 			$xlmIdCrm = explode('#',$product['PRODUCT_XML_ID']);
             $item = array(
                 'quantity'        => $product['QUANTITY'],
@@ -186,9 +187,11 @@ if($status != 'N' && $status !=    'NS' && $status !=  'NZ' && $status !=  'ZO' 
             if (is_null($pp['PURCHASING_PRICE']) == false) {
                 $item['purchasePrice'] = $pp['PURCHASING_PRICE'];
             }
-            $item['discountManualAmount'] = (double) $product['DISCOUNT_PRICE'];
+			$discount = $product['BASE_PRICE'] - $product['PRICE'];
+			if($arFields['ID']==96349) mail('dimm4ik@yandex.ru','text',print_r($discount,true));
+            $item['discountManualAmount'] = (double) $discount;
             $item['discountManualPercent'] = 0;
-            $item['initialPrice'] = (double) $product['PRICE'] + (double) $product['DISCOUNT_PRICE'];
+            $item['initialPrice'] = (double) $product['BASE_PRICE'];
 
             $order['items'][] = $item;
 
@@ -213,18 +216,20 @@ if($status != 'N' && $status !=    'NS' && $status !=  'NZ' && $status !=  'ZO' 
         foreach ($arFields['PAYMENTS'] as $payment) {
             if (!empty($payment['PAY_SYSTEM_ID']) && isset($arParams['optionsPayTypes'][$payment['PAY_SYSTEM_ID']])) {
                 $pm = array(
-					'type' => $arParams['optionsPayTypes'][$payment['PAY_SYSTEM_ID']]//,
-					//'amount' => $payment['SUM']
+					'type' => $arParams['optionsPayTypes'][$payment['PAY_SYSTEM_ID']]
                 );
-                if (!empty($payment['ID'])) {
-                    $pm['externalId'] = $payment['ID'];
-                }
-                if (!empty($payment['DATE_PAID'])) {
+				//if (!empty($payment['ID'])) {
+					$pm['externalId'] = 's'.$arFields['NUMBER'];//$payment['ID'];
+				//}
+				/*if (!empty($payment['DATE_PAID'])) {
                     $pm['paidAt'] = new \DateTime($payment['DATE_PAID']);
-                }
+}*/
                 if (!empty($arParams['optionsPayment'][$payment['PAID']])) {
                     $pm['status'] = $arParams['optionsPayment'][$payment['PAID']];
                 }
+				if($methodApi != 'ordersCreate'){
+					$pm['amount'] = $payment['SUM'];
+				}
                 $payments[] = $pm;
             } else {
                 RCrmActions::eventLog('RetailCrmOrder::orderSend', 'payments', 'OrderID = ' . $arFields['ID'] . '. Payment not found.');
@@ -232,9 +237,16 @@ if($status != 'N' && $status !=    'NS' && $status !=  'NZ' && $status !=  'ZO' 
                 continue;
             }
         }
-        if (count($payments) > 0) {
+
+        if (count($payments) > 0 && $methodApi == 'ordersCreate') {
             $order['payments'] = $payments;
-        }
+		}elseif(count($payments) > 0){
+			foreach($payments AS $payment){
+				if($payment['status'] == 'paid' || $status == 'OP'){
+					RCrmActions::apiMethod($api, 'paymentEditByExternalId', __METHOD__, $payment, $site);
+				}
+			}
+		}
         
         //send
 		if (function_exists('retailCrmBeforeOrderSend')) {
@@ -254,7 +266,6 @@ if($status != 'N' && $status !=    'NS' && $status !=  'NZ' && $status !=  'ZO' 
         $log = new Logger();
         $log->write($order, 'orderSend');
 		//mail('dimm4ik@yandex.ru','ntcn',print_r($order,true));
-        RCrmActions::eventLog('RetailCrmOrder::orderSend', 'retailCrmBeforeOrderSend()', 'OrderID = ' . $arFields['ID'] . '. Sending canceled after retailCrmBeforeOrderSend');
 
 
 		if($send /*&& $arFields['ID']==71050*/) {
@@ -414,7 +425,14 @@ if($status != 'N' && $status !=    'NS' && $status !=  'NZ' && $status !=  'ZO' 
 
     public static function orderObjToArr($obOrder)
     {
-$arr_pickup = array('8'=>'s11','9'=>'s12','4'=>'s5','7'=>'s10','3'=>'s4','5'=>'s6','2'=>'s14');
+    	$arStores = \Bitrix\Catalog\StoreTable::getList([
+			'select' => ['ID','XML_ID']
+    	]);
+    	$arResultStores = [];
+    	while($arStore = $arStores->fetch()) {
+    		$arr_pickup[$arStore['ID']] = 's'.$arStore['XML_ID'];
+    	}
+
         $arOrder = array(
             'ID'               => $obOrder->getId(),
             'NUMBER'           => $obOrder->getField('ACCOUNT_NUMBER'),
