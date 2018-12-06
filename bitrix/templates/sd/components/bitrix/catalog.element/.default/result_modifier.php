@@ -239,7 +239,6 @@ $arResult['STORES'] = array();
 $arResult['STORES_MAP'] = array();
 $arResult['SIZES_TABLE'] = array();
 $aSizes = array();
-$gend = mb_strtolower(mb_substr(strip_tags($arResult['DISPLAY_PROPERTIES']['GENDER']['DISPLAY_VALUE']), 0, 1, "UTF-8"), "UTF-8");
 
 foreach ($arResult['OFFERS'] as $i => $offer) {
     $arResult['CATALOG_QUANTITY'] += $offer['CATALOG_QUANTITY'];

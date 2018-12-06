@@ -105,9 +105,23 @@ if($isFilter || $isSidebar):
 		"STRICT_SECTION_CHECK" => "Y",	// Строгая проверка раздела для показа списка
 	),
 	false
-);*/?> 
+);*/
 
-<?if($GLOBALS['arFilterSection']) {
+/*Вывод товаров унисекс*/
+if ($GLOBALS['arFilter']["=PROPERTY_51"]) {
+    $cf = $GLOBALS['arFilter']["=PROPERTY_51"][0];
+
+    $GLOBALS['arFilter'][] = array(
+        "LOGIC" => "OR",
+        array("PROPERTY_51" => false),
+        array("PROPERTY_51" => $cf));
+
+    unset($GLOBALS['arFilter']["=PROPERTY_51"]);
+}
+
+/*Вывод товаров унисекс*/
+
+if($GLOBALS['arFilterSection']) {
 	$arResult["VARIABLES"]["SECTION_ID"] = ''; 
 	$arResult["VARIABLES"]["SECTION_CODE"] = end($GLOBALS['arFilterSection']);
 }?>
