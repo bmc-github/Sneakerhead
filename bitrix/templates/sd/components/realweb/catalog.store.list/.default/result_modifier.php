@@ -527,12 +527,23 @@ if ($_POST['STORE_ID']){
 	$item = $dom_xml->createElement('item');
 	$item->setAttribute("");
 	$items->appendChild($item);
+	if(empty($oneV["C_CODE"])){
+		$db = \Bitrix\Main\Application::getConnection('import');
+		$db->query("SET collation_connection = utf8_general_ci");
+		$db->query("SET NAMES utf8");
+		$sql = "SELECT code FROM catalog_all_goods WHERE art = '" . $oneV["ARTNUMBER"]."' && size = '". $oneV["SIZE"] ."'";
+		$result = $db->query($sql)->Fetch();
+		$oneV["C_CODE"] = $result['code'];
+	}
 	$code1c=$dom_xml->createElement('code1c', $oneV["C_CODE"]);
 	$item->appendChild($code1c);
 	$article=$dom_xml->createElement('article', $oneV["ARTNUMBER"]);
 	$item->appendChild($article); 
 	$price=$dom_xml->createElement('price', $oneV["PRICE"]);
 	$item->appendChild($price);  
+	if(!$oneV["QUANTITY"]){
+		$oneV["QUANTITY"] = 1;
+	}
 	$quantity=$dom_xml->createElement('quantity', $oneV["QUANTITY"]);
 	$item->appendChild($quantity); 
 	$date=$dom_xml->createElement('date', $DATE_CREATE);
