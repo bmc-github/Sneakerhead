@@ -7132,7 +7132,7 @@ if(zipProperty.REQUIRED == 'Y'){
 					textNode.setAttribute('autocomplete', 'address');
 				if (settings.IS_EMAIL == 'Y'){		
 	                    		textNode.setAttribute('autocomplete', 'email');
-					textNode.setAttribute('pattern', "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$");
+					textNode.setAttribute('pattern', "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,12}$");
 				}
 				if (settings.IS_PAYER == 'Y')
 					textNode.setAttribute('autocomplete', 'name');
