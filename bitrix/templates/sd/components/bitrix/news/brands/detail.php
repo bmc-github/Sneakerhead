@@ -303,21 +303,16 @@ $seo = CIBlockElement::GetList(array(), array('IBLOCK_ID'=>13,'CODE'=>$curPage,'
 
 $arResult['META'] = array();
 if($_REQUEST['PAGEN_1'] && $_REQUEST['PAGEN_1']>1){
-  $arResult['META']['TITLE'] = ($meta['ELEMENT_PAGE_TITLE'] ? $meta['ELEMENT_PAGE_TITLE'] : $GLOBALS['meta']['h1']).' - страница каталога №'.$_REQUEST['PAGEN_1'];
+  $arResult['META']['TITLE'] = $GLOBALS['meta']['h1'].' - страница каталога №'.$_REQUEST['PAGEN_1'];
   $arResult['META']['KEYWORDS'] = '';
   $arResult['META']['DESCRIPTION'] = 'Страница №'.$_REQUEST['PAGEN_1'].': '.$meta['ELEMENT_META_DESCRIPTION'];
-  $arResult['META']['H1'] = ($meta['ELEMENT_PAGE_TITLE'] ? $meta['ELEMENT_PAGE_TITLE'] : $GLOBALS['meta']['h1']).' — страница №'.$_REQUEST['PAGEN_1'];
+  $arResult['META']['H1'] = $GLOBALS['meta']['h1'].' — страница №'.$_REQUEST['PAGEN_1'];
 }else{
-  $arResult['META']['TITLE'] =  $meta['ELEMENT_META_TITLE'] ? $meta['ELEMENT_META_TITLE'] : $GLOBALS['meta']['title'];
-  $arResult['META']['KEYWORDS'] = $meta['ELEMENT_META_KEYWORDS'] ? $meta['ELEMENT_META_KEYWORDS'] : $GLOBALS['meta']['keywords'];
+  $arResult['META']['TITLE'] =  $GLOBALS['meta']['title'];
+  $arResult['META']['KEYWORDS'] = $GLOBALS['meta']['keywords'];
   $arResult['META']['DESCRIPTION'] = $meta['ELEMENT_META_DESCRIPTION'] ? $meta['ELEMENT_META_DESCRIPTION'] : $GLOBALS['meta']['description'];
-  $arResult['META']['H1'] = $meta['ELEMENT_PAGE_TITLE'] ? $meta['ELEMENT_PAGE_TITLE'] : $GLOBALS['meta']['h1'];
+  $arResult['META']['H1'] = $GLOBALS['meta']['h1'];
 }
-
-
-
-//$arResult['META']['H1'] = $meta['ELEMENT_PAGE_TITLE'] ? $meta['ELEMENT_PAGE_TITLE'] : $GLOBALS['meta']['h1'];
-
 
 $cp = $this->__component;
 if(is_object($cp))

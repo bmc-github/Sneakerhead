@@ -145,6 +145,10 @@ if(($gender != '' || $brand != '' || $color != '' || $ssize != '') || $section['
       $description = 'Новые коллекции: '.($color?$color.' ':'').($gender?$gender.' ':'').ToLower($section['NAME']).($brand?' '.$brand:'').($size?' '.$size.' размера':'').' в магазинах Sneakerhead.';
       $h1 = 'Новинки: '.($color?$color.' ':'').($gender?$gender.' ':'').ToLower($section['NAME']).($brand?' '.$brand:'').($size?' '.$size.' размера':'');
     }
+  }elseif(substr_count($_SERVER['REQUEST_URI'],'brands')>0){
+      $title = 'Купить товары '.$brand.($brand_rus?' ('.$brand_rus.')':'').' по цене от '.$price.' рублей с доставкой по Москве и России в интернет-магазине Sneakerhead';
+      $keywords = ToLower($brand.($brand_rus?' '.$brand_rus:'')).' интернет магазин цены продажа москва';
+      $h1 = $brand;	  
   }else{
     if(in_array($section['CODE'],array('shoes','stuff','winter-shoes'))){
       $title = ($color?$color.' ':'').($gender?$gender.' ':'').ToLower($section['NAME']).($brand?' '.$brand:'').($brand_rus?' ('.$brand_rus.')':'').($size?' '.$size.' размера':'').' - купить по цене от '.$price.' рублей в интернет магазине Sneakerhead';
