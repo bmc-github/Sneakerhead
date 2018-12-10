@@ -11,6 +11,14 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+
+$sort = "ID";
+if($_GET['sort'] && $_GET['order']){
+    $arrSortAlown = array('price'=>'CATALOG_PRICE_1','date'=>'CREATED_DATE');   
+    $_sort = isset($arrSortAlown[$_GET['sort']]) ? $arrSortAlown[$_GET['sort']] : 'CREATED_DATE';
+    $_order = isset($_GET['order']) && $_GET['order']=='asc' ? 'ASC' : 'DESC';
+    $param = 'sort='.$_GET['sort'].'&order='.$_GET['order'];
+} 
 if (!$uri_parts) {
     $url_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $uri_parts = explode('/', trim($url_path, ' /'));
@@ -89,7 +97,7 @@ $SMART_FILTER_PATH = implode("/", $uri_parts);
 	array(
 		"IBLOCK_TYPE" => "catalog",
 		"IBLOCK_ID" => "2",
-		"ELEMENT_SORT_FIELD" => "CREATED",
+		"ELEMENT_SORT_FIELD" => $sort,
 		"ELEMENT_SORT_ORDER" => "desc",
 		"ELEMENT_SORT_FIELD2" => "id",
 		"ELEMENT_SORT_ORDER2" => "desc",
@@ -115,10 +123,10 @@ $SMART_FILTER_PATH = implode("/", $uri_parts);
 			0 => "SIZES_SHOES",
 			1 => "",
 		),
-		"OFFERS_SORT_FIELD" => "timestamp_x",
+		"OFFERS_SORT_FIELD" => $sort,
 		"OFFERS_SORT_ORDER" => "desc",
 		"OFFERS_SORT_FIELD2" => "id",
-		"OFFERS_SORT_ORDER2" => "asc",
+		"OFFERS_SORT_ORDER2" => "desc",
 		"OFFERS_LIMIT" => "0",
 		"BASKET_URL" => "/shopping-cart/",
 		"ACTION_VARIABLE" => "action",
