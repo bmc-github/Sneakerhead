@@ -12,6 +12,14 @@
 /** @var CBitrixComponent $component */
 use \Bitrix\Main\Localization\Loc;
 $this->setFrameMode(true);
+
+$sort = "ID";
+if($_GET['sort'] && $_GET['order']){
+    $arrSortAlown = array('price'=>'CATALOG_PRICE_1','date'=>'CREATED_DATE');   
+    $_sort = isset($arrSortAlown[$_GET['sort']]) ? $arrSortAlown[$_GET['sort']] : 'CREATED_DATE';
+    $_order = isset($_GET['order']) && $_GET['order']=='asc' ? 'ASC' : 'DESC';
+    $param = 'sort='.$_GET['sort'].'&order='.$_GET['order'];
+} 
 $APPLICATION->SetPageProperty('class', 'category-page');
 if (!$uri_parts) {
     $url_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -117,10 +125,10 @@ $seo = CIBlockElement::GetList(array(), array('IBLOCK_ID'=>13,'CODE'=>$curPage,'
 		"IBLOCK_ID" => "2",
 		"HIDE_NOT_AVAILABLE" => "Y",
 		"HIDE_NOT_AVAILABLE_OFFERS" => "Y",
-		"ELEMENT_SORT_FIELD" => "CREATED",
+		"ELEMENT_SORT_FIELD" => $sort,
 		"ELEMENT_SORT_ORDER" => "desc",
 		"ELEMENT_SORT_FIELD2" => "id",
-		"ELEMENT_SORT_ORDER2" => "DESC",
+		"ELEMENT_SORT_ORDER2" => "desc",
 		"PAGE_ELEMENT_COUNT" => "51",
 		"LINE_ELEMENT_COUNT" => "3",
 		"PROPERTY_CODE" => array(
@@ -143,10 +151,10 @@ $seo = CIBlockElement::GetList(array(), array('IBLOCK_ID'=>13,'CODE'=>$curPage,'
 			0 => "SIZES_SHOES",
 			1 => "",
 		),
-		"OFFERS_SORT_FIELD" => "timestamp_x",
+		"OFFERS_SORT_FIELD" => $sort,
 		"OFFERS_SORT_ORDER" => "desc",
 		"OFFERS_SORT_FIELD2" => "id",
-		"OFFERS_SORT_ORDER2" => "asc",
+		"OFFERS_SORT_ORDER2" => "desc",
 		"OFFERS_LIMIT" => "0",
 		"BASKET_URL" => "/shopping-cart/",
 		"ACTION_VARIABLE" => "action",
