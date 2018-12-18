@@ -15,7 +15,7 @@
       -webkit-flex-flow: row wrap;
       justify-content: start;
     }
- 
+
     .choose-size-wrap {
       margin-bottom: 16px;
     }
@@ -38,7 +38,7 @@
     }
 
 
- 
+
  .sizes-chart-header {
       justify-content: space-between;
       margin-bottom: 16px;
@@ -59,8 +59,10 @@
       position: absolute;
       z-index: 1;
       width: 200px;
-      left: -206px;
-      top: 0;
+      margin-left: -100px;
+      left: 50%;
+      bottom: 100%;
+      z-index: 100;
       font-size: 11px;
       letter-spacing: 1px;
       color: black;
@@ -71,7 +73,7 @@
         padding: 12px;
         	background-color: white;
     }
-   
+
 a.show_size_grid_trigger {
     font-family: 'Roboto', sans-serif;
     text-transform: uppercase;

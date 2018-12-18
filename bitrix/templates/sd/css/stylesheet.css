@@ -131,7 +131,7 @@ header.is-fixed {
     margin-top: 0;
     position: fixed;
     top: 0;
-    z-index: 110;
+    z-index: 200;
     background: #fff;
 }
 

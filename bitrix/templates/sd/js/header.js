@@ -26,7 +26,6 @@
   };
 
   win.addEventListener('optimizedScroll', function(){
-    console.log(getWindowTop());
     // 28 - высота topline
     if (getWindowTop() >= 28) {
       header.classList.add('is-fixed');
