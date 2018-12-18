@@ -8051,7 +8051,7 @@ button::-moz-focus-inner {
 .header {
     height: 62px;
     width: 100%;
-    z-index: 20;
+    z-index: 110;
     position: fixed;
     background: #fff;
     top: 0;
