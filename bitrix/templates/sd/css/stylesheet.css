@@ -124,6 +124,15 @@ header {
     width: 100%;
     min-width: 1280px;
     box-sizing: border-box !important;
+    transition: background-color .2s ease;
+}
+
+header.is-fixed {
+    margin-top: 0;
+    position: fixed;
+    top: 0;
+    z-index: 110;
+    background: #fff;
 }
 
 .rr-widget2 header {
@@ -1448,7 +1457,7 @@ main.container .filterpro-wrapper .filterpro {
     -o-transition: background-color .1s ease-in;
     -webkit-transition: background-color .1s ease-in;
     background: #fff;
-    text-align: center; 	
+    text-align: center;
 }
 
 .image-additional li.active {
@@ -1512,7 +1521,7 @@ main.container .filterpro-wrapper .filterpro {
 }
 
 .product-page .favorite-add {
-    float: none;	
+    float: none;
     border: 1px solid;
     display: inline-block;
     height: 28px;
@@ -3879,14 +3888,14 @@ a.filter-link {
     font-family: 'PT Sans';
     background: none;
     transition: all linear .1s;
-}               
+}
 a.filter-link.disabled {
     pointer-events: none;
     opacity: 0.5;
-}               
+}
 a.filter-link.checked {
     pointer-events: none;
-}               
+}
 a.filter-link:hover {
     color: #000;
     border-color: #e2aeb3;
@@ -3981,7 +3990,7 @@ div#bx-soa-properties textarea#orderDescription {
     padding: 20px 0px;
     margin: 0 auto;
 }
-.attributes-wrap-col {    
+.attributes-wrap-col {
     width: 50%;
     padding-right: 20px;
 }

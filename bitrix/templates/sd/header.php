@@ -1,5 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)die();
-  
+
 
   if(!($_REQUEST['lang_code'])||$_REQUEST['lang_code']=='')
     $_REQUEST['lang_code'] = 'ru';
@@ -50,6 +50,7 @@
    }
       $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery-1.7.1.min.js");
       $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery-ui-1.8.16.custom.min.js");
+      $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/header.js");
       $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/common.js");
       $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.bxslider.min.js");
       $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.fancybox.pack.js");
@@ -67,7 +68,7 @@
     <script src="'.SITE_TEMPLATE_PATH.'/js/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix("#logo img");</script>
     <![endif]-->');
-?>   
+?>
     <link href="//cdn.jsdelivr.net/npm/suggestions-jquery@17.12.0/dist/css/suggestions.min.css" rel="stylesheet" />
     <!--[if lt IE 10]><script src="//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script><![endif]-->
     <script src="//cdn.jsdelivr.net/npm/suggestions-jquery@17.12.0/dist/js/jquery.suggestions.min.js"></script>
@@ -86,7 +87,7 @@
         apiJs.src = "//cdn.retailrocket.ru/content/javascript/api.js";
         ref.parentNode.insertBefore(apiJs, ref);
       }(document));
-      dataLayer = [];        
+      dataLayer = [];
       function onCheckoutOption(step) {
         window.dataLayer = window.dataLayer || [];
         dataLayer.push({
@@ -116,7 +117,7 @@
   </head>
   <body><?if($curPage != '/') echo '<!--noindex-->';?>
     <?$APPLICATION->IncludeComponent("h2o:favorites.add", "", array());?>
-    <div class="header_wrapper" style="height:102px">    
+    <div class="header_wrapper" style="height:102px">
       <div class="topline">
         <div class="header-language">
           <form class="ga_language" action="" method="post" enctype="multipart/form-data">
@@ -141,20 +142,20 @@ if($_REQUEST['lang_code'] != 'en'):?>
 <?if($USER->IsAuthorized()){?>
         <p><?=GetMessage('H_LOGGED_AS');?> <a href="/personal/"><?=$USER->GetFullName()?></a> ( <a href="?logout=yes"><?=GetMessage('H_LOGOUT');?></a> )</p>
 <?}else{?><?if($curPage == '/') echo '<!--noindex-->';?>
-        <p><a id="header-login" class="login-fancybox" href="/login/" rel="nofollow" data-fancybox-type="ajax"><?=GetMessage('H_LOGIN');?></a> <?=GetMessage('H_OR');?> 
+        <p><a id="header-login" class="login-fancybox" href="/login/" rel="nofollow" data-fancybox-type="ajax"><?=GetMessage('H_LOGIN');?></a> <?=GetMessage('H_OR');?>
         <a id="header-register" class="login-fancybox" href="/create-account/" rel="nofollow" data-fancybox-type="ajax"><?=GetMessage('H_REGISTER');?></a></p><?if($curPage == '/') echo '<!--/noindex-->';?>
 <?}?>
         <a href="/delivery/"<?if($curPage != '/') echo ' rel="nofollow"';?>><?=GetMessage('H_DELIVERY_AND_PAYMENT');?></a>
         <a href="/contacts-page/"<?if($curPage != '/') echo ' rel="nofollow"';?>><?=GetMessage('H_SHOP_ADDRESSES');?></a>
-        <a href="/blog/"<?if($curPage != '/') echo ' rel="nofollow"';?>><?=GetMessage('H_BLOG');?></a>        
-        <div class="header-phone">         
+        <a href="/blog/"<?if($curPage != '/') echo ' rel="nofollow"';?>><?=GetMessage('H_BLOG');?></a>
+        <div class="header-phone">
           <div class="header-phone-right"><a href="tel:+78007003253">+7 800 700 32 53</a></div>
           <p class="hours">8:00 - 20:00</p>
-          <div class="clearfix"></div>        
+          <div class="clearfix"></div>
         </div>
       </div>
       <header>
-        <div class="header-left"> 
+        <div class="header-left">
           <div class="header-logo">
 <?if($curPage != '/'){?>
             <a href="/" title="<?=GetMessage('H_LOGO_TITLE');?>">
@@ -170,8 +171,8 @@ if($_REQUEST['lang_code'] != 'en'):?>
             <div class="header-main-bottom clearafter">
               <div class="header-categories">
 <?$APPLICATION->IncludeComponent(
-	"bitrix:catalog.section.list", 
-	"topmenu", 
+	"bitrix:catalog.section.list",
+	"topmenu",
 	array(
 		"COMPONENT_TEMPLATE" => "topmenu",
 		"IBLOCK_TYPE" => "catalog",
@@ -223,7 +224,7 @@ if($_REQUEST['lang_code'] != 'en'):?>
         "PAGE" => "#SITE_DIR#search/",
         "COMPONENT_TEMPLATE" => ".default"
   ), false);
-?> 
+?>
               </div>
               <div class="header-social" style="width: auto;">
                 <ul>
@@ -237,7 +238,7 @@ if($_REQUEST['lang_code'] != 'en'):?>
           </div>
         </div>
       </header>
-    </div>     
+    </div>
     <div id="notification"></div><?if($curPage != '/') echo '<!--/noindex-->';?>
 <?if($_SERVER['REAL_FILE_PATH'] == '/blog/index.php' || $curPage == '/blog/'):?>
     <div class="blog_container">
@@ -248,7 +249,7 @@ if($_REQUEST['lang_code'] != 'en'):?>
 <?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "", array(
             "START_FROM" => "0",
             "PATH" => "",
-            "SITE_ID" => "-"), 
+            "SITE_ID" => "-"),
   false, array('HIDE_ICONS' => 'Y'));
 ?>
 <?endif;
