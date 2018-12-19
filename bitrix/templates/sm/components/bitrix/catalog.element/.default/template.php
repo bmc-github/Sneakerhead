@@ -470,7 +470,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 						<div style="width: 68px"><i class="icon icon_delivery"></i></div>
 						<div style="width: -webkit-calc(100% - 68px);width: calc(100% - 68px);">
 							<p><strong>Закажи доставку курьерской службой Redexpress в пределах МКАД — и мы доставим товар бесплатно!</strong></p>
-							<p><a class="redlink" href="/delivery/">Подробно о предложении</a></p>
+							<p><a class="redlink" href="/delivery/" target="_blank">Подробно о предложении</a></p>
 						</div>
 					</div>
 

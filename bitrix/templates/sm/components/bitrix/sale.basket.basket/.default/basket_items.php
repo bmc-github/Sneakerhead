@@ -347,7 +347,7 @@ $v = $db_props->fetch();
       <div data-retailrocket-markup-block="57ea53fd9872e5765454b622" data-product-id="<?=join(',', $retail_ids);?>"></div>
       <div class="delivery-info" style="margin: 15px 0">
         <p style="float:left; margin-right: 6px; color: red"><i class="fa fa-hand-o-right fa-2x"></i></p>
-        <p>Доступные способы доставки и оплаты зависят от региона доставки.<br /><a href="/delivery/" style="text-decoration: underline">Подробнее о доставке</a></p>
+        <p>Доступные способы доставки и оплаты зависят от региона доставки.<br /><a href="/delivery/" target="_blank" style="text-decoration: underline">Подробнее о доставке</a></p>
       </div>
       <?if ($arParams["USE_PREPAYMENT"] == "Y" && strlen($arResult["PREPAY_BUTTON"]) > 0):?>
 			<?=$arResult["PREPAY_BUTTON"]?>

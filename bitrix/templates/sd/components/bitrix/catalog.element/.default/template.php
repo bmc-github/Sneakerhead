@@ -500,7 +500,7 @@ $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22730 && !$_SESSION['no_mosc
 						<div class="product__spec-devivery">
 							<i class="icon icon_delivery"></i>
 							<p>Закажи доставку курьерской службой Redexpress в пределах МКАД — и мы доставим товар бесплатно!</p>
-							<p><a class="redlink" href="/delivery/">Подробно о предложении</a></p>
+							<p><a class="redlink" href="/delivery/" target="_blank">Подробно о предложении</a></p>
 						</div>
 					</div>
 					<div class="flex-box">
@@ -556,7 +556,7 @@ $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22730 && !$_SESSION['no_mosc
 										<li>Major-express. Сроки доставки 1-6 рабочих  дней.</li>
 									</ul>
 									<p><strong>Доставка за границу осуществляется Почтой России по полной предоплате</strong></p>
-									<p><a class="redlink" href="/delivery/">Подробные условия</a></p>
+									<p><a class="redlink" href="/delivery/" target="_blank">Подробные условия</a></p>
 								</div>
 								<div class="product__tabs-panel tab-panel" id="pay">
 									<p>Доступные способы оплаты:</p>
@@ -568,7 +568,7 @@ $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22730 && !$_SESSION['no_mosc
 								</div>
 								<div class="product__tabs-panel tab-panel" id="exchange">
 									<p>Перед отправкой обмена обязательно свяжитесь с нашим менеджером <a href="mailto:obmen@sneakerhead.ru">obmen@sneakerhead.ru</a></p>
-									<p><a class="redlink" href="/return/">Подробные правила возврата товара</a></p>
+									<p><a class="redlink" href="/return/" target="_blank">Подробные правила возврата товара</a></p>
 								</div>
 							</div>
 				<?}?>

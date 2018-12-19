@@ -130,7 +130,7 @@ if (strlen($arResult["ERROR_MESSAGE"]) <= 0)
 <script src="<?=SITE_TEMPLATE_PATH?>/js/let.min.js"></script>
 <div class="delivery-info" style="margin: 15px 0">
   <p style="float:left; margin-right: 6px; color: red"><i class="fa fa-hand-o-right fa-2x"></i></p>
-  <p>Доступные способы доставки и оплаты зависят от региона доставки.<br /><a href="/delivery/" style="text-decoration: underline">Подробнее о доставке</a></p>
+  <p>Доступные способы доставки и оплаты зависят от региона доставки.<br /><a href="/delivery/" target="_blank" style="text-decoration: underline">Подробнее о доставке</a></p>
 </div>
 
 					<?
