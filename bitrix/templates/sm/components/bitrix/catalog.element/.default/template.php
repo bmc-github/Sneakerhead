@@ -148,796 +148,797 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 	}
 }
 
-  $category = CIBlockSection::GetByID($arResult['~IBLOCK_SECTION_ID'])->GetNext(false,false);
-  $brand = CIBlockElement::GetList(array(), array('IBLOCK_ID'=>6,'ID'=>$arResult['DISPLAY_PROPERTIES']['BRAND']['VALUE']), false, false, array('ID','IBLOCK_ID','NAME','DETAIL_PAGE_URL','PROPERTY_SIZE_CHART','PROPERTY_SIZE_TABLES'))->GetNext(false,false);
-  $stock_status = CIBlockElement::GetList(array(), array('IBLOCK_ID'=>18,'ID'=>$arResult['PROPERTIES']['STOCK_STATUS']['VALUE']), false, false, array('PREVIEW_TEXT'))->GetNext(false,false);
+	$category = CIBlockSection::GetByID($arResult['~IBLOCK_SECTION_ID'])->GetNext(false,false);
+	$brand = CIBlockElement::GetList(array(), array('IBLOCK_ID'=>6,'ID'=>$arResult['DISPLAY_PROPERTIES']['BRAND']['VALUE']), false, false, array('ID','IBLOCK_ID','NAME','DETAIL_PAGE_URL','PROPERTY_SIZE_CHART','PROPERTY_SIZE_TABLES'))->GetNext(false,false);
+	$stock_status = CIBlockElement::GetList(array(), array('IBLOCK_ID'=>18,'ID'=>$arResult['PROPERTIES']['STOCK_STATUS']['VALUE']), false, false, array('PREVIEW_TEXT'))->GetNext(false,false);
 
-  $cat = $arResult['PROPERTIES']['CATEGORY']['VALUE']?:$category['NAME'];
-  $cat_ = substr(explode(' ',$cat)[0],-1);
+	$cat = $arResult['PROPERTIES']['CATEGORY']['VALUE']?:$category['NAME'];
+	$cat_ = substr(explode(' ',$cat)[0],-1);
 
-  if($arResult['DISPLAY_PROPERTIES']['GENDER']['DISPLAY_VALUE']){
-    $gender_ = strip_tags($arResult['DISPLAY_PROPERTIES']['GENDER']['DISPLAY_VALUE']);
-    switch($cat_){
-      case 'а':
-      case 'я': $adg = 'ая'; break;
-      case 'о': $adg = 'ое'; break;
-      case 'и':
-      case 'е':
-      case 'ы': $adg = 'ие'; break;
-      default:  {if(mb_substr($gender_,0,1,"UTF-8")=='М') $adg = 'ой'; else $adg = 'ий';}
-    }
-    $gender = substr($gender_,0,-2).$adg;
-  }else{
-    $gender = '';//'Унисекс';
-  }
-  if($arResult["PROPERTIES"]["COLAT"]["VALUE"]){
-    $color_ = $arResult["PROPERTIES"]["COLAT"]["VALUE"];
-    $color__ = substr($color_,-2);
-    switch($cat_){
-      case 'а':
-      case 'я': if($color__ == 'ий') $adc = 'яя'; else $adc = 'ая'; break;
-      case 'о': if($color__ == 'ий') $adc = 'ее'; else $adc = 'ое'; break;
-      case 'и':
-      case 'е': 
-      case 'ы': if($color__ == 'ий') $adc = 'ие'; else $adc = 'ые'; break;
-      default:  $adc = $color__;
-    }
-    $color = substr($color_,0,-2).$adc;
-  }else{
-    $color = '';
-  }
-  $sku = $arResult['PROPERTIES']['ARTNUMBER']['VALUE'];
+	if($arResult['DISPLAY_PROPERTIES']['GENDER']['DISPLAY_VALUE']){
+		$gender_ = strip_tags($arResult['DISPLAY_PROPERTIES']['GENDER']['DISPLAY_VALUE']);
+		switch($cat_){
+			case 'а':
+			case 'я': $adg = 'ая'; break;
+			case 'о': $adg = 'ое'; break;
+			case 'и':
+			case 'е':
+			case 'ы': $adg = 'ие'; break;
+			default:  {if(mb_substr($gender_,0,1,"UTF-8")=='М') $adg = 'ой'; else $adg = 'ий';}
+		}
+		$gender = substr($gender_,0,-2).$adg;
+	}else{
+		$gender = '';//'Унисекс';
+	}
+	if($arResult["PROPERTIES"]["COLAT"]["VALUE"]){
+		$color_ = $arResult["PROPERTIES"]["COLAT"]["VALUE"];
+		$color__ = substr($color_,-2);
+		switch($cat_){
+			case 'а':
+			case 'я': if($color__ == 'ий') $adc = 'яя'; else $adc = 'ая'; break;
+			case 'о': if($color__ == 'ий') $adc = 'ее'; else $adc = 'ое'; break;
+			case 'и':
+			case 'е':
+			case 'ы': if($color__ == 'ий') $adc = 'ие'; else $adc = 'ые'; break;
+			default:  $adc = $color__;
+		}
+		$color = substr($color_,0,-2).$adc;
+	}else{
+		$color = '';
+	}
+	$sku = $arResult['PROPERTIES']['ARTNUMBER']['VALUE'];
 
-  $title = ($gender?$gender.' ':'').ToLower($cat).' '.$brand['NAME'].' '.$arResult['NAME'];
-  if($category['IBLOCK_SECTION_ID'] == 11 || $category['IBLOCK_SECTION_ID'] == 12 || $category['ID'] == 11 || $category['ID'] == 12)
-    $alt = ($gender?$gender.' ':'').ToLower(($color?$color.' ':'').$cat).' '.$brand['NAME'].' '.$arResult['NAME'];
-  else
-    $alt = 'Купить '.ToLower(($gender?$gender.' ':'').($color?$color.' ':'').$cat).' '.$brand['NAME'].' '.$arResult['NAME'];
+	$title = ($gender?$gender.' ':'').ToLower($cat).' '.$brand['NAME'].' '.$arResult['NAME'];
+	if($category['IBLOCK_SECTION_ID'] == 11 || $category['IBLOCK_SECTION_ID'] == 12 || $category['ID'] == 11 || $category['ID'] == 12)
+		$alt = ($gender?$gender.' ':'').ToLower(($color?$color.' ':'').$cat).' '.$brand['NAME'].' '.$arResult['NAME'];
+	else
+		$alt = 'Купить '.ToLower(($gender?$gender.' ':'').($color?$color.' ':'').$cat).' '.$brand['NAME'].' '.$arResult['NAME'];
 ?>
-    <div class="container detail">
-      <div class="row product-detail" id="<?=$itemIds['ID']?>">
-        <div class="col-lg-12">
-          <h1><?=($gender?$gender.' ':'').ToLower($cat)?> <span><?=$brand['NAME']?></span> <?=$arResult['NAME']?></h1>
-          <p class="vendorCode">Артикул: <?=$sku?></p>
+		<div class="container detail">
+			<div class="row product-detail" id="<?=$itemIds['ID']?>">
+				<div class="col-lg-12">
+					<h1><?=($gender?$gender.' ':'').ToLower($cat)?> <span><?=$brand['NAME']?></span> <?=$arResult['NAME']?></h1>
+					<p class="vendorCode">Артикул: <?=$sku?></p>
 <?if($arResult['DISPLAY_PROPERTIES']['ISNEW']['VALUE'] == 'да'){?>
-          <span class="product_isnew" style="position:relative;top:0;left:0;color:#f20113">новинка</span>
+					<span class="product_isnew" style="position:relative;top:0;left:0;color:#f20113">новинка</span>
 <?}
-  if($arResult['DISPLAY_PROPERTIES']['SALE']['VALUE'] == 'да'){?>
-          <span class="product_isnew" style="position:relative;top:0;left:0;color:#f20113">Распродажа</span>
+	if($arResult['DISPLAY_PROPERTIES']['SALE']['VALUE'] == 'да'){?>
+					<span class="product_isnew" style="position:relative;top:0;left:0;color:#f20113">Распродажа</span>
 <?}
-  if(!empty($actualItem['MORE_PHOTO'])){?>
-          <div id="Glide" class="glide">
-            <div class="glide__wrapper">
-              <ul class="glide__track">
-              <?if($arResult['XML_ID'] < '16442'){ ?>
-                <li class="glide__slide">
-                  <div class="imgBox">
-                    <div class="bigImgBox">
-                      <div class="bigImg">
-                        <a href="<?=$img['src']?>" title="<?=$title?>">
-                          <img src="<?=$img['src']?>" alt="<?=$alt?>" id="image" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              <?}
-                foreach($actualItem['MORE_PHOTO'] as $i=>$photo){?>
-                <li class="glide__slide">
-                  <div class="imgBox">
-                    <div class="bigImgBox">
-                      <div class="bigImg">
-                        <a href="<?=$photo['SRC']?>" title="<?=$title?> - изображение N<?=$i+1?> картинки">
-                          <img src="<?=$photo['SRC']?>" alt="<?=$alt?> - фото <?=$i+1?> картинки" id="image" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              <?}?>
-              </ul>
-            </div>
-            <div class="glide__arrows"></div>
-            <div class="glide__bullets"></div>
-          </div>
+	if(!empty($actualItem['MORE_PHOTO'])){?>
+					<div id="Glide" class="glide">
+						<div class="glide__wrapper">
+							<ul class="glide__track">
+							<?if($arResult['XML_ID'] < '16442'){ ?>
+								<li class="glide__slide">
+									<div class="imgBox">
+										<div class="bigImgBox">
+											<div class="bigImg">
+												<a href="<?=$img['src']?>" title="<?=$title?>">
+													<img src="<?=$img['src']?>" alt="<?=$alt?>" id="image" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</li>
+							<?}
+								foreach($actualItem['MORE_PHOTO'] as $i=>$photo){?>
+								<li class="glide__slide">
+									<div class="imgBox">
+										<div class="bigImgBox">
+											<div class="bigImg">
+												<a href="<?=$photo['SRC']?>" title="<?=$title?> - изображение N<?=$i+1?> картинки">
+													<img src="<?=$photo['SRC']?>" alt="<?=$alt?> - фото <?=$i+1?> картинки" id="image" />
+												</a>
+											</div>
+										</div>
+									</div>
+								</li>
+							<?}?>
+							</ul>
+						</div>
+						<div class="glide__arrows"></div>
+						<div class="glide__bullets"></div>
+					</div>
 <?}
-  if($actualItem['CATALOG_QUANTITY']){?>
-          <div class="price">
+	if($actualItem['CATALOG_QUANTITY']){?>
+					<div class="price">
 <?  if(($arParams['SHOW_OLD_PRICE'] == 'Y') && ($arResult['PROPERTIES']['SALE']['VALUE'] == 'да') && ($arResult['PROPERTIES']['SPECIAL_PRICE']['VALUE'] < $price['RATIO_BASE_PRICE']) && ($arResult['PROPERTIES']['SPECIAL_DATE']['VALUE'] < date('d.m.Y'))){?>
-            <span class="price-old"><?=number_format($arResult['PROPERTIES']['SPECIAL_PRICE']['VALUE'],0,'','');?></span>
-            <span class="price-new"><?=$price['BASE_PRICE']?> <i class="fa fa-rub"></i></span>
+						<span class="price-old"><?=number_format($arResult['PROPERTIES']['SPECIAL_PRICE']['VALUE'],0,'','');?></span>
+						<span class="price-new"><?=$price['BASE_PRICE']?> <i class="fa fa-rub"></i></span>
 <?  }else{?>
-            <?=$price['BASE_PRICE']?> <i class="fa fa-rub"></i>
+						<?=$price['BASE_PRICE']?> <i class="fa fa-rub"></i>
 <?  }
-    if($points){?>
-            <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
+		if($points){?>
+						<span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
 <?  }
-    if($discounts){?>
-            <br />
-            <div class="discount">
+		if($discounts){?>
+						<br />
+						<div class="discount">
 <?    foreach($discounts as $discount){
-        echo sprintf($text_discount, $discount['quantity'], $discount['price']).'<br />';
-      }?>
-            </div>
+				echo sprintf($text_discount, $discount['quantity'], $discount['price']).'<br />';
+			}?>
+						</div>
 <?  }?>
-          </div>
-          <div class="colorSize">
+					</div>
+					<div class="colorSize">
 <?  if(!empty($arResult['RELATED_PRODUCTS'])){?>
-            <select id="product_color_link">
-              <option value="0"><?=$color_?></option>
+						<select id="product_color_link">
+							<option value="0"><?=$color_?></option>
 <?    foreach($arResult['RELATED_PRODUCTS'] as $key => $product){?>
-              <option value="<?=$product['ID']?>"><?=$product['COLOR']?></option>
+							<option value="<?=$product['ID']?>"><?=$product['COLOR']?></option>
 <?    }?>
-            </select>
-            <script>
-              var products_links = [];
-            <?  foreach($arResult['RELATED_PRODUCTS'] as $key => $product){?>
-              products_links["<?=$product['ID']?>"] = "<?=$product['URL']; ?>";
-            <?  }?>
-              $(document.body).on("change", "#product_color_link", function(){
-                var t = $("#product_color_link");
-                if(t.val() !== 0){
-                  window.location = products_links[t.val()];
-                }
-              });
-            </script>
+						</select>
+						<script>
+							var products_links = [];
+						<?  foreach($arResult['RELATED_PRODUCTS'] as $key => $product){?>
+							products_links["<?=$product['ID']?>"] = "<?=$product['URL']; ?>";
+						<?  }?>
+							$(document.body).on("change", "#product_color_link", function(){
+								var t = $("#product_color_link");
+								if(t.val() !== 0){
+									window.location = products_links[t.val()];
+								}
+							});
+						</script>
 <?  }else{?>
-            <select name="" id="product_color_link">
-              <option value="0"><?=$color_?></option>
-            </select>
+						<select name="" id="product_color_link">
+							<option value="0"><?=$color_?></option>
+						</select>
 <?  }?>
-          </div>
+					</div>
 <?  if($haveOffers && !empty($arResult['OFFERS_PROP']) && ($arResult['OFFERS'][0]['US_NAME']!='' || $arResult['OFFERS'][0]['UK_NAME']!='' || $arResult['OFFERS'][0]['EUR_NAME']!='' || $arResult['OFFERS'][0]['RUS_NAME']!='' || $arResult['OFFERS'][0]['CM_NAME']!='')){?>
-          <div class="choose-size-wrap">
-            <div class = "flex-row sizes-chart-header" >
-              <div>
-                <p>Выбрать размер</p>
-              </div>         
-              <div class="sizes-chart-names">
-                <a href="#US" class="size_range_name">US</a>
-                <a href="#UK" class="size_range_name">UK</a>
-                <a href="#RUS" class="size_range_name">RUS</a>
-                <a href="#EUR" class="size_range_name">EUR</a>
-                <a href="#CM" class="size_range_name">CM</a>
-              </div>
-            </div>        
-            <!--US SIZES-->
-            <div class="flex-row sizes-chart-items-tab">         
-            <?foreach($arResult['OFFERS'] as $it){?>
-              <div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
-                <?=$it['US_NAME']?>
-              </div>
-            <?}?>
-            </div>
-            <!--UK SIZES-->
-            <div class="flex-row sizes-chart-items-tab">
-            <?foreach($arResult['OFFERS'] as $it){?>
-              <div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
-                <?=$it['UK_NAME']?>
-              </div>
-            <?}?>
-            </div>
-            <!--RUS SIZES-->
-            <div class="flex-row sizes-chart-items-tab">         
-            <?foreach($arResult['OFFERS'] as $it){?>
-              <div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
-                <?=$it['RUS_NAME']?>
-              </div>
-            <?}?>
-            </div>
-            <!--EUR SIZES-->
-            <div class="flex-row sizes-chart-items-tab">         
-            <?foreach($arResult['OFFERS'] as $it){?>
-              <div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
-                <?=$it['EUR_NAME']?>
-              </div>
-            <?}?>
-            </div>
-            <!--CM SIZES-->
-            <div class="flex-row sizes-chart-items-tab">        
-            <?foreach($arResult['OFFERS'] as $it){?>
-              <div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
-                <?=$it['CM_NAME']?>
-              </div>
-            <?}?>    
-            </div>
-          </div>  
-<?    if(in_array($category['XML_ID'],array(46,26,21,10,43))){?>
-          <a href="javascript:void(0)" class="show_size_grid_trigger">Размерная сетка</a>
-<?    }
-    }else{?>
-          <div class="choose-size-wrap">  
-            <div class = "flex-row sizes-chart-header">
-              <div>
-                <p>Выбрать размер</p>
-              </div>
-            </div>
-            <!--CM SIZES-->
-            <div class="flex-row sizes-chart-items-tab">
-            <?foreach($arResult['OFFERS'] as $it){?>
-              <div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
-                <?=$it['SIZE_NAME']?>
-              </div>
-            <?}?>
-            </div>
-            <?if(in_array($category['XML_ID'],array(46,26,21,10,43))){?> 
-            <a href="javascript:void(0)" class="show_size_grid_trigger">Размерная сетка</a>
-            <?}?>
-          </div>
+					<div class="choose-size-wrap">
+						<div class = "flex-row sizes-chart-header" >
+							<div>
+								<p>Выбрать размер</p>
+							</div>
+							<div class="sizes-chart-names">
+								<a href="#US" class="size_range_name">US</a>
+								<a href="#UK" class="size_range_name">UK</a>
+								<a href="#RUS" class="size_range_name">RUS</a>
+								<a href="#EUR" class="size_range_name">EUR</a>
+								<a href="#CM" class="size_range_name">CM</a>
+							</div>
+						</div>
+						<!--US SIZES-->
+						<div class="flex-row sizes-chart-items-tab">
+						<?foreach($arResult['OFFERS'] as $it){?>
+							<div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
+								<?=$it['US_NAME']?>
+							</div>
+						<?}?>
+						</div>
+						<!--UK SIZES-->
+						<div class="flex-row sizes-chart-items-tab">
+						<?foreach($arResult['OFFERS'] as $it){?>
+							<div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
+								<?=$it['UK_NAME']?>
+							</div>
+						<?}?>
+						</div>
+						<!--RUS SIZES-->
+						<div class="flex-row sizes-chart-items-tab">
+						<?foreach($arResult['OFFERS'] as $it){?>
+							<div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
+								<?=$it['RUS_NAME']?>
+							</div>
+						<?}?>
+						</div>
+						<!--EUR SIZES-->
+						<div class="flex-row sizes-chart-items-tab">
+						<?foreach($arResult['OFFERS'] as $it){?>
+							<div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
+								<?=$it['EUR_NAME']?>
+							</div>
+						<?}?>
+						</div>
+						<!--CM SIZES-->
+						<div class="flex-row sizes-chart-items-tab">
+						<?foreach($arResult['OFFERS'] as $it){?>
+							<div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
+								<?=$it['CM_NAME']?>
+							</div>
+						<?}?>
+						</div>
+						<?    if(in_array($category['XML_ID'],array(46,26,21,10,43))){?>
+							<a href="javascript:void(0)" class="show_size_grid_trigger">Размерная сетка</a>
+						<?    } ?>
+					</div>
+
+		<? }else{?>
+					<div class="choose-size-wrap">
+						<div class = "flex-row sizes-chart-header">
+							<div>
+								<p>Выбрать размер</p>
+							</div>
+						</div>
+						<!--CM SIZES-->
+						<div class="flex-row sizes-chart-items-tab">
+						<?foreach($arResult['OFFERS'] as $it){?>
+							<div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
+								<?=$it['SIZE_NAME']?>
+							</div>
+						<?}?>
+						</div>
+						<?if(in_array($category['XML_ID'],array(46,26,21,10,43))){?>
+						<a href="javascript:void(0)" class="show_size_grid_trigger redlink">Размерная сетка</a>
+						<?}?>
+					</div>
 <?  }?>
-          <div class="available_shops"></div>
-          <div class="size_grid_info_container" style="position:relative">
-            <table class="size_grid_info_title_wr">
-              <tbody>
-                <tr>
-                  <td><div class="size_grid_info_title">Размерная сетка</div></td>
-                  <td><a href="javascript:void(0)" class="size_grid_info_close"></a></td>
-                </tr>
-              </tbody>
-            </table>
-            <table class="size_grid_info_header">
-              <tbody>
-                <tr>
-                  <td>US</td>
-                  <td>UK</td>
-                  <td>EUR</td>
-                  <td>RUS</td>
-                  <td>CM</td>
-                </tr>
-              </tbody>
-            </table>
+					<div class="size_grid_info_container" style="position:relative">
+						<table class="size_grid_info_title_wr">
+							<tbody>
+								<tr>
+									<td><div class="size_grid_info_title">Размерная сетка</div></td>
+									<td><a href="javascript:void(0)" class="size_grid_info_close"></a></td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="size_grid_info_header">
+							<tbody>
+								<tr>
+									<td>US</td>
+									<td>UK</td>
+									<td>EUR</td>
+									<td>RUS</td>
+									<td>CM</td>
+								</tr>
+							</tbody>
+						</table>
 <?  switch($brand['PROPERTIES']['SIZE']['VALUE']){
-      case 'US':  $line = 1; break;
-      case 'UK':  $line = 2; break;
-      case 'EUR': $line = 3; break;
-      case 'RUS': $line = 4; break;
-      case 'CM':  $line = 5; break;
-    }?>
-            <style>.size_grid_info tr td:nth-child(<?=$line?>){background: #F4F4F4;font-weight: bold;}</style>
+			case 'US':  $line = 1; break;
+			case 'UK':  $line = 2; break;
+			case 'EUR': $line = 3; break;
+			case 'RUS': $line = 4; break;
+			case 'CM':  $line = 5; break;
+		}?>
+						<style>.size_grid_info tr td:nth-child(<?=$line?>){background: #F4F4F4;font-weight: bold;}</style>
 <?  if(empty($arResult['SIZES_TABLE'])){?>
-            <div class="size_grid_info_scroll_wr">
-              <table class="size_grid_info">
-                <tbody>
-                  <tr> <td>4</td><td>3</td><td>37</td><td>36</td><td>22</td></tr>
-                  <tr> <td>4.5</td><td>3.5</td><td>37.5</td><td>36.5</td><td>22.5</td></tr>
-                  <tr> <td>5</td><td>4</td><td>38</td><td>37</td><td>23</td></tr>
-                  <tr> <td>5.5</td><td>4.5</td><td>38.5</td><td>37.5</td><td>23.5</td></tr>
-                  <tr> <td>6</td><td>5</td><td>39</td><td>38</td><td>24</td></tr>
-                  <tr> <td>6.5</td><td>5.5</td><td>39.5</td><td>38.5</td><td>24.5</td></tr>
-                  <tr> <td>7</td><td>6</td><td>40</td><td>39</td><td>25</td></tr>
-                  <tr> <td>7.5</td><td>6.5</td><td>40.5</td><td>39.5</td><td>25.5</td></tr>
-                  <tr> <td>8</td><td>7</td><td>41</td><td>40</td><td>26</td></tr>
-                  <tr> <td>8.5</td><td>7.5</td><td>42</td><td>41</td><td>26.5</td></tr>
-                  <tr> <td>9</td><td>8</td><td>42.5</td><td>41.5</td><td>27</td></tr>
-                  <tr> <td>9.5</td><td>8.5</td><td>43</td><td>42</td><td>27.5</td></tr>
-                  <tr> <td>10</td><td>9</td><td>44</td><td>43</td><td>28</td></tr>
-                  <tr> <td>10.5</td><td>9.5</td><td>44.5</td><td>43.5</td><td>28.5</td></tr>
-                  <tr> <td>11</td><td>10</td><td>45</td><td>44</td><td>29</td></tr>
-                  <tr> <td>11.5</td><td>10.5</td><td>45.5</td><td>44.5</td><td>29.5</td></tr>
-                  <tr> <td>12</td><td>11</td><td>46</td><td>45</td><td>30</td></tr>
-                  <tr> <td>12.5</td><td>11.5</td><td>47</td><td>46</td><td>30.5</td></tr>
-                  <tr> <td>13</td><td>12</td><td>47.5</td><td>46.5</td><td>31</td></tr>
-                  <tr> <td>13.5</td><td>12.5</td><td>48</td><td>47</td><td>31.5</td></tr>
-                  <tr> <td>14</td><td>13</td><td>48.5</td><td>47.5</td><td>32</td></tr>
-                  <tr> <td>15</td><td>14</td><td>49.5</td><td>48.5</td><td>33</td></tr>
-                  <tr> <td>16</td><td>15</td><td>50.5</td><td>49.5</td><td>34</td></tr>
-                  <tr> <td>17</td><td>16</td><td>51.5</td><td>50.5</td><td>35</td></tr>
-                  <tr> <td>18</td><td>17</td><td>52.5</td><td>51.5</td><td>36</td></tr>
-                </tbody>
-              </table>
-            </div>
+						<div class="size_grid_info_scroll_wr">
+							<table class="size_grid_info">
+								<tbody>
+									<tr> <td>4</td><td>3</td><td>37</td><td>36</td><td>22</td></tr>
+									<tr> <td>4.5</td><td>3.5</td><td>37.5</td><td>36.5</td><td>22.5</td></tr>
+									<tr> <td>5</td><td>4</td><td>38</td><td>37</td><td>23</td></tr>
+									<tr> <td>5.5</td><td>4.5</td><td>38.5</td><td>37.5</td><td>23.5</td></tr>
+									<tr> <td>6</td><td>5</td><td>39</td><td>38</td><td>24</td></tr>
+									<tr> <td>6.5</td><td>5.5</td><td>39.5</td><td>38.5</td><td>24.5</td></tr>
+									<tr> <td>7</td><td>6</td><td>40</td><td>39</td><td>25</td></tr>
+									<tr> <td>7.5</td><td>6.5</td><td>40.5</td><td>39.5</td><td>25.5</td></tr>
+									<tr> <td>8</td><td>7</td><td>41</td><td>40</td><td>26</td></tr>
+									<tr> <td>8.5</td><td>7.5</td><td>42</td><td>41</td><td>26.5</td></tr>
+									<tr> <td>9</td><td>8</td><td>42.5</td><td>41.5</td><td>27</td></tr>
+									<tr> <td>9.5</td><td>8.5</td><td>43</td><td>42</td><td>27.5</td></tr>
+									<tr> <td>10</td><td>9</td><td>44</td><td>43</td><td>28</td></tr>
+									<tr> <td>10.5</td><td>9.5</td><td>44.5</td><td>43.5</td><td>28.5</td></tr>
+									<tr> <td>11</td><td>10</td><td>45</td><td>44</td><td>29</td></tr>
+									<tr> <td>11.5</td><td>10.5</td><td>45.5</td><td>44.5</td><td>29.5</td></tr>
+									<tr> <td>12</td><td>11</td><td>46</td><td>45</td><td>30</td></tr>
+									<tr> <td>12.5</td><td>11.5</td><td>47</td><td>46</td><td>30.5</td></tr>
+									<tr> <td>13</td><td>12</td><td>47.5</td><td>46.5</td><td>31</td></tr>
+									<tr> <td>13.5</td><td>12.5</td><td>48</td><td>47</td><td>31.5</td></tr>
+									<tr> <td>14</td><td>13</td><td>48.5</td><td>47.5</td><td>32</td></tr>
+									<tr> <td>15</td><td>14</td><td>49.5</td><td>48.5</td><td>33</td></tr>
+									<tr> <td>16</td><td>15</td><td>50.5</td><td>49.5</td><td>34</td></tr>
+									<tr> <td>17</td><td>16</td><td>51.5</td><td>50.5</td><td>35</td></tr>
+									<tr> <td>18</td><td>17</td><td>52.5</td><td>51.5</td><td>36</td></tr>
+								</tbody>
+							</table>
+						</div>
 <?  }else{?>
-            <div class="size_grid_info_scroll_wr">
-              <table class="size_grid_info">
-                <tbody>
+						<div class="size_grid_info_scroll_wr">
+							<table class="size_grid_info">
+								<tbody>
 <?    foreach($arResult['SIZES_TABLE'] as $v){ ?>
-                    <tr><td><?=$v['US']?></td><td><?=$v['UK']?></td><td><?=$v['EUR']?></td><td><?=$v['RUS']?></td><td><?=$v['CM']?></td></tr>
+										<tr><td><?=$v['US']?></td><td><?=$v['UK']?></td><td><?=$v['EUR']?></td><td><?=$v['RUS']?></td><td><?=$v['CM']?></td></tr>
 <?    }?>
-                </tbody>
-              </table>
-            </div>
+								</tbody>
+							</table>
+						</div>
 <?  }?>
-          </div>
+					</div>
 <?}?>
-          <div class="product-description">
+					<div class="available_shops"></div>
+					<div class="product-description">
 <?if(!$actualItem['CATALOG_QUANTITY']){?>
-            <p style="color:red;"><br>Товар закончился.</p>
+						<p style="color:red;"><br>Товар закончился.</p>
 <?}?>
 <?/*if($actualItem['CATALOG_QUANTITY']>0 && !empty($stock_status['PREVIEW_TEXT'])){?>
-            <div class="stock">
+						<div class="stock">
 <?  if(($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 22727 || $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 89319 ) &&  $DB->CompareDates($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'], date('d.m.Y ')) > 0){
-      echo htmlspecialchars_decode(str_replace('[DATE]',$arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'],$stock_status['PREVIEW_TEXT']));
-    }elseif($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22727 && $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 89319){
-      echo htmlspecialchars_decode($stock_status['PREVIEW_TEXT']);
-    }?>
-            </div>
+			echo htmlspecialchars_decode(str_replace('[DATE]',$arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'],$stock_status['PREVIEW_TEXT']));
+		}elseif($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22727 && $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 89319){
+			echo htmlspecialchars_decode($stock_status['PREVIEW_TEXT']);
+		}?>
+						</div>
 <?}*/?>
 <?if(!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']){
-    if(!empty($arResult['DISPLAY_PROPERTIES'])){
-      foreach($arResult['DISPLAY_PROPERTIES'] as $property){
-        if(isset($arParams['MAIN_BLOCK_PROPERTY_CODE'][$property['CODE']])){?>
-            <p><?=$property['NAME']?>: <b><?=(is_array($property['DISPLAY_VALUE'])? implode(' / ', $property['DISPLAY_VALUE']): $property['DISPLAY_VALUE'])?></b></p>	
+		if(!empty($arResult['DISPLAY_PROPERTIES'])){
+			foreach($arResult['DISPLAY_PROPERTIES'] as $property){
+				if(isset($arParams['MAIN_BLOCK_PROPERTY_CODE'][$property['CODE']])){?>
+						<p><?=$property['NAME']?>: <b><?=(is_array($property['DISPLAY_VALUE'])? implode(' / ', $property['DISPLAY_VALUE']): $property['DISPLAY_VALUE'])?></b></p>
 <?      }
-      }
-      unset($property);
-    }
-  }
-  if($arResult['PREVIEW_TEXT'] != '')
-            echo $arResult['PREVIEW_TEXT'];?>
-          </div>
-          <div class="flex-box">
-            <div style="width: 68px"><i class="icon icon_delivery"></i></div>
-            <div style="width: -webkit-calc(100% - 68px);width: calc(100% - 68px);">
-              <p><strong>Закажи доставку курьерской службой Redexpress в пределах МКАД — и мы доставим товар бесплатно!</strong></p>
-              <p><a class="redlink" href="/delivery/">Подробно о предложении</a></p>
-            </div>
-          </div>
+			}
+			unset($property);
+		}
+	}
+	if($arResult['PREVIEW_TEXT'] != '')
+						echo $arResult['PREVIEW_TEXT'];?>
+					</div>
+					<div class="flex-box">
+						<div style="width: 68px"><i class="icon icon_delivery"></i></div>
+						<div style="width: -webkit-calc(100% - 68px);width: calc(100% - 68px);">
+							<p><strong>Закажи доставку курьерской службой Redexpress в пределах МКАД — и мы доставим товар бесплатно!</strong></p>
+							<p><a class="redlink" href="/delivery/">Подробно о предложении</a></p>
+						</div>
+					</div>
 
-          <div class="cart waveBlock waves-effect waves-block" <?if(!$actualItem['CATALOG_QUANTITY']) echo 'style="display:none;";'?>>
-            <form data-adr="<?=$_SERVER['REQUEST_URI']?>" method="post" id="frm_add">
+					<div class="cart waveBlock waves-effect waves-block" <?if(!$actualItem['CATALOG_QUANTITY']) echo 'style="display:none;";'?>>
+						<form data-adr="<?=$_SERVER['REQUEST_URI']?>" method="post" id="frm_add">
 <?if(date(strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'])) > strtotime("now")){
-    if(($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 22727 || $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 89319 )){?>                                              
-              <button type="button" class="addCart button" id="button-cart" onclick="preorder()">Предзаказ</button>
+		if(($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 22727 || $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 89319 )){?>
+							<button type="button" class="addCart button" id="button-cart" onclick="preorder()">Предзаказ</button>
 <?  }else{?>
-              <button type="button" class="addCart button" id="button-cart" value="" disabled>В продаже с <?=date('d.m', strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE']));?></button>
-<?  } 
-  }else{
-    if($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 22730){?>
-              <button type="button" class="addCart button" id="button-cart" onclick="preorder()">Добавить в корзину</button>
-<?  }else{?>
-              <button type="button" class="addCart button" id="button-cart" onclick="miniup()">Добавить в корзину</button>
+							<button type="button" class="addCart button" id="button-cart" value="" disabled>В продаже с <?=date('d.m', strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE']));?></button>
 <?  }
-  }?>
-              <input type="hidden" name="<?=$arParams['ACTION_VARIABLE']?>" value="ADD2BASKET" />       
-              <input type="hidden" name="<?=$arParams['PRODUCT_ID_VARIABLE']?>" value="" />          
-              <input type="hidden" name="<?=$arParams["PRODUCT_QUANTITY_VARIABLE"] ?>" value="1" />
-              <div id="<?=$itemIds['BASKET_PROP_DIV']?>" style="display: none;">
-              <?if(!empty($arResult['PROPERTIES'])){
-                  foreach($arResult['PROPERTIES'] as $propId => $propInfo){?>
-                <input type="hidden" name="<?=$arParams['PRODUCT_PROPS_VARIABLE']?>[<?=$propId?>]" value="<?=htmlspecialcharsbx($propInfo['ID'])?>">
-	      <?  }
-                }?>
-              </div>              
-              <div class="addCart redbutton cart-success" style="display:none;">Добавлено в <a href="/shopping-cart/">корзину</a></div>
-              <div class="addCart redbutton cart-error" style="display:none;">Укажите размер!</div>
-            </form>
-			  <?/*
+	}else{
+		if($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 22730){?>
+							<button type="button" class="addCart button" id="button-cart" onclick="preorder()">Добавить в корзину</button>
+<?  }else{?>
+							<button type="button" class="addCart button" id="button-cart" onclick="miniup()">Добавить в корзину</button>
+<?  }
+	}?>
+							<input type="hidden" name="<?=$arParams['ACTION_VARIABLE']?>" value="ADD2BASKET" />
+							<input type="hidden" name="<?=$arParams['PRODUCT_ID_VARIABLE']?>" value="" />
+							<input type="hidden" name="<?=$arParams["PRODUCT_QUANTITY_VARIABLE"] ?>" value="1" />
+							<div id="<?=$itemIds['BASKET_PROP_DIV']?>" style="display: none;">
+							<?if(!empty($arResult['PROPERTIES'])){
+									foreach($arResult['PROPERTIES'] as $propId => $propInfo){?>
+								<input type="hidden" name="<?=$arParams['PRODUCT_PROPS_VARIABLE']?>[<?=$propId?>]" value="<?=htmlspecialcharsbx($propInfo['ID'])?>">
+				<?  }
+								}?>
+							</div>
+							<div class="addCart redbutton cart-success" style="display:none;">Добавлено в <a href="/shopping-cart/">корзину</a></div>
+							<div class="addCart redbutton cart-error" style="display:none;">Укажите размер!</div>
+						</form>
+				<?/*
 if($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22730 && date(strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'])) < strtotime("now")){?>
-            <div class="pickup">
-              <div class="pickup-item">
-                <div class="popup" style="width: 100%">
-                  <a class="whitebutton">Забрать из магазина</a>
-                </div>
-                <div style="color:red" class="error">Выберите размер</div>
-              </div>
-            </div>
+						<div class="pickup">
+							<div class="pickup-item">
+								<div class="popup" style="width: 100%">
+									<a class="whitebutton">Забрать из магазина</a>
+								</div>
+								<div style="color:red" class="error">Выберите размер</div>
+							</div>
+						</div>
 <?
-}*/?>   
-          </div>
-        </div>
-      </div>
+}*/?>
+					</div>
+				</div>
+			</div>
 <div data-retailrocket-markup-block="57ea49939872e5765454b533" data-product-id="<?=$arResult['ID']?>"></div>
-    </div>
+		</div>
 
-    <div class="popup-container" id="oneclick_pickup">
-      <a class="close" onclick="$('.fadeMe').trigger('click');">X</a>
-      <div class="title"><p>БЫСТРЫЙ ЗАКАЗ С САМОВЫВОЗОМ&nbsp;В&nbsp;МАГАЗИН</p><br /></div>
-      <p class="sub-title">По факту готовности заказа с вами свяжется оператор</p>
-      <p class="info">Любой вопрос по заказу Вы можете задать по телефону:</p>
-      <p class="tel"><a href="tel:+74952303084">+7 (495) 230-30-84</a></p>
-      <br />
-      <form data-adr="<?=$_SERVER['REQUEST_URI']?>" method="post">
-        <table style="margin:10px auto;" class="oneclick-inorder">
-          <tbody>
-            <tr>
-              <td colspan="2">
-                <p id="choose" class="sub-title">Выберите магазин</p>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" id="pickup_select">
-	      </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-	        <a href="/contacts-page/" style="text-transform: uppercase; font-weight: 200; border-bottom: 1px #f20113 dashed;">Адреса магазинов</a>
-              </td>
-	    </tr>
-            <tr>
-              <td>Имя</td>
-              <td><input type="text"  name="name" placeholder="Как в вам обратиться?" class="input-ongray isrequired" style="width:100%"></td>
-            </tr>
-            <tr>
-              <td>Телефон</td>
-              <td><input type="text" name="telephone" data-let-input="/^[0-9]+$/" data-let-phone="+7 (___) ___-__-__" placeholder="Телефон" class="input-ongray isrequired" style="width:100%"></td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <div class="privacy_check" style="margin: 15px 20px;">
-                  <input type="checkbox" checked name="agree" disabled value="1" />
-                  <label>Я прочитал и согласен с <a class="fancybox" target = "_blank"  href="/privacy/"><b>условиями</b></a></label>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" style="text-align:center;">
-                <div class="redbutton" id="oneclickcart">Забрать в магазине</div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" style="text-align:center;color:red">
-                <p class="successmsg"></p>
-                <p class="admitad"></p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-    </div>
+		<div class="popup-container" id="oneclick_pickup">
+			<a class="close" onclick="$('.fadeMe').trigger('click');">X</a>
+			<div class="title"><p>БЫСТРЫЙ ЗАКАЗ С САМОВЫВОЗОМ&nbsp;В&nbsp;МАГАЗИН</p><br /></div>
+			<p class="sub-title">По факту готовности заказа с вами свяжется оператор</p>
+			<p class="info">Любой вопрос по заказу Вы можете задать по телефону:</p>
+			<p class="tel"><a href="tel:+74952303084">+7 (495) 230-30-84</a></p>
+			<br />
+			<form data-adr="<?=$_SERVER['REQUEST_URI']?>" method="post">
+				<table style="margin:10px auto;" class="oneclick-inorder">
+					<tbody>
+						<tr>
+							<td colspan="2">
+								<p id="choose" class="sub-title">Выберите магазин</p>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" id="pickup_select">
+				</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+					<a href="/contacts-page/" style="text-transform: uppercase; font-weight: 200; border-bottom: 1px #f20113 dashed;">Адреса магазинов</a>
+							</td>
+			</tr>
+						<tr>
+							<td>Имя</td>
+							<td><input type="text"  name="name" placeholder="Как в вам обратиться?" class="input-ongray isrequired" style="width:100%"></td>
+						</tr>
+						<tr>
+							<td>Телефон</td>
+							<td><input type="text" name="telephone" data-let-input="/^[0-9]+$/" data-let-phone="+7 (___) ___-__-__" placeholder="Телефон" class="input-ongray isrequired" style="width:100%"></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="privacy_check" style="margin: 15px 20px;">
+									<input type="checkbox" checked name="agree" disabled value="1" />
+									<label>Я прочитал и согласен с <a class="fancybox" target = "_blank"  href="/privacy/"><b>условиями</b></a></label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" style="text-align:center;">
+								<div class="redbutton" id="oneclickcart">Забрать в магазине</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" style="text-align:center;color:red">
+								<p class="successmsg"></p>
+								<p class="admitad"></p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
 
-    <div class="popup-container" id="success_order">
-      <a class="close" onclick="$('.fadeMe').trigger('click');">X</a>
-      <div class="title"><p>СПАСИБО ЗА ПОКУПКУ!</p><br /></div>
-      <div class="info"></div>
-      <br />
-      <p><a href="/shoes/" class="redbutton">Вернуться в магазин</a></p>
-    </div>
+		<div class="popup-container" id="success_order">
+			<a class="close" onclick="$('.fadeMe').trigger('click');">X</a>
+			<div class="title"><p>СПАСИБО ЗА ПОКУПКУ!</p><br /></div>
+			<div class="info"></div>
+			<br />
+			<p><a href="/shoes/" class="redbutton">Вернуться в магазин</a></p>
+		</div>
 
-<?//}?>    
-    <script>
-      $("#Glide").glide({
-        type: "carousel"
-      });
-      $(".size_grid_info_close").click(function(){
-        $(".size_grid_info_container").slideUp();
-      });
-      $(".show_size_grid_trigger").click(function(){
-        $(".size_grid_info_container").slideDown();
-      });
+<?//}?>
+		<script>
+			$("#Glide").glide({
+				type: "carousel"
+			});
+			$(".size_grid_info_close").click(function(){
+				$(".size_grid_info_container").slideUp();
+			});
+			$(".show_size_grid_trigger").click(function(){
+				$(".size_grid_info_container").slideDown();
+			});
 
-      $(document).ready(function(){
-        setTimeout(function(){
-          var PSO = '.product-size-option';
-          $(PSO).styler({
-            onFormStyled:function(){
-              $(PSO).parent('.jq-selectbox').find('.jq-selectbox__dropdown').find('li').each(function(){
-                var t = $(this);
-                var shopdata = t.data('shopdata');
-                t.addClass('product-size-option-item');
-                if(shopdata){
-                  t.append('<span>'+shopdata+'</span>');
-                }      
-              });
-            },
-            onSelectOpened:function(){
-              $(PSO).parent('.jq-selectbox').find('.jq-selectbox__dropdown').find('ul').css({
-                'overflow-y':'',
-                'overflow-x':'',
-                'height':function(){
-                  return $(PSO).parent('.jq-selectbox').find('.jq-selectbox__dropdown').find('li').length * 32 +"px";
-                },
-                'max-height':function(){
-                  return $(PSO).parent('.jq-selectbox').find('.jq-selectbox__dropdown').find('li').length * 32 +"px";
-                }
-              });
-            },
-            onSelectClosed:function(){
-              $('.cart').find('.cart-error').hide();
-              $('.cart').find('.cart-success').hide();
-              $('.cart').find('#button-cart').show();
-            }
-          });
-          $('#product_color_link').styler();
+			$(document).ready(function(){
+				setTimeout(function(){
+					var PSO = '.product-size-option';
+					$(PSO).styler({
+						onFormStyled:function(){
+							$(PSO).parent('.jq-selectbox').find('.jq-selectbox__dropdown').find('li').each(function(){
+								var t = $(this);
+								var shopdata = t.data('shopdata');
+								t.addClass('product-size-option-item');
+								if(shopdata){
+									t.append('<span>'+shopdata+'</span>');
+								}
+							});
+						},
+						onSelectOpened:function(){
+							$(PSO).parent('.jq-selectbox').find('.jq-selectbox__dropdown').find('ul').css({
+								'overflow-y':'',
+								'overflow-x':'',
+								'height':function(){
+									return $(PSO).parent('.jq-selectbox').find('.jq-selectbox__dropdown').find('li').length * 32 +"px";
+								},
+								'max-height':function(){
+									return $(PSO).parent('.jq-selectbox').find('.jq-selectbox__dropdown').find('li').length * 32 +"px";
+								}
+							});
+						},
+						onSelectClosed:function(){
+							$('.cart').find('.cart-error').hide();
+							$('.cart').find('.cart-success').hide();
+							$('.cart').find('#button-cart').show();
+						}
+					});
+					$('#product_color_link').styler();
 
-          $(".colorSize .selectric-items").width($(".colorSize .selectric-wrapper").width());
+					$(".colorSize .selectric-items").width($(".colorSize .selectric-wrapper").width());
 
-          $("div.minImg").on("click", "a", function(e){
-            e.preventDefault();
-            $("div.minImg").removeClass("active");
-            $(this).closest("div.minImg").addClass("active");
-            $("div.bigImgBox img#image").attr("src", $(this).attr("href"));
-          });
-        }, 300);  
+					$("div.minImg").on("click", "a", function(e){
+						e.preventDefault();
+						$("div.minImg").removeClass("active");
+						$(this).closest("div.minImg").addClass("active");
+						$("div.bigImgBox img#image").attr("src", $(this).attr("href"));
+					});
+				}, 300);
 
-        $('.success, .warning, .attention, information, .error').remove();
-		  <?if(date(strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'])) > strtotime('now') && $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22727 && $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 89319){?>
-        $('.cart').find('.cart-error').html('В продаже с <?=date('d.m', strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE']));?>');
+				$('.success, .warning, .attention, information, .error').remove();
+			<?if(date(strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'])) > strtotime('now') && $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22727 && $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 89319){?>
+				$('.cart').find('.cart-error').html('В продаже с <?=date('d.m', strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE']));?>');
 																																																								 /*$('.cart').find('.cart-error').show();*/
-        $('.cart').find('.cart-success').hide();
-        $(this).hide();
-      <?}?>
+				$('.cart').find('.cart-success').hide();
+				$(this).hide();
+			<?}?>
 
-        $(".colorSize .selectric-items ul li").click(function(){
-          $('.cart').find('.cart-error').hide();
-          $('.cart').find('.cart-success').hide();
-          $('.cart').find('#button-cart').show();
-        });
+				$(".colorSize .selectric-items ul li").click(function(){
+					$('.cart').find('.cart-error').hide();
+					$('.cart').find('.cart-success').hide();
+					$('.cart').find('#button-cart').show();
+				});
 
-        $('select[name="option[34]"]').change(function(){
-          $('.cart form input[name="id"]').val($(this).val());
-          $(this).find('option').each(function() {
-            if($(this).prop('selected') == true){ 
-              $('#shops').html( $(this).attr('data-shopdata'));
-            }
-          });
-          return false;
-        });      
+				$('select[name="option[34]"]').change(function(){
+					$('.cart form input[name="id"]').val($(this).val());
+					$(this).find('option').each(function() {
+						if($(this).prop('selected') == true){
+							$('#shops').html( $(this).attr('data-shopdata'));
+						}
+					});
+					return false;
+				});
 
-        if($('input[name="id"]').val() == ''){
-          if($('select[name="option[34]"]').children().length > 2){          
-          }else{
-            $('select[name="option[34]"] :last').prop('selected',true);
-	    $('input[name="id"]').val($('select[name="option[34]"]').val());	
-            $(this).hide();
-	  }
-        }else{
-          $(this).hide();
-        }
-      });
-            function preorder(){
-            	if($('input[name="id"]').val() == ''){
+				if($('input[name="id"]').val() == ''){
 					if($('select[name="option[34]"]').children().length > 2){
-                        $('#button-cart').hide();
-                        $('.cart').find('.cart-error').show();
-                        $('.cart').find('.cart-success').hide();
-                        $(this).hide();
-                        return false;
-                      }
-                    }
-            	$.ajax({
-            	  type: "post",
-            		url: '<?=$templateFolder?>/preorder.php',
-            	  dataType: "html",
-            		data: $('#frm_add').serialize(),
-                success: function(data){
-            			data = JSON.parse(data);
-            			if(data.status == 'ERROR'){
-            				$('.cart').find('.cart-error').html(data.text).show();
-            				$('#button-cart').hide();			
-            			}else{
-            				$.ajax({
-                    	type: "get",
-            					url: "/mini.php",        			
-            				  dataType: "html",
-                			success: function(data){
-                       				$("#topcart").html(data);			        
-            					        $('.cart').find('.cart-success').show();
-            				        	$('#button-cart').hide();
-	        	         	}
-            	      });	        	
-            			}
-            		}
-            	});
-            	return false;        
-            }
-    </script>
-    <?/*<script>
-      $('#button-cart').bind('click', function() {
-        var t = $(this);
-        $.ajax({
-          url: 'index.php?route=checkout/cart/add',
-          type: 'post',
-          data: $('.product-info input[type=\'text\'], .product-info input[type=\'hidden\'], .product-info input[type=\'radio\']:checked, .product-info input[type=\'checkbox\']:checked, .product-info select, .product-info textarea'),
-          dataType: 'json',
-          success: function(json) {
-          console.log(json);
-            $('.success, .warning, .attention, information, .error').remove();
-            if (json['error']) {
-              if (json['error']['option']) {
-                t.parent('.cart').find('.cart-error').show();
-                t.parent('.cart').find('.cart-success').hide();
-                t.hide();
-              }
-              if (json['error']['release']) {
-                t.parent('.cart').find('.cart-error').html(json['error']['release']);
-                t.parent('.cart').find('.cart-error').show();
-                t.parent('.cart').find('.cart-success').hide();
-                t.hide();
-              }
-            }
-            if (json['success']) {
-              t.parent('.cart').find('.cart-success').show();
-              t.hide();
-              t.parent('.cart').find('.cart-error').hide();
-              if($('.header-cart').find('.cart-total').html() == '') {
-                $('.header-cart').find('.cart-total').html(json['total']);
-              } else {
-                $('.header-cart').find(".ri-cart").html("<span class=\"cart-total\">"+json['total']+"</span></i>");
-              }
-              try { rrApi.addToBasket(18493) } catch(e) {}
-              window.dataLayer = window.dataLayer || [];
-              dataLayer.push({
-                'ecommerce': {
-                  'currencyCode': 'RUB',
-                  'add': {
-                    'products': [{
-                    'name': '<?=$arResult["NAME"]?>',
-                    'id': '<?=$arResult["ID"]?>',
-                    'categoryId': '<?=$category["ID"]?>',
-                    'category': '<?=$category["NAME"]?>',
-                    'price': '<?=$price["RATIO_PRICE"]?>',
-                    'quantity': 1
-                  }]
-                }
-              },
-              'event': 'gtm-ee-event',
-              'gtm-ee-event-category': 'Enhanced Ecommerce',
-              'gtm-ee-event-action': 'Adding a Product to a Shopping Cart',
-              'gtm-ee-event-non-interaction': 'False'
-            });
-            }
-          }
-        });
-      });
-    </script>*/?>
-    <script>
-      (window["rrApiOnReady"] = window["rrApiOnReady"] || []).push(function(){
-        try{ rrApi.view(<?=$arResult['ID']?>); } catch(e) {}
-      });
-    </script>
+					}else{
+						$('select[name="option[34]"] :last').prop('selected',true);
+			$('input[name="id"]').val($('select[name="option[34]"]').val());
+						$(this).hide();
+		}
+				}else{
+					$(this).hide();
+				}
+			});
+						function preorder(){
+							if($('input[name="id"]').val() == ''){
+					if($('select[name="option[34]"]').children().length > 2){
+												$('#button-cart').hide();
+												$('.cart').find('.cart-error').show();
+												$('.cart').find('.cart-success').hide();
+												$(this).hide();
+												return false;
+											}
+										}
+							$.ajax({
+								type: "post",
+								url: '<?=$templateFolder?>/preorder.php',
+								dataType: "html",
+								data: $('#frm_add').serialize(),
+								success: function(data){
+									data = JSON.parse(data);
+									if(data.status == 'ERROR'){
+										$('.cart').find('.cart-error').html(data.text).show();
+										$('#button-cart').hide();
+									}else{
+										$.ajax({
+											type: "get",
+											url: "/mini.php",
+											dataType: "html",
+											success: function(data){
+											 				$("#topcart").html(data);
+															$('.cart').find('.cart-success').show();
+															$('#button-cart').hide();
+										 	}
+										});
+									}
+								}
+							});
+							return false;
+						}
+		</script>
+		<?/*<script>
+			$('#button-cart').bind('click', function() {
+				var t = $(this);
+				$.ajax({
+					url: 'index.php?route=checkout/cart/add',
+					type: 'post',
+					data: $('.product-info input[type=\'text\'], .product-info input[type=\'hidden\'], .product-info input[type=\'radio\']:checked, .product-info input[type=\'checkbox\']:checked, .product-info select, .product-info textarea'),
+					dataType: 'json',
+					success: function(json) {
+					console.log(json);
+						$('.success, .warning, .attention, information, .error').remove();
+						if (json['error']) {
+							if (json['error']['option']) {
+								t.parent('.cart').find('.cart-error').show();
+								t.parent('.cart').find('.cart-success').hide();
+								t.hide();
+							}
+							if (json['error']['release']) {
+								t.parent('.cart').find('.cart-error').html(json['error']['release']);
+								t.parent('.cart').find('.cart-error').show();
+								t.parent('.cart').find('.cart-success').hide();
+								t.hide();
+							}
+						}
+						if (json['success']) {
+							t.parent('.cart').find('.cart-success').show();
+							t.hide();
+							t.parent('.cart').find('.cart-error').hide();
+							if($('.header-cart').find('.cart-total').html() == '') {
+								$('.header-cart').find('.cart-total').html(json['total']);
+							} else {
+								$('.header-cart').find(".ri-cart").html("<span class=\"cart-total\">"+json['total']+"</span></i>");
+							}
+							try { rrApi.addToBasket(18493) } catch(e) {}
+							window.dataLayer = window.dataLayer || [];
+							dataLayer.push({
+								'ecommerce': {
+									'currencyCode': 'RUB',
+									'add': {
+										'products': [{
+										'name': '<?=$arResult["NAME"]?>',
+										'id': '<?=$arResult["ID"]?>',
+										'categoryId': '<?=$category["ID"]?>',
+										'category': '<?=$category["NAME"]?>',
+										'price': '<?=$price["RATIO_PRICE"]?>',
+										'quantity': 1
+									}]
+								}
+							},
+							'event': 'gtm-ee-event',
+							'gtm-ee-event-category': 'Enhanced Ecommerce',
+							'gtm-ee-event-action': 'Adding a Product to a Shopping Cart',
+							'gtm-ee-event-non-interaction': 'False'
+						});
+						}
+					}
+				});
+			});
+		</script>*/?>
+		<script>
+			(window["rrApiOnReady"] = window["rrApiOnReady"] || []).push(function(){
+				try{ rrApi.view(<?=$arResult['ID']?>); } catch(e) {}
+			});
+		</script>
 <script type="text/javascript">
 var _tmr = _tmr || [];
 _tmr.push({
-    id: '3065581',
-    type: 'itemView',
-    productid: '<?=$arResult["ID"]?>',
-    pagetype: 'product',
-    list: '1',
-    totalvalue: '<?=$price["RATIO_PRICE"]?>'
+		id: '3065581',
+		type: 'itemView',
+		productid: '<?=$arResult["ID"]?>',
+		pagetype: 'product',
+		list: '1',
+		totalvalue: '<?=$price["RATIO_PRICE"]?>'
 });
 </script>
-    <script>
-      // required object
-      window.ad_product = {
-      "id": "<?=$arResult['ID']?>",
-      "vendor": "<?=$brand['NAME']?>",
-      "price": "<?=$price['RATIO_PRICE']?>",
-      "url": "",
-      "picture": "",
-      "name": "<?=$arResult['NAME']?>",
-      "category": "<?=$category['ID']?>"
-      };
-      window._retag = window._retag || [];
-      window._retag.push({code: "9ce8886989", level: 2});
-      (function () {
-      var id = "admitad-retag";
-      if (document.getElementById(id)) {return;}
-      var s = document.createElement("script");
-      s.async = true; s.id = id;
-      var r = (new Date).getDate();
-      s.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//cdn.lenmit.com/static/js/retag.min.js?r="+r;
-      var a = document.getElementsByTagName("script")[0]
-      a.parentNode.insertBefore(s, a);
-      })()
-    </script>
-    <!-- GTM -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      dataLayer.push({
-        'ecommerce':{
-          'currencyCode': 'RUB',
-          'detail':{
-            'products': [{
-              'name': '<?=$arResult["NAME"]?>', // название товара
-              'id': '<?=$arResult["ID"]?>', // id товара
-              'categoryId': '<?=$category["ID"]?>', // id категории
-              'category': '<?=$category["NAME"]?>',
-              'price': '<?=$price["RATIO_PRICE"]?>' // цена товара
-            }]
-          }
-        },
-        'event': 'gtm-ee-event',
-        'gtm-ee-event-category': 'Enhanced Ecommerce',
-        'gtm-ee-event-action': 'Product Details',
-        'gtm-ee-event-non-interaction': 'True',
-      });
-    </script>
-    <script>
-      $('.popup').click(function(){
-        var t = $(this);
-        var option =  $('.input-ongray .product-size-option option:selected').val();
-        var html = '';          
-        var stores = [];
+		<script>
+			// required object
+			window.ad_product = {
+			"id": "<?=$arResult['ID']?>",
+			"vendor": "<?=$brand['NAME']?>",
+			"price": "<?=$price['RATIO_PRICE']?>",
+			"url": "",
+			"picture": "",
+			"name": "<?=$arResult['NAME']?>",
+			"category": "<?=$category['ID']?>"
+			};
+			window._retag = window._retag || [];
+			window._retag.push({code: "9ce8886989", level: 2});
+			(function () {
+			var id = "admitad-retag";
+			if (document.getElementById(id)) {return;}
+			var s = document.createElement("script");
+			s.async = true; s.id = id;
+			var r = (new Date).getDate();
+			s.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//cdn.lenmit.com/static/js/retag.min.js?r="+r;
+			var a = document.getElementsByTagName("script")[0]
+			a.parentNode.insertBefore(s, a);
+			})()
+		</script>
+		<!-- GTM -->
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			dataLayer.push({
+				'ecommerce':{
+					'currencyCode': 'RUB',
+					'detail':{
+						'products': [{
+							'name': '<?=$arResult["NAME"]?>', // название товара
+							'id': '<?=$arResult["ID"]?>', // id товара
+							'categoryId': '<?=$category["ID"]?>', // id категории
+							'category': '<?=$category["NAME"]?>',
+							'price': '<?=$price["RATIO_PRICE"]?>' // цена товара
+						}]
+					}
+				},
+				'event': 'gtm-ee-event',
+				'gtm-ee-event-category': 'Enhanced Ecommerce',
+				'gtm-ee-event-action': 'Product Details',
+				'gtm-ee-event-non-interaction': 'True',
+			});
+		</script>
+		<script>
+			$('.popup').click(function(){
+				var t = $(this);
+				var option =  $('.input-ongray .product-size-option option:selected').val();
+				var html = '';
+				var stores = [];
 //        if(option == '')
 //          $('.cart-error').html('Выберите размер');
 
-        if(option == ''){
-          $('#button-cart').hide();
-          $('.cart-error').show();
-          return false;
-        }
+				if(option == ''){
+					$('#button-cart').hide();
+					$('.cart-error').show();
+					return false;
+				}
 
 <?foreach($arResult['STORES_MAP'] as $i=>$arr){?>
-        var store = [];
+				var store = [];
 <?  $a=0;
-    foreach($arr as $it){?>
-        var st=[]
-        st['id'] = "<?=$it['ID'];?>";
-        st['name']  = "<?=$it['NAME'];?>";
-        store[<?=$a;?>]=st;
+		foreach($arr as $it){?>
+				var st=[]
+				st['id'] = "<?=$it['ID'];?>";
+				st['name']  = "<?=$it['NAME'];?>";
+				store[<?=$a;?>]=st;
 <?    $a++;
-    }?>
-        stores[<?=$i;?>] = store;
+		}?>
+				stores[<?=$i;?>] = store;
 <?}?>
-        var arr = stores[option];
-        arr.forEach(function(item, i, arr){
-          html += '<input type="radio" name="pickupshop" value="'+item['id']+'" />'+item['name']+' (Забрать сегодня)<br />';
-        });
-        //console.log(html);
-       
-        var popup = $('#oneclick_pickup');
-        $('#pickup_select').html(html);
+				var arr = stores[option];
+				arr.forEach(function(item, i, arr){
+					html += '<input type="radio" name="pickupshop" value="'+item['id']+'" />'+item['name']+' (Забрать сегодня)<br />';
+				});
+				//console.log(html);
+
+				var popup = $('#oneclick_pickup');
+				$('#pickup_select').html(html);
 	popup.addClass('show');
 	$('html, body').animate({
-	  scrollTop: popup.offset().top
+		scrollTop: popup.offset().top
 	}, 2000);
 
-        //$('.fadeMe').show();
-        $('.fadeMe').on('click',function() {
-	  $('#pickup_select').html('');
-	  popup.removeClass('show');
-	  $('.fadeMe').hide();
-	  $('#pickup_select').empty();
-        });
-        $("input[name=pickupshop]:radio").click(function(){
-          var id = $(this).val();	  
-	  $(document.body).find(".address .item").each(function(){
-  	    if($(this).attr('id') == id){
-              $(this).css('display', 'block');
-	    }else{
-              $(this).css('display', 'none');
-            }
-          });
+				//$('.fadeMe').show();
+				$('.fadeMe').on('click',function() {
+		$('#pickup_select').html('');
+		popup.removeClass('show');
+		$('.fadeMe').hide();
+		$('#pickup_select').empty();
+				});
+				$("input[name=pickupshop]:radio").click(function(){
+					var id = $(this).val();
+		$(document.body).find(".address .item").each(function(){
+				if($(this).attr('id') == id){
+							$(this).css('display', 'block');
+			}else{
+							$(this).css('display', 'none');
+						}
+					});
 	});
-      });
-    </script>
-    <script>
-      $(document.body).on("focus", ".isrequired", function(){$(this).css("border","");});        
-      $("#oneclickcart").click(function(){
-      id = $('.cart').find('[name=id]').val();
-      name = $('#oneclick_pickup').find('[name=name]').val();
-      phone = $('#oneclick_pickup').find('[name=telephone]').val();
-      shop = $('#oneclick_pickup').find('[name=pickupshop]').val();
-        event.preventDefault();
-        var wri = $("#oneclick_pickup");
-        //var wrp = $(".cart-info");
-        var validate = true;
-        wri.find(".isrequired").each(function(){
-          if(!$(this).val().length){validate = false; $(this).css("border","1px solid #D22")}
-        });
-        if(!$("input[type=\'radio\']:checked" ).val()){
- 	  validate = false;
-	  $('#choose').css("color","#D22");
+			});
+		</script>
+		<script>
+			$(document.body).on("focus", ".isrequired", function(){$(this).css("border","");});
+			$("#oneclickcart").click(function(){
+			id = $('.cart').find('[name=id]').val();
+			name = $('#oneclick_pickup').find('[name=name]').val();
+			phone = $('#oneclick_pickup').find('[name=telephone]').val();
+			shop = $('#oneclick_pickup').find('[name=pickupshop]').val();
+				event.preventDefault();
+				var wri = $("#oneclick_pickup");
+				//var wrp = $(".cart-info");
+				var validate = true;
+				wri.find(".isrequired").each(function(){
+					if(!$(this).val().length){validate = false; $(this).css("border","1px solid #D22")}
+				});
+				if(!$("input[type=\'radio\']:checked" ).val()){
+ 		validate = false;
+		$('#choose').css("color","#D22");
 	}
-        if (validate){
-          $("#oneclickcart").hide();
-          wri.find('.successmsg').html("Пожалуйста, подождите");
-          wri.find('.successmsg').show();
-          $.ajax({
-            url: '<?=$templateFolder?>/confirm_pickup.php',
-            type: 'post',
-            data: 'id='+id+'&shop='+shop+'&name='+name+'&phone='+phone,
-            dataType: 'json',
-            complete: function(json){
-              var popup = $('#success_order');
-	      var offset = popup.offset();		
-              popup.find('.info').html(json.responseText);              
-	      $('body, html').animate({
-        	scrollTop: offset.top
-	      }, 100);
-              popup.addClass('show');
-              wri.removeClass('show');
-              wri.hide();
-              $('.fadeMe').show();
-              $('.fadeMe').on('click',function() {
-                popup.removeClass('show');
-                $('.fadeMe').hide();
-              });        
-            }
-          });
-        }
-      });        
-    </script>
+				if (validate){
+					$("#oneclickcart").hide();
+					wri.find('.successmsg').html("Пожалуйста, подождите");
+					wri.find('.successmsg').show();
+					$.ajax({
+						url: '<?=$templateFolder?>/confirm_pickup.php',
+						type: 'post',
+						data: 'id='+id+'&shop='+shop+'&name='+name+'&phone='+phone,
+						dataType: 'json',
+						complete: function(json){
+							var popup = $('#success_order');
+				var offset = popup.offset();
+							popup.find('.info').html(json.responseText);
+				$('body, html').animate({
+					scrollTop: offset.top
+				}, 100);
+							popup.addClass('show');
+							wri.removeClass('show');
+							wri.hide();
+							$('.fadeMe').show();
+							$('.fadeMe').on('click',function() {
+								popup.removeClass('show');
+								$('.fadeMe').hide();
+							});
+						}
+					});
+				}
+			});
+		</script>
 <?
 if ($haveOffers)
 {
@@ -1276,78 +1277,78 @@ if ($arParams['DISPLAY_COMPARE'])
 <?unset($actualItem, $itemIds, $jsParams);?>
 <script src="<?=SITE_TEMPLATE_PATH?>/js/let.min.js"></script>
 <script>
-    letJS.setHandler('data-let-phone', function(event, unchanged) {
-      if (!this.value) {
-        this.value = event.rule;
-      }
-      if (unchanged) {
-        if (event.type === 'blur') {
-            if (this.value === event.rule) {
-               this.value = '';
-            }
-            return;
-        } else {
-            this.focus();
-        }
-      } else if (event.insertValue) {
-        var parts = event.insertValue.split('');
-        for(var i = 0; i < parts.length; i++) {
-            this.value = this.value.replace(/^([^_]+)_/, '$1' + parts[i]);
-        }
-      } else if (event.cropValue) {
-        this.value = this.value.replace(/(\+7.*)\d([^\d]*)$/, '$1_$2');
-      }
-      var pos = this.value.indexOf('_');
-      event.selection(pos > 0 ? pos : this.value.length);
-      return false;
-    });
+		letJS.setHandler('data-let-phone', function(event, unchanged) {
+			if (!this.value) {
+				this.value = event.rule;
+			}
+			if (unchanged) {
+				if (event.type === 'blur') {
+						if (this.value === event.rule) {
+							 this.value = '';
+						}
+						return;
+				} else {
+						this.focus();
+				}
+			} else if (event.insertValue) {
+				var parts = event.insertValue.split('');
+				for(var i = 0; i < parts.length; i++) {
+						this.value = this.value.replace(/^([^_]+)_/, '$1' + parts[i]);
+				}
+			} else if (event.cropValue) {
+				this.value = this.value.replace(/(\+7.*)\d([^\d]*)$/, '$1_$2');
+			}
+			var pos = this.value.indexOf('_');
+			event.selection(pos > 0 ? pos : this.value.length);
+			return false;
+		});
 
 function miniup(){
 console.log($(".sizes-chart-item.selected").data('id'));
 	if($(".sizes-chart-item.selected").data('id')){
-$('input[name="id"]').val($('.sizes-chart-item.selected').data('id')); 
+$('input[name="id"]').val($('.sizes-chart-item.selected').data('id'));
 	}else{
 	$('#button-cart').hide();
-      $('.cart').find('.cart-error').show();
-      $('.cart').find('.cart-success').hide();
-      $(this).hide();
-      return false;
+			$('.cart').find('.cart-error').show();
+			$('.cart').find('.cart-success').hide();
+			$(this).hide();
+			return false;
 }
 	/*  if($('.cart form input[name="id"]').val() == ''){
-	  if($('select[name="option[34]"]').children().length > 2){
-      $('#button-cart').hide();
-      $('.cart').find('.cart-error').show();
-      $('.cart').find('.cart-success').hide();
-      $(this).hide();
-      return false;
-    }else{
-        
-        $('input[name="id"]').val($('.sizes-chart-item').data('id'))
-        
-        
-        
+		if($('select[name="option[34]"]').children().length > 2){
+			$('#button-cart').hide();
+			$('.cart').find('.cart-error').show();
+			$('.cart').find('.cart-success').hide();
+			$(this).hide();
+			return false;
+		}else{
+
+				$('input[name="id"]').val($('.sizes-chart-item').data('id'))
+
+
+
 }
-  }*/
+	}*/
 console.log($("#frm_add").data('adr'));
 console.log($("#frm_add").serialize());
-  $.ajax({
+	$.ajax({
 	type: "POST",
 	url: $("#frm_add").data('adr'),
-        data:$("#frm_add").serialize(),
-        dataType: "html",
-        success: function(out){
+				data:$("#frm_add").serialize(),
+				dataType: "html",
+				success: function(out){
 		$.ajax({
-                	type: "GET",
+									type: "GET",
 			url: "/mini.php",
-        	        dataType: "html",
-                	success: function(out){
-                        	$(".header .iconsBox a.cart").html(out);
-			        $('.cart').find('.cart-success').show();
-			        $('#button-cart').hide();
-                      	}
-               });
-        }
-  });
-  return false;
+									dataType: "html",
+									success: function(out){
+													$(".header .iconsBox a.cart").html(out);
+							$('.cart').find('.cart-success').show();
+							$('#button-cart').hide();
+												}
+							 });
+				}
+	});
+	return false;
 }
 </script>

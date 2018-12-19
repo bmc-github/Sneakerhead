@@ -1,6 +1,10 @@
   .choose-size-wrap {
     margin-bottom: 16px;
 }
+.choose-size-wrap .show_size_grid_trigger {
+  margin-top: 12px;
+  display: inline-block;
+}
   .flex-row{
       padding: 0;
       margin: 0;
@@ -40,8 +44,13 @@
 
 
  .sizes-chart-header {
-      justify-content: space-between;
       margin-bottom: 16px;
+    }
+    .sizes-chart-header p {
+      font-weight: bold;
+    }
+    .sizes-chart-names {
+      margin-left: 12px;
     }
     .size_range_name {
       font-size: 11px;
@@ -81,4 +90,13 @@ a.show_size_grid_trigger {
     letter-spacing: 0.5px;
     color: #f20113;
     margin-bottom: 12px;
+}
+
+.sizes-chart-items-tab {
+  padding: 1px 0 0 1px;
+}
+
+.sizes-chart-items-tab .sizes-chart-item {
+  margin-top: -1px;
+  margin-left: -1px;
 }
