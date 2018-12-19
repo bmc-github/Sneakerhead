@@ -1902,6 +1902,17 @@ input.input-ongray:-moz-placeholder { /* Firefox 18- */
     color: #fff;
 }
 
+.redbutton.cart-success a {
+    color: #fff;
+    color: rgba(255, 255, 255, .6);
+    transition: color .2s ease;
+}
+
+.redbutton.cart-success a:hover {
+    color: rgba(255, 255, 255, .9);
+    border-bottom: 1px solid rgba(255, 255, 255, .4);
+}
+
 .whitebutton {
     border: 2px solid #F20113;
     background: #fff;

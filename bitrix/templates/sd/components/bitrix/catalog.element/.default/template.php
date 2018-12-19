@@ -368,7 +368,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 									<?if($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE']!='' && date(strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'])) > strtotime("now")){?>
 											 <?if($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 22727 || $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 89319){?>
 													<button type="button" class="button" id="button-cart" onclick="preorder()">Предзаказ</button>
-													<div class="redbutton cart-success" style="display:none;">Добавлено в <a href="/shopping-cart/">корзину</a></div>
+													<div class="redbutton cart-success" style="display:none;">Добавлено <a href="/shopping-cart/">в корзину</a></div>
 													<div class="redbutton cart-error" style="display:none;">Укажите размер!</div>
 							<input type="hidden" name="<?=$arParams['ACTION_VARIABLE']?>" value="ADD2BASKET" />
 													<input type="hidden" name="<?=$arParams['PRODUCT_ID_VARIABLE']?>" value="" />
@@ -382,7 +382,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 					<?}else{?>
 							<button type="button" class="button" id="button-cart" onclick="miniup()">Добавить в корзину</button>
 					<?}?>
-													<div class="redbutton cart-success" style="display:none;">Добавлено в <a href="/shopping-cart/">корзину</a></div>
+													<div class="redbutton cart-success" style="display:none;">Добавлено <a href="/shopping-cart/">в корзину</a></div>
 													<div class="redbutton cart-error" style="display:none;">Укажите размер!</div>
 							<input type="hidden" name="<?=$arParams['ACTION_VARIABLE']?>" value="ADD2BASKET" />
 													<input type="hidden" name="<?=$arParams['PRODUCT_ID_VARIABLE']?>" value="" />

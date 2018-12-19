@@ -1620,6 +1620,17 @@ input.input-ongray:focus {
     color: #fff;
 }
 
+.redbutton.cart-success a {
+    color: #fff;
+    color: rgba(255, 255, 255, .6);
+    transition: color .2s ease;
+}
+
+.redbutton.cart-success a:hover {
+    color: rgba(255, 255, 255, .9);
+    border-bottom: 1px solid rgba(255, 255, 255, .4);
+}
+
 .checkout-steps-contents {
     padding: 40px 12px 20px;
     background: #fff;

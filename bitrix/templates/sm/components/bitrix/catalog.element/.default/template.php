@@ -499,7 +499,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 				<?  }
 								}?>
 							</div>
-							<div class="addCart redbutton cart-success" style="display:none;">Добавлено в <a href="/shopping-cart/">корзину</a></div>
+							<div class="addCart redbutton cart-success" style="display:none;">Добавлено <a href="/shopping-cart/">в корзину</a></div>
 							<div class="addCart redbutton cart-error" style="display:none;">Укажите размер!</div>
 						</form>
 				<?/*
