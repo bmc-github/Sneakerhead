@@ -1628,7 +1628,6 @@ input.input-ongray:focus {
 
 .redbutton.cart-success a:hover {
     color: rgba(255, 255, 255, .9);
-    border-bottom: 1px solid rgba(255, 255, 255, .4);
 }
 
 .checkout-steps-contents {
