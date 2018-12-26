@@ -677,14 +677,16 @@ if($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22730 && date(strtotime($
 			});
 						function preorder(){
 							if($('input[name="id"]').val() == ''){
-					if($('select[name="option[34]"]').children().length > 2){
-												$('#button-cart').hide();
-												$('.cart').find('.cart-error').show();
-												$('.cart').find('.cart-success').hide();
-												$(this).hide();
-												return false;
-											}
-										}
+								if($('.choose-size-wrap').children().length > 2){
+									$('#button-cart').hide();
+									$('.cart').find('.cart-error').show();
+									$('.cart').find('.cart-success').hide();
+									$(this).hide();
+									return false;
+								}else{
+										$('input[name="id"]').val($('.sizes-chart-item').data('id'))
+								}
+							}
 							$.ajax({
 								type: "post",
 								url: '<?=$templateFolder?>/preorder.php',
