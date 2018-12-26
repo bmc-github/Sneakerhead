@@ -43,7 +43,7 @@ $nomoscow = false;
 	$addig[]= $mxResult['ID'];
 $db_props = CIBlockElement::GetProperty(2, $mxResult['ID'], array("sort" => "asc"), Array("ID"=>"84"));
 $v = $db_props->fetch();
-		if($v['VALUE'] == '22730'){
+		if($v['VALUE'] == '22730' || $v['VALUE'] == '22727'){
 	$noMoscow = true;
 }
 	}
