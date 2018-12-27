@@ -11,7 +11,7 @@
   $('.sizes-chart-header a').click(function (g) {
     var tab = $('.choose-size-wrap'),
       index = $(this).closest('.size_range_name').index();
-      $(".choose-size-wrap").find('.sizes-chart-item').removeClass('selected');
+      //$(".choose-size-wrap").find('.sizes-chart-item').removeClass('selected');
       tab.find('.size_range_name').removeClass('selected');
       $(this).closest('.size_range_name').addClass('selected');
       tab.find('.sizes-chart-items-tab').not('div.sizes-chart-items-tab:eq(' + index + ')').css('display', 'none');
@@ -80,7 +80,7 @@ $('.sizes-chart-item').on({
     popup.css('display', 'none');
   }
 });
-//Выбор размеров
+//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 (function(window){
 	'use strict';

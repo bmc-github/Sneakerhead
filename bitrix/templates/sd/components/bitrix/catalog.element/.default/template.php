@@ -290,40 +290,40 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 											</div>
 										<!--US SIZES-->
 										<div class="flex-row sizes-chart-items-tab">
-											<? foreach($arResult['OFFERS'] as $it){?>
-												<div class="sizes-chart-item" data-id="<?=$it['ID']?>">
+											<? foreach($arResult['OFFERS'] as $key => $it){?>
+												<div class="sizes-chart-item<?= ($key == 0) ? ' selected' : '' ?>" data-id="<?=$it['ID']?>">
 													<?=$it['US_NAME']?> <p class ="sizes-chart-item_shops"><?=implode('<br>',$arResult['STORES'][$it['ID']]);?></p>
 												</div>
 											<?}?>
 										</div>
 										 <!--UK SIZES-->
 										<div class="flex-row sizes-chart-items-tab">
-											<? foreach($arResult['OFFERS'] as $it){?>
-												<div class="sizes-chart-item" data-id="<?=$it['ID']?>">
+											<? foreach($arResult['OFFERS'] as $key => $it){?>
+												<div class="sizes-chart-item<?= ($key == 0) ? ' selected' : '' ?>" data-id="<?=$it['ID']?>">
 													<?=$it['UK_NAME']?> <p class ="sizes-chart-item_shops"><?=implode('<br>',$arResult['STORES'][$it['ID']]);?></p>
 												</div>
 											<?}?>
 										</div>
 										<!--RUS SIZES-->
 										<div class="flex-row sizes-chart-items-tab">
-											<? foreach($arResult['OFFERS'] as $it){?>
-												<div class="sizes-chart-item" data-id="<?=$it['ID']?>">
+											<? foreach($arResult['OFFERS'] as $key => $it){?>
+												<div class="sizes-chart-item<?= ($key == 0) ? ' selected' : '' ?>" data-id="<?=$it['ID']?>">
 												<?=$it['RUS_NAME']?> <p class ="sizes-chart-item_shops"><?=implode('<br>',$arResult['STORES'][$it['ID']]);?></p>
 												</div>
 											<?}?>
 										</div>
 											<!--EUR SIZES-->
 										<div class="flex-row sizes-chart-items-tab">
-											<? foreach($arResult['OFFERS'] as $it){?>
-												<div class="sizes-chart-item" data-id="<?=$it['ID']?>">
+											<? foreach($arResult['OFFERS'] as $key => $it){?>
+												<div class="sizes-chart-item<?= ($key == 0) ? ' selected' : '' ?>" data-id="<?=$it['ID']?>">
 												 <?=$it['EUR_NAME']?> <p class ="sizes-chart-item_shops"><?=implode('<br>',$arResult['STORES'][$it['ID']]);?></p>
 												</div>
 											<?}?>
 										</div>
 										<!--CM SIZES-->
 										<div class="flex-row sizes-chart-items-tab">
-											<? foreach($arResult['OFFERS'] as $it){?>
-												<div class="sizes-chart-item" data-id="<?=$it['ID']?>">
+											<? foreach($arResult['OFFERS'] as $key => $it){?>
+												<div class="sizes-chart-item<?= ($key == 0) ? ' selected' : '' ?>" data-id="<?=$it['ID']?>">
 													<?=$it['CM_NAME']?> <p class ="sizes-chart-item_shops"><?=implode('<br>',$arResult['STORES'][$it['ID']]);?></p>
 												</div>
 											<?}?>
@@ -345,8 +345,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 										 </div>
 										<!--CM SIZES-->
 											<div class="flex-row sizes-chart-items-tab">
-												<? foreach($arResult['OFFERS'] as $it){?>
-													<div class="sizes-chart-item" data-id="<?=$it['ID']?>">
+												<? foreach($arResult['OFFERS'] as $key => $it){?>
+													<div class="sizes-chart-item<?= ($key == 0) ? ' selected' : '' ?>" data-id="<?=$it['ID']?>">
 														<?=$it['SIZE_NAME']?> <p class ="sizes-chart-item_shops"><?=implode('<br>',$arResult['STORES'][$it['ID']]);?></p>
 													</div>
 												<?}?>
@@ -367,7 +367,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 													<div class="redbutton cart-success" style="display:none;">Добавлено <a href="/shopping-cart/">в корзину</a></div>
 													<div class="redbutton cart-error" style="display:none;">Укажите размер!</div>
 							<input type="hidden" name="<?=$arParams['ACTION_VARIABLE']?>" value="ADD2BASKET" />
-													<input type="hidden" name="<?=$arParams['PRODUCT_ID_VARIABLE']?>" value="" />
+													<input type="hidden" name="<?=$arParams['PRODUCT_ID_VARIABLE']?>" value="<?= $arResult['OFFERS'][0]['ID'] ?>" />
 					<?}else{/*
 <button type="button" class="button" id="button-cart" onclick="preorder()" disabled>В продаже с <?=date('d.m', strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE']));?></button>*/?>
 <div class="redbutton cart-error" style="">В продаже с <?=date('d.m', strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE']));?></div>
@@ -381,7 +381,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 													<div class="redbutton cart-success" style="display:none;">Добавлено <a href="/shopping-cart/">в корзину</a></div>
 													<div class="redbutton cart-error" style="display:none;">Укажите размер!</div>
 							<input type="hidden" name="<?=$arParams['ACTION_VARIABLE']?>" value="ADD2BASKET" />
-													<input type="hidden" name="<?=$arParams['PRODUCT_ID_VARIABLE']?>" value="" />
+													<input type="hidden" name="<?=$arParams['PRODUCT_ID_VARIABLE']?>" value="<?= $arResult['OFFERS'][0]['ID'] ?>" />
 									 <?}?>
 
 													<input type="hidden" name="<?=$arParams["PRODUCT_QUANTITY_VARIABLE"] ?>" value="1" />

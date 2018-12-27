@@ -299,40 +299,40 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 						</div>
 						<!--US SIZES-->
 						<div class="flex-row sizes-chart-items-tab">
-						<?foreach($arResult['OFFERS'] as $it){?>
-							<div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
+						<?foreach($arResult['OFFERS'] as $key => $it){?>
+							<div class="sizes-chart-item<?= ($key == 0) ? ' selected' : '' ?>" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
 								<?=$it['US_NAME']?>
 							</div>
 						<?}?>
 						</div>
 						<!--UK SIZES-->
 						<div class="flex-row sizes-chart-items-tab">
-						<?foreach($arResult['OFFERS'] as $it){?>
-							<div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
+						<?foreach($arResult['OFFERS'] as $key => $it){?>
+							<div class="sizes-chart-item<?= ($key == 0) ? ' selected' : '' ?>" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
 								<?=$it['UK_NAME']?>
 							</div>
 						<?}?>
 						</div>
 						<!--RUS SIZES-->
 						<div class="flex-row sizes-chart-items-tab">
-						<?foreach($arResult['OFFERS'] as $it){?>
-							<div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
+						<?foreach($arResult['OFFERS'] as $key => $it){?>
+							<div class="sizes-chart-item<?= ($key == 0) ? ' selected' : '' ?>" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
 								<?=$it['RUS_NAME']?>
 							</div>
 						<?}?>
 						</div>
 						<!--EUR SIZES-->
 						<div class="flex-row sizes-chart-items-tab">
-						<?foreach($arResult['OFFERS'] as $it){?>
-							<div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
+						<?foreach($arResult['OFFERS'] as $key => $it){?>
+							<div class="sizes-chart-item<?= ($key == 0) ? ' selected' : '' ?>" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
 								<?=$it['EUR_NAME']?>
 							</div>
 						<?}?>
 						</div>
 						<!--CM SIZES-->
 						<div class="flex-row sizes-chart-items-tab">
-						<?foreach($arResult['OFFERS'] as $it){?>
-							<div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
+						<?foreach($arResult['OFFERS'] as $key => $it){?>
+							<div class="sizes-chart-item<?= ($key == 0) ? ' selected' : '' ?>" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
 								<?=$it['CM_NAME']?>
 							</div>
 						<?}?>
@@ -351,8 +351,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 						</div>
 						<!--CM SIZES-->
 						<div class="flex-row sizes-chart-items-tab">
-						<?foreach($arResult['OFFERS'] as $it){?>
-							<div class="sizes-chart-item" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
+						<?foreach($arResult['OFFERS'] as $key => $it){?>
+							<div class="sizes-chart-item<?= ($key == 0) ? ' selected' : '' ?>" data-id="<?=$it['ID']?>" data-shops="<?=implode('<br>',$arResult['STORES'][$it['ID']]);?>">
 								<?=$it['SIZE_NAME']?>
 							</div>
 						<?}?>
@@ -452,7 +452,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 <?  }
 	}?>
 							<input type="hidden" name="<?=$arParams['ACTION_VARIABLE']?>" value="ADD2BASKET" />
-							<input type="hidden" name="<?=$arParams['PRODUCT_ID_VARIABLE']?>" value="" />
+							<input type="hidden" name="<?=$arParams['PRODUCT_ID_VARIABLE']?>" value="<?= $arResult['OFFERS'][0]['ID'] ?>" />
 							<input type="hidden" name="<?=$arParams["PRODUCT_QUANTITY_VARIABLE"] ?>" value="1" />
 							<div id="<?=$itemIds['BASKET_PROP_DIV']?>" style="display: none;">
 							<?if(!empty($arResult['PROPERTIES'])){
