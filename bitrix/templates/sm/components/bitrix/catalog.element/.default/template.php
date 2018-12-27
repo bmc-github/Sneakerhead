@@ -436,40 +436,6 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 					</div>
 <?}?>
 					<div class="available_shops"></div>
-					<div class="product-description">
-<?if(!$actualItem['CATALOG_QUANTITY']){?>
-						<p style="color:red;"><br>Товар закончился.</p>
-<?}?>
-<?/*if($actualItem['CATALOG_QUANTITY']>0 && !empty($stock_status['PREVIEW_TEXT'])){?>
-						<div class="stock">
-<?  if(($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 22727 || $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 89319 ) &&  $DB->CompareDates($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'], date('d.m.Y ')) > 0){
-			echo htmlspecialchars_decode(str_replace('[DATE]',$arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'],$stock_status['PREVIEW_TEXT']));
-		}elseif($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22727 && $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 89319){
-			echo htmlspecialchars_decode($stock_status['PREVIEW_TEXT']);
-		}?>
-						</div>
-<?}*/?>
-<?if(!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']){
-		if(!empty($arResult['DISPLAY_PROPERTIES'])){
-			foreach($arResult['DISPLAY_PROPERTIES'] as $property){
-				if(isset($arParams['MAIN_BLOCK_PROPERTY_CODE'][$property['CODE']])){?>
-						<p><?=$property['NAME']?>: <b><?=(is_array($property['DISPLAY_VALUE'])? implode(' / ', $property['DISPLAY_VALUE']): $property['DISPLAY_VALUE'])?></b></p>
-<?      }
-			}
-			unset($property);
-		}
-	}
-	if($arResult['PREVIEW_TEXT'] != '')
-						echo $arResult['PREVIEW_TEXT'];?>
-					</div>
-					<div class="flex-box">
-						<div style="width: 68px"><i class="icon icon_delivery"></i></div>
-						<div style="width: -webkit-calc(100% - 68px);width: calc(100% - 68px);">
-							<p><strong>Закажи доставку курьерской службой Redexpress в пределах МКАД — и мы доставим товар бесплатно!</strong></p>
-							<p><a class="redlink" href="/delivery/" target="_blank">Подробно о предложении</a></p>
-						</div>
-					</div>
-
 					<div class="cart waveBlock waves-effect waves-block" <?if(!$actualItem['CATALOG_QUANTITY']) echo 'style="display:none;";'?>>
 						<form data-adr="<?=$_SERVER['REQUEST_URI']?>" method="post" id="frm_add">
 <?if(date(strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'])) > strtotime("now")){
@@ -510,6 +476,39 @@ if($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22730 && date(strtotime($
 						</div>
 <?
 }*/?>
+					</div>
+					<div class="product-description">
+<?if(!$actualItem['CATALOG_QUANTITY']){?>
+						<p style="color:red;"><br>Товар закончился.</p>
+<?}?>
+<?/*if($actualItem['CATALOG_QUANTITY']>0 && !empty($stock_status['PREVIEW_TEXT'])){?>
+						<div class="stock">
+<?  if(($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 22727 || $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 89319 ) &&  $DB->CompareDates($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'], date('d.m.Y ')) > 0){
+			echo htmlspecialchars_decode(str_replace('[DATE]',$arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'],$stock_status['PREVIEW_TEXT']));
+		}elseif($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22727 && $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 89319){
+			echo htmlspecialchars_decode($stock_status['PREVIEW_TEXT']);
+		}?>
+						</div>
+<?}*/?>
+<?if(!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']){
+		if(!empty($arResult['DISPLAY_PROPERTIES'])){
+			foreach($arResult['DISPLAY_PROPERTIES'] as $property){
+				if(isset($arParams['MAIN_BLOCK_PROPERTY_CODE'][$property['CODE']])){?>
+						<p><?=$property['NAME']?>: <b><?=(is_array($property['DISPLAY_VALUE'])? implode(' / ', $property['DISPLAY_VALUE']): $property['DISPLAY_VALUE'])?></b></p>
+<?      }
+			}
+			unset($property);
+		}
+	}
+	if($arResult['PREVIEW_TEXT'] != '')
+						echo $arResult['PREVIEW_TEXT'];?>
+					</div>
+					<div class="flex-box" style="margin-top: 25px; margin-bottom: 10px;">
+						<div style="width: 68px"><i class="icon icon_delivery"></i></div>
+						<div style="width: -webkit-calc(100% - 68px);width: calc(100% - 68px);">
+							<p><strong>Закажи доставку курьерской службой Redexpress в пределах МКАД — и мы доставим товар бесплатно!</strong></p>
+							<p><a class="redlink" href="/delivery/" target="_blank">Подробно о предложении</a></p>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -1299,6 +1299,14 @@ main.container .filterpro-wrapper .filterpro {
     margin-bottom: 7px;
 }
 
+.product-detail .glide--horizontal .glide__bullets {
+    padding-top: 0;
+}
+
+.product-detail .glide--horizontal .glide__bullets > * {
+    vertical-align: top;
+}
+
 .product-attribute {
     font-size: 13px;
 }
@@ -2932,3 +2940,6 @@ display: none;
     text-align: center;
 }
 
+.available_shops {
+    margin-bottom: 20px;
+}
