@@ -244,11 +244,11 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 								</tbody>
 							</table>
 						</div>
+						<?if(!empty($arResult['RELATED_PRODUCTS'])){?>
 						<table class="product_option_table"<?if(!$actualItem['CATALOG_QUANTITY']) echo ' style="display:none;";'?>>
 							<tbody>
 								<tr>
 									<td class="product_color_select_wr">
-									<?if(!empty($arResult['RELATED_PRODUCTS'])){?>
 										<select id="product_color_link">
 											<option value="0"><?=$color_?></option>
 											<?foreach($arResult['RELATED_PRODUCTS'] as $key => $product){?>
@@ -267,15 +267,11 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 												}
 											});
 										</script>
-										<?}else{?>
-											<select name="" id="product_color_link">
-												<option value="0"><?=$color_?></option>
-											</select>
-										<?}?>
 									</td>
 								</tr>
 							</tbody>
 						</table>
+						<?}?>
 
 						<?if($haveOffers && !empty($arResult['OFFERS_PROP']) && ($arResult['OFFERS'][0]['US_NAME']!='' || $arResult['OFFERS'][0]['UK_NAME']!='' || $arResult['OFFERS'][0]['EUR_NAME']!='' || $arResult['OFFERS'][0]['RUS_NAME']!='' || $arResult['OFFERS'][0]['CM_NAME']!='')){?>
 							<!-- Размеры - начало-->

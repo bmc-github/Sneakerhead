@@ -261,13 +261,13 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 						</div>
 <?  }?>
 					</div>
+					<?  if(!empty($arResult['RELATED_PRODUCTS'])){?>
 					<div class="colorSize">
-<?  if(!empty($arResult['RELATED_PRODUCTS'])){?>
 						<select id="product_color_link">
 							<option value="0"><?=$color_?></option>
-<?    foreach($arResult['RELATED_PRODUCTS'] as $key => $product){?>
+							<?    foreach($arResult['RELATED_PRODUCTS'] as $key => $product){?>
 							<option value="<?=$product['ID']?>"><?=$product['COLOR']?></option>
-<?    }?>
+							<?    }?>
 						</select>
 						<script>
 							var products_links = [];
@@ -281,12 +281,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 								}
 							});
 						</script>
-<?  }else{?>
-						<select name="" id="product_color_link">
-							<option value="0"><?=$color_?></option>
-						</select>
-<?  }?>
 					</div>
+					<?  }?>
 <?  if($haveOffers && !empty($arResult['OFFERS_PROP']) && ($arResult['OFFERS'][0]['US_NAME']!='' || $arResult['OFFERS'][0]['UK_NAME']!='' || $arResult['OFFERS'][0]['EUR_NAME']!='' || $arResult['OFFERS'][0]['RUS_NAME']!='' || $arResult['OFFERS'][0]['CM_NAME']!='')){?>
 					<div class="choose-size-wrap">
 						<div class = "flex-row sizes-chart-header" >
