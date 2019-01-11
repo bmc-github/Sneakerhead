@@ -272,7 +272,7 @@ if ($normalCount > 0):
                                                 <span class="cart_old_price" id="old_price_<?=$arItem["ID"]?>"><?=$arItem["FULL_PRICE_FORMATED"]?></span><br />
 						<span class="cart_discount_info"><?=$arHeader["name"]?> <?=$arItem["DISCOUNT_PRICE_PERCENT_FORMATED"]?></span><br />
  					      <?endif;?>
-					    <?endif;?>	
+					    <?endif;?>
                                             </td>
                                             <?
                                         elseif ($arHeader["id"] == "WEIGHT"):
@@ -352,14 +352,14 @@ if ($normalCount > 0):
                 if ($arParams["HIDE_COUPON"] != "Y") {
                     ?>
                     <?//\Bitrix\Sale\DiscountCouponsManager::delete($arResult['COUPON_LIST'][0]["COUPON"]);?>
-                    
-                    
-        
-   <?if(!$arResult['COUPON_LIST']):?>   
-   <form action="" method="post" enctype="multipart/form-data">          
+
+
+
+   <?if(!$arResult['COUPON_LIST']):?>
+   <form action="" method="post" enctype="multipart/form-data">
                          <p>Код купона:</p>
                         <input type="text" name="coupon" id="coupon" value="" <?/*onchange="enterCoupon();"*/?> style="background:#fff;"/>
-                        <input type="hidden" name="next" value="coupon"/> 
+                        <input type="hidden" name="next" value="coupon"/>
                         <button type="button" value="Применить купон" class="redbutton" onclick="enterCoupon();" style="height:30px;line-height:30px;padding:0 20px;margin:1px 10px;float:right;">Применить</button>
 </form>
 <?endif?>
@@ -408,7 +408,7 @@ if ($normalCount > 0):
                             }
                             unset($couponClass, $oneCoupon);
                         } ?>
-                    
+
                     <?
                 }
                 ?>
@@ -445,7 +445,7 @@ if ($normalCount > 0):
                     endif;
                     ?>
                 <? endif; ?>
-                <tr>
+                <tr style="display: none;">
                     <td class="title"><b><?= GetMessage("SALE_TOTAL") ?></b></td>
                     <td class="sum" id="allSum_FORMATED"><?= $arResult["allSum_FORMATED"] ?></td>
                 </tr>
@@ -608,7 +608,7 @@ endif; ?>
       return false;
     });
 
-    $(document.body).on("focus", ".isrequired", function(){$(this).css("border","");});        
+    $(document.body).on("focus", ".isrequired", function(){$(this).css("border","");});
     $("#oneclickcart").on('click',function(e){
         e.preventDefault();
         var wri = $(".feedBackWrapper");
@@ -632,19 +632,19 @@ endif; ?>
               popup.css('max-height', $(window.top).height());
               popup.css('left', left);
               popup.css('top', top);
-              popup.find('.info').html(json.responseText); 
-console.log(json.responseText);             
+              popup.find('.info').html(json.responseText);
+console.log(json.responseText);
               popup.addClass('show');
               $('.fadeMe').show();
               $('.fadeMe').on('click',function() {
                 document.location.replace("/");
                 popup.removeClass('show');
                 $('.fadeMe').hide();
-              });        
+              });
             }
           });
         }
-    });        
+    });
 </script>
 
 <script type="text/javascript">

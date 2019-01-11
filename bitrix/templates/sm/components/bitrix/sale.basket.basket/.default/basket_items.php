@@ -51,14 +51,16 @@ $v = $db_props->fetch();
 
 ?>
 	<? if ($arParams['ORDER_PAGE'] !== "Y"){ ?>
-   <div id="coupons_block" class="content" style="margin-top:20px;text-align:center;">
+   <div id="coupons_block" class="content coupon-form">
 <?if ($arParams["HIDE_COUPON"] != "Y"){?>
-<?if(!$arResult['COUPON_LIST']):?> 
-      <form action="" method="post" enctype="multipart/form-data">
-	Код купона: 
-        <input type="text" id="coupon" name="coupon" value="" <?/*onchange="enterCoupon();"*/?> style="background:#fff;" />
-        <input type="hidden" name="next" value="coupon" />
-        <button type="submit" value="Применить" class="redbutton" onclick="enterCoupon();return false;" style="height:30px;line-height:30px;padding:0 20px;margin-top:20px;">Применить</button>
+<?if(!$arResult['COUPON_LIST']):?>
+      <form class="coupon-form__form" action="" method="post" enctype="multipart/form-data">
+        <!-- <label class="coupon-form__label" for="coupon">Код купона:</label> -->
+        <div class="coupon-form__input">
+          <input class="coupon-form__input-control" type="text" id="coupon" name="coupon" value="" placeholder="Код купона" <?/*onchange="enterCoupon();"*/?> />
+          <input type="hidden" name="next" value="coupon" />
+        </div>
+        <button type="submit" value="Применить" class="coupon-form__submit redbutton" onclick="enterCoupon();return false;">Применить</button>
 </form>
 <?endif?>
 			<?if (!empty($arResult['COUPON_LIST'])){
@@ -74,7 +76,7 @@ $v = $db_props->fetch();
 								break;
 						}
 						?>
-            <?if($couponClass!='bad'):?>            
+            <?if($couponClass!='bad'):?>
         <div class="bx_ordercart_coupon">
           <span class="<? echo $couponClass; ?>" data-coupon="<? echo htmlspecialcharsbx($oneCoupon['COUPON']); ?>"></span>
           <div class="bx_ordercart_coupon_notes">
@@ -107,14 +109,14 @@ $v = $db_props->fetch();
 					}
 					unset($couponClass, $oneCoupon);
 				}?>
-      
+
 		<?}?>
     </div>
 <form method="post" action="/checkout/" name="basket_form" id="basket_form" class="feedBackWrapper cart">
 
       <table id="basket_items" class="cart-info listItems">
 		<thead>
-				<tr>                       
+				<tr>
 					<?foreach ($arResult["GRID"]["HEADERS"] as $id => $arHeader){
 						$arHeaders[] = $arHeader["id"];
 						if (in_array($arHeader["id"], array("TYPE"))){
@@ -166,7 +168,7 @@ $v = $db_props->fetch();
 	    <?if (strlen($arItem["DETAIL_PAGE_URL"]) > 0):?></a><?endif;?>
           </td>
 	  <td class="des" colspan="3">
-            <p class="cat"><a class="category_name" href="<?=$arItem['CATEGORY']['SECTION_PAGE_URL']?>"><?=$arItem['CATEGORY']['NAME']?></a></p> 
+            <p class="cat"><a class="category_name" href="<?=$arItem['CATEGORY']['SECTION_PAGE_URL']?>"><?=$arItem['CATEGORY']['NAME']?></a></p>
             <p class="titleItem">
               <a class="manufacturer_name" href="<?=$arItem['BRAND']['DETAIL_PAGE_URL']?>"><?=$arItem['BRAND']['NAME']?></a>
               <?if (strlen($arItem["DETAIL_PAGE_URL"]) > 0):?><a class="product_name" href="<?=$arItem["DETAIL_PAGE_URL"] ?>"><?endif;?><?=$arItem["NAME"]?><?if (strlen($arItem["DETAIL_PAGE_URL"]) > 0):?></a><?endif;?>
@@ -281,7 +283,7 @@ $v = $db_props->fetch();
 									<?/*<span><?=$arHeader["name"]; ?>:</span>
 							<div id="discount_value_<?=$arItem["ID"]?>"><?=$arItem["DISCOUNT_PRICE_PERCENT_FORMATED"]?></div>*/?>
 	      </p>
-	<?else:?>      
+	<?else:?>
 	<?endif;endforeach;?>
            </div>
 
@@ -290,14 +292,14 @@ $v = $db_props->fetch();
 								if ($bDeleteColumn):*/
 									?>
          <a class="deleteItem checkout_removefromcart" href="<?=str_replace("#ID#", $arItem["ID"], $arUrls["delete"])?>" title="<?=GetMessage("SALE_DELETE")?>" onclick="return deleteProductRow(this)"></a>
-									
+
 					<?/*endif;?>
 
 						<?endif;*/?>
          </td>
         </tr>
 					<?$retail_ids[] = $arItem['XML_ID'];
-					endif;					
+					endif;
 				endforeach;?>
 	</tbody>
       </table>
@@ -320,9 +322,9 @@ $v = $db_props->fetch();
 					<?
 					$showTotalPrice = (float)$arResult["DISCOUNT_PRICE_ALL"] > 0;
 					?>
-	  <div style="display: <?=($showTotalPrice ? 'table-row' : 'none'); ?>;">
+	  <div style="display: <?=($showTotalPrice ? 'block' : 'none'); ?>; line-height: 30px;">
             <div class="custom_t1"></div>
-						<div class="custom_t2" style="text-decoration:line-through; color:#828282;" id="PRICE_WITHOUT_DISCOUNT">
+						<div class="custom_t2 pull-right" style="text-decoration:line-through; color:#828282;" id="PRICE_WITHOUT_DISCOUNT">
               <?=($showTotalPrice ? $arResult["PRICE_WITHOUT_DISCOUNT"] : ''); ?>
             </div>
           </div>
@@ -337,7 +339,7 @@ $v = $db_props->fetch();
 					endif;
 					?>
 				<?endif;?>
-          <div class="clearfix">
+          <div class="clearfix" style="display: none;">
             <div class="pull-left"><?=GetMessage("SALE_TOTAL")?></div>
 	    <div class="pull-right" id="allSum_FORMATED"><?=$arResult["allSum_FORMATED"]?></div>
           </div>
@@ -345,10 +347,6 @@ $v = $db_props->fetch();
       </div>
 
       <div data-retailrocket-markup-block="57ea53fd9872e5765454b622" data-product-id="<?=join(',', $retail_ids);?>"></div>
-      <div class="delivery-info" style="margin: 15px 0">
-        <p style="float:left; margin-right: 6px; color: red"><i class="fa fa-hand-o-right fa-2x"></i></p>
-        <p>Доступные способы доставки и оплаты зависят от региона доставки.<br /><a href="/delivery/" target="_blank" style="text-decoration: underline">Подробнее о доставке</a></p>
-      </div>
       <?if ($arParams["USE_PREPAYMENT"] == "Y" && strlen($arResult["PREPAY_BUTTON"]) > 0):?>
 			<?=$arResult["PREPAY_BUTTON"]?>
 			<span><?=GetMessage("SALE_OR")?></span>
@@ -358,10 +356,9 @@ $v = $db_props->fetch();
       <?}?>
       <?/*<a href="javascript:void(0)" onclick="checkOut();" class="redbutton checkout"><?=GetMessage("SALE_ORDER")?></a>*/?>
       <a href="/checkout/" onclick="checkOut();" class="redbutton checkout"><?=GetMessage("SALE_ORDER")?></a>
-      <a href="/" class="goShop waveBlock waves-effect waves-block">Продолжить покупки</a>
     </form>
 
-<? if(!$_SESSION['no_moscow_delivery'] && !$noMoscow)  {?>  
+<? if(!$_SESSION['no_moscow_delivery'] && !$noMoscow)  {?>
     <div class="oneClickBox">
       <form class="feedBackWrapper" data-adr="<?=$_SERVER['REQUEST_URI']?>" method="post">
         <a name="new_order"><h3>Заказать по Москве<br> без регистрации в 1 клик</h3></a>
@@ -419,7 +416,7 @@ $v = $db_props->fetch();
       event.selection(pos > 0 ? pos : this.value.length);
       return false;
     });
-    $(document.body).on("focus", ".isrequired", function(){$(this).css("border","");});        
+    $(document.body).on("focus", ".isrequired", function(){$(this).css("border","");});
     $("#oneclickcart").on('click',function(e){
         e.preventDefault();
         var wri = $(".feedBackWrapper");
@@ -436,10 +433,10 @@ $v = $db_props->fetch();
             type: 'post',
             data: $('.cart-info input[type=\'text\'],.cart-info input[type=\'hidden\'],.cart-info input[type=\'radio\']:checked,.cart-info input[type=\'checkbox\']:checked,.cart-info select,.cart-info textarea,.feedBackWrapper input[type=\'text\'],.feedBackWrapper input[type=\'hidden\']'),
             dataType: 'json',
-            complete: function(json){              
+            complete: function(json){
 			var popup = $('#success_order');
-	      var offset = popup.offset();		
-              popup.find('.info').html(json.responseText);              
+	      var offset = popup.offset();
+              popup.find('.info').html(json.responseText);
 	      $('body, html').animate({
         	scrollTop: offset.top
 	      }, 100);
@@ -449,8 +446,8 @@ $v = $db_props->fetch();
               $('.fadeMe').show();
               $('.fadeMe').on('click',function() {
                 popup.removeClass('show');
-                $('.fadeMe').hide();    
-            });  
+                $('.fadeMe').hide();
+            });
 			}
           });
         }
@@ -468,4 +465,42 @@ _tmr.push({
     totalvalue: '<?= $arResult["allSum"] ?>'
 });
 onCheckoutOption(1);
+</script>
+
+<style>
+  .totop {
+    display: none;
+  }
+
+  .rr-widget2 .retailrocket-widgettitle {
+    margin-bottom: 20px;
+    font-size: 15px;
+  }
+
+  .rr-widget2 .price {
+    margin-left: 7px;
+    text-align: left;
+  }
+
+  .rr-widget2 .slick-prev,
+  .rr-widget2 .slick-next {
+    filter: grayscale(100%);
+  }
+</style>
+
+<script>
+  function observeRetailRocketSlider() {
+    var $slider = $('.retailrocket-items.slick-initialized');
+
+    if (!$slider.length) {
+      if (window.requestAnimationFrame) window.requestAnimationFrame(observeRetailRocketSlider);
+    } else {
+      $slider.slick('slickSetOption', {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }, true);
+     }
+  };
+
+  observeRetailRocketSlider();
 </script>
