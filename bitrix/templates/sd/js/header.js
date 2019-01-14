@@ -26,7 +26,7 @@
   };
 
   win.addEventListener('optimizedScroll', function(){
-    // 28 - высота topline
+    // 28 - высота topline, 35 - высота sale-banner
     if (getWindowTop() >= 28) {
       header.classList.add('is-fixed');
     } else {

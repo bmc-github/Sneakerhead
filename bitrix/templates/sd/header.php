@@ -121,7 +121,10 @@
   </head>
   <body><?if($curPage != '/') echo '<!--noindex-->';?>
     <?$APPLICATION->IncludeComponent("h2o:favorites.add", "", array());?>
-    <div class="header_wrapper" style="height:102px">
+    <div class="header_wrapper" style="height:136px">
+      <a class="sale-banner" href="/sale/" title="Финальная распродажа">
+        <div class="sale-banner__inner">Финальная распродажа <span class="sale-banner__arrow">&rarr;</span></div>
+      </a>
       <div class="topline">
         <div class="header-language">
           <form class="ga_language" action="" method="post" enctype="multipart/form-data">

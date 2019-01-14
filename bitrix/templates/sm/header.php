@@ -14,7 +14,7 @@
     <meta charset="utf-8" />
     <title><?$APPLICATION->ShowTitle()?></title>
     <?$APPLICATION->ShowHead();?>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <?
     $APPLICATION->SetAdditionalCSS("//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&subset=latin,cyrillic");
     $APPLICATION->SetAdditionalCSS("//fonts.googleapis.com/css?family=PT+Sans:100,300,400,500,700&subset=latin,cyrillic");
@@ -41,15 +41,15 @@ if($curPage == '/'){
 }elseif($_SERVER['REAL_FILE_PATH'] == '/blog/index.php' || $curPage == '/blog/'){
     $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/tilda-grid-3.0.min.css");
     $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/tilda-blocks-2.12.css");
-    $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/tilda-zoom-1.0.min.css"); 
+    $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/tilda-zoom-1.0.min.css");
     $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/news.css");
     $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/colorbox.css");
 }
-    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.min.js");    
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.min.js");
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery-ui-1.8.16.custom.min.js");
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.bxslider.min.js");
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.fancybox.pack.js");
-    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.formstyler.min.js");    
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.formstyler.min.js");
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.lazyload.min.js");
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/glide.min.js");
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/mobile.min.js");
@@ -96,7 +96,7 @@ if($curPage == '/'){
         apiJs.src = "//cdn.retailrocket.ru/content/javascript/api.js";
         ref.parentNode.insertBefore(apiJs, ref);
       }(document));
-      dataLayer = [];      
+      dataLayer = [];
       function onCheckoutOption(step){
         window.dataLayer = window.dataLayer || [];
         dataLayer.push({
@@ -113,7 +113,7 @@ if($curPage == '/'){
         });
         console.log(step);
       }
-    </script>    
+    </script>
     <script>
       dataLayer.push({
         'userId': '<?=$userId?>'
@@ -123,7 +123,7 @@ if($curPage == '/'){
   </head>
   <body>
     <header>
-      <?/*      
+      <?/*
       <style>
         .topline p {
           display: inline-block;
@@ -155,12 +155,12 @@ if($curPage == '/'){
               </div>
               <a class="logo" href="/" title="">
                 <img src="<?=SITE_TEMPLATE_PATH?>/images/logo.svg" alt="" />
-              </a>              
+              </a>
               <div class="iconsBox">
                 <a href="tel:+78007003253" class="call"></a>
 <?$APPLICATION->IncludeComponent(
-	"bitrix:sale.basket.basket.small", 
-	"", 
+	"bitrix:sale.basket.basket.small",
+	"",
 	array(
 		"PATH_TO_BASKET" => "/shopping-cart/",
 		"PATH_TO_ORDER" => "/checkout/",
@@ -176,6 +176,9 @@ if($curPage == '/'){
           </div>
         </div>
       </div>
+      <a class="sale-banner" href="/sale/" title="Финальная распродажа">
+        <div class="sale-banner__inner">Финальная распродажа &rarr;</div>
+      </a>
       <!-- Всплывающий блок поиска -->
       <div class="searchContainer">
         <div class="searchBox">
@@ -189,7 +192,7 @@ if($curPage == '/'){
 		"COMPONENT_TEMPLATE" => ".default"
 	),
 	false
-);?> 
+);?>
           </div>
         </div>
       </div>
@@ -200,8 +203,8 @@ if($curPage == '/'){
         </a>
         <div class="menu">
 <?$APPLICATION->IncludeComponent(
-	"bitrix:catalog.section.list", 
-	"topmenu", 
+	"bitrix:catalog.section.list",
+	"topmenu",
 	array(
 		"COMPONENT_TEMPLATE" => "topmenu",
 		"IBLOCK_TYPE" => "catalog",
@@ -250,7 +253,7 @@ if($curPage == '/'){
         </div>
       </div>
     </header>
-    <div id="notification"></div>    
+    <div id="notification"></div>
 <?if($_SERVER['REAL_FILE_PATH'] == '/blog/index.php' || $curPage == '/blog/'):?>
     <div class="blog_container">
 <?endif;
@@ -267,7 +270,7 @@ if($curPage == '/'){
 	false,
 	Array('HIDE_ICONS' => 'Y')
 );*/?>
-      <?/*<h1><?$APPLICATION->ShowTitle(false)?></h1>*/?> 
+      <?/*<h1><?$APPLICATION->ShowTitle(false)?></h1>*/?>
 <?endif;
   if($_SERVER['REAL_FILE_PATH'] == '/blog/index.php' || $curPage == '/blog/'):?>
     </div>

@@ -10176,3 +10176,34 @@ input.coupon-form__input-control:focus {
 .privacy_check > label {
     display: inline;
 }
+
+
+.sale-banner {
+    position: relative;
+    display: block;
+    z-index: 10;
+    background-color: #fc0404;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 19px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+}
+
+.sale-banner__inner {
+    padding: 8px 10px;
+    box-sizing: border-box;
+}
+
+a.sale-banner {
+    transition: background-color .2s ease;
+}
+
+a.sale-banner:hover,
+a.sale-banner:focus {
+    background-color: #ff3a3a;
+    color: #fff;
+}
