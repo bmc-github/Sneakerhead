@@ -25,11 +25,15 @@
       $APPLICATION->SetAdditionalCSS("//fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700&subset=latin,cyrillic");
       $APPLICATION->SetAdditionalCSS("//fonts.googleapis.com/css?family=PT+Sans:100,300,400,500,600,700&subset=latin,cyrillic");
       $APPLICATION->SetAdditionalCSS("//fonts.googleapis.com/css?family=Open+Sans:100,300,400,500,600,700&subset=latin,cyrillic");
-      $APPLICATION->SetAdditionalCSS("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");?>
-    <link rel="stylesheet" href="<?= SITE_TEMPLATE_PATH ?>/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?= SITE_TEMPLATE_PATH ?>/css/stylesheet.css" />
-    <link rel="stylesheet" href="<?= SITE_TEMPLATE_PATH ?>/css/stylesheet-2.css" />
-    <?$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/jquery.bxslider.css");
+      $APPLICATION->SetAdditionalCSS("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+    ?>
+
+      <link rel="stylesheet" href="<?= autoVersion(SITE_TEMPLATE_PATH . '/css/bootstrap.min.css') ?>" />
+      <link rel="stylesheet" href="<?= autoVersion(SITE_TEMPLATE_PATH . '/css/stylesheet.css') ?>" />
+      <link rel="stylesheet" href="<?= autoVersion(SITE_TEMPLATE_PATH . '/css/stylesheet-2.css') ?>" />
+
+    <?
+      $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/jquery.bxslider.css");
       $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/jquery.fancybox.css");
       $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/jquery.growl.css");
       $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/svg_icons.css");

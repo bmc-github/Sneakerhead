@@ -13,7 +13,7 @@ use \Bitrix\Main\Localization\Loc;
  * @var string $elementDeleteParams
  */
 
-$this->addExternalCss('/bitrix/css/main/bootstrap.css');
+//$this->addExternalCss('/bitrix/css/main/bootstrap.css');
 
 global $APPLICATION;
 

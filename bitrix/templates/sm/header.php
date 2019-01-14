@@ -21,10 +21,12 @@
     $APPLICATION->SetAdditionalCSS("//fonts.googleapis.com/css?family=Open+Sans:100,300,400,500,700&subset=latin,cyrillic");
     $APPLICATION->SetAdditionalCSS("//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
     ?>
-    <link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/stylesheet-9.css" />
-    <link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/mobile.css" />
-    <link rel="stylesheet" href="<?=SITE_TEMPLATE_PATH?>/css/mobile.min.v5.css?1" />
+
+    <link rel="stylesheet" href="<?= autoVersion(SITE_TEMPLATE_PATH . '/css/bootstrap.min.css') ?>" />
+    <link rel="stylesheet" href="<?= autoVersion(SITE_TEMPLATE_PATH . '/css/stylesheet-9.css') ?>" />
+    <link rel="stylesheet" href="<?= autoVersion(SITE_TEMPLATE_PATH . '/css/mobile.css') ?>" />
+    <link rel="stylesheet" href="<?= autoVersion(SITE_TEMPLATE_PATH . '/css/mobile.min.v5.css') ?>" />
+
     <?
     $APPLICATION->SetAdditionalCSS("/bitrix/templates/sd/css/jquery.bxslider.css");
     $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/jquery.fancybox.css");
