@@ -74,10 +74,14 @@ class Import
             "filter" => array(
                 "!VALUE" => false,
                 "=ELEMENT.IBLOCK_ID" => self::IBLOCK_ID,
-                "PROPERTY.CODE" => "ARTNUMBER"
+                "PROPERTY.CODE" => "ARTNUMBER","ELEMENT.ACTIVE" => 'Y'
             ),
-        ))->fetchAll();
-        return $rows;
+        ));
+        while($row = $rows->Fetch()){
+        	$items[$row['ARTNUMBER']] = $row;
+        	
+        }
+        return $items;
     }
 
     public function getOffers()
@@ -415,6 +419,19 @@ class Import
         $obImport = new self();
         $arRemnants = $obImport->getRemnants();
         $arElements = $obImport->getElements();
+        foreach($arRemnants AS $k=>$v){
+        	if(empty($arElements[$k])){
+        		$items = CIBlockElement::GetList(array(), array('IBLOCK_ID' => '2', 'PROPERTY_ARTNUMBER'=>$k
+        		), false, false, array(
+        				'ID',
+        				'XML_ID','PROPERTY_ARTNUMBER'));
+        		$item = $items->Fetch();
+        		if(!empty($item)){
+        			$arElements[$k] = array('ELEMENT_ID'=>$item['ID'],'ARTNUMBER'=>$item['PROPERTY_ARTNUMBER_VALUE']);
+        		}
+        		
+        	}
+        }
         foreach ($arElements as $arItem) {
             if ($arRemnants[$arItem['ARTNUMBER']]) {
                 $arOffers = $obImport->getOffersByProductId($arItem['ELEMENT_ID']);
