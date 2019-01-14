@@ -194,7 +194,7 @@ class Import
         $arIds = array();
         // обновляем/добавляем для склада
         foreach ($arStories as $xmlId => $store) {
-            $storeId = $this->STORE[$xmlId];
+            /*$storeId = $this->STORE[$xmlId];
             $arIds[$storeId] = $storeId;
             if ($arAmount[$storeId]) {
                 \Bitrix\Catalog\StoreProductTable::update(
@@ -209,15 +209,15 @@ class Import
                 ));
 
             }
-            $this->log("Update: id " . $id . ", size " . $size . ", store " . $storeId . ", quantity " . $store["q"]);
+            $this->log("Update: id " . $id . ", size " . $size . ", store " . $storeId . ", quantity " . $store["q"]);*/
             $quantity += floatval($store["q"]);
         }
         // обнуляем там где нет
-        foreach ($arAmount as $storeId => $store) {
+        /*foreach ($arAmount as $storeId => $store) {
             if (!$arIds[$storeId]) {
                 \Bitrix\Catalog\StoreProductTable::delete($store['ID']);
             }
-        }
+        }*/
         // обновляем общее количество
         $catalog_product = \CCatalogProduct::GetByID($id);
         if (!$catalog_product) {
@@ -228,15 +228,15 @@ class Import
                 "ID" => $id,
                 'PURCHASING_PRICE' => 0,
                 'PURCHASING_CURRENCY' => 'RUB',
-                'QUANTITY' => $quantity,
-                'WEIGHT' => $weight
+                'QUANTITY' => $quantity/*,
+                'WEIGHT' => $weight*/
             );
             \CCatalogProduct::Add($arFields);
         } else {
-            $weight = current($this->getProperty('WEIGHT', $elementId, self::IBLOCK_ID));
+            /*$weight = current($this->getProperty('WEIGHT', $elementId, self::IBLOCK_ID));
             $weight = doubleval($weight['VALUE']);
-            $weight = $this->calcWeight($weight);
-            \CCatalogProduct::Update($id, array('QUANTITY' => $quantity, 'WEIGHT' => $weight));
+            $weight = $this->calcWeight($weight);*/
+            \CCatalogProduct::Update($id, array('QUANTITY' => $quantity/*, 'WEIGHT' => $weight*/));
         }
     }
 
