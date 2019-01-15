@@ -1304,6 +1304,10 @@ table {
 legend,td,th {
     padding: 0
 }
+
+.sale_order_full_table td {
+    padding-top: 28px;
+}
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
     *,:after,:before {
