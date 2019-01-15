@@ -150,12 +150,18 @@ if($curPage == '/'){
           <div class="row">
             <div class="col-lg-12">
               <div class="btnMenu">
-                <span class="iconBar"></span>
-                <span class="iconBar"></span>
-                <span class="iconBar"></span>
+                <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 1.5C0 0.671573 0.671573 0 1.5 0H18.5C19.3284 0 20 0.671573 20 1.5C20 2.32843 19.3284 3 18.5 3H1.5C0.671573 3 0 2.32843 0 1.5ZM0 8.5C0 7.67157 0.671573 7 1.5 7H18.5C19.3284 7 20 7.67157 20 8.5C20 9.32843 19.3284 10 18.5 10H1.5C0.671573 10 0 9.32843 0 8.5ZM1.5 14C0.671573 14 0 14.6716 0 15.5C0 16.3284 0.671573 17 1.5 17H18.5C19.3284 17 20 16.3284 20 15.5C20 14.6716 19.3284 14 18.5 14H1.5Z" fill="url(#paint0_linear)"/>
+                  <defs>
+                    <linearGradient id="paint0_linear" x1="10" y1="16.9992" x2="10" y2="-24.4143" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#999A9E"/>
+                      <stop offset="1" stop-color="#5E5751"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
               </div>
               <a class="logo" href="/" title="">
-                <img src="<?=SITE_TEMPLATE_PATH?>/images/logo.svg" alt="" />
+                <img src="<?=SITE_TEMPLATE_PATH?>/images/logo-horiz.svg" alt="" />
               </a>
               <div class="iconsBox">
                 <a href="tel:+78007003253" class="call"></a>
@@ -179,26 +185,28 @@ if($curPage == '/'){
       </div>
       <div class="categories-nav categories-nav--scroll-start categories-nav--scroll-end">
         <div class="categories-nav__scroll">
-          <ul class="categories-nav__list">
-            <li class="categories-nav__item">
-              <a class="categories-nav__link" href="#" title="Новинки">Новинки</a>
-            </li>
-            <li class="categories-nav__item">
-              <a class="categories-nav__link" href="#" title="Бренды">Бренды</a>
-            </li>
-            <li class="categories-nav__item">
-              <a class="categories-nav__link" href="#" title="Обувь">Обувь</a>
-            </li>
-            <li class="categories-nav__item">
-              <a class="categories-nav__link" href="#" title="Одежда">Одежда</a>
-            </li>
-            <li class="categories-nav__item">
-              <a class="categories-nav__link" href="#" title="Аксессуары">Аксессуары</a>
-            </li>
-            <li class="categories-nav__item categories-nav__item--active">
-              <a class="categories-nav__link" href="#" title="Распродажа">Распродажа</a>
-            </li>
-          </ul>
+          <div class="categories-nav__container container">
+            <ul class="categories-nav__list">
+              <li class="categories-nav__item">
+                <a class="categories-nav__link" href="#" title="Новинки">Новинки</a>
+              </li>
+              <li class="categories-nav__item">
+                <a class="categories-nav__link" href="#" title="Бренды">Бренды</a>
+              </li>
+              <li class="categories-nav__item">
+                <a class="categories-nav__link" href="#" title="Обувь">Обувь</a>
+              </li>
+              <li class="categories-nav__item">
+                <a class="categories-nav__link" href="#" title="Одежда">Одежда</a>
+              </li>
+              <li class="categories-nav__item">
+                <a class="categories-nav__link" href="#" title="Аксессуары">Аксессуары</a>
+              </li>
+              <li class="categories-nav__item categories-nav__item--active">
+                <a class="categories-nav__link" href="#" title="Распродажа">Распродажа</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <a class="sale-banner" href="/sale/" title="Финальная распродажа">
