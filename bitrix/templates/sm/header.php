@@ -53,6 +53,7 @@ if($curPage == '/'){
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.lazyload.min.js");
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/glide.min.js");
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/mobile.min.js");
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/categories-nav.js");
     $APPLICATION->AddHeadString(
     '<!--[if IE 7]>
     <link rel="stylesheet" href="'.SITE_TEMPLATE_PATH.'/css/ie7.css" />
@@ -174,6 +175,30 @@ if($curPage == '/'){
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="categories-nav categories-nav--scroll-start categories-nav--scroll-end">
+        <div class="categories-nav__scroll">
+          <ul class="categories-nav__list">
+            <li class="categories-nav__item">
+              <a class="categories-nav__link" href="#" title="Новинки">Новинки</a>
+            </li>
+            <li class="categories-nav__item">
+              <a class="categories-nav__link" href="#" title="Бренды">Бренды</a>
+            </li>
+            <li class="categories-nav__item">
+              <a class="categories-nav__link" href="#" title="Обувь">Обувь</a>
+            </li>
+            <li class="categories-nav__item">
+              <a class="categories-nav__link" href="#" title="Одежда">Одежда</a>
+            </li>
+            <li class="categories-nav__item">
+              <a class="categories-nav__link" href="#" title="Аксессуары">Аксессуары</a>
+            </li>
+            <li class="categories-nav__item categories-nav__item--active">
+              <a class="categories-nav__link" href="#" title="Распродажа">Распродажа</a>
+            </li>
+          </ul>
         </div>
       </div>
       <a class="sale-banner" href="/sale/" title="Финальная распродажа">
