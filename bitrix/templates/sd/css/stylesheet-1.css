@@ -1814,17 +1814,6 @@ li.header-blog-link a {
     color: #fff;
     border-radius: 2px;
 }
-span.product_isnew {
-    border-bottom: 2px solid #f20113;
-    color: #000;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 12px;
-    position: absolute;
-    top: 15px;
-    left: 25px;
-    padding-bottom: 5px;
-}
 .rub-font{
     position:relative;
 }

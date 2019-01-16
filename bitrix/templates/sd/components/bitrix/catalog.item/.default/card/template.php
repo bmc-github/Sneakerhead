@@ -33,20 +33,20 @@ use \Bitrix\Main\Localization\Loc;
                   <meta itemprop="sku" content="<?=$item['PROPERTIES']['ARTNUMBER']['VALUE']?>" />
                   <meta itemprop="category" content="<?=$cat_?>" />
                   <meta itemprop="manufacturer" content="<?=$brand['NAME']?>" />
-	        
+
                   <div class="metro-link-product-borderfix">
 <?if($item['PROPERTIES']['ISNEW']['VALUE'] == 'да' && $curPage != '/'){?>
-                    <span class="product_isnew"><?=Loc::getMessage('LIST_NEW');?></span>
-<?}if (($arParams['SHOW_OLD_PRICE'] == 'Y') && ($item['PROPERTIES']['SALE']['VALUE'] == 'да') && ($item['PROPERTIES']['SPECIAL_PRICE']['VALUE'] > 0) && (strtotime($item['PROPERTIES']['SPECIAL_DATE']['VALUE']) < strtotime("now"))) { 
+                    <span class="new-label"><?=Loc::getMessage('LIST_NEW');?></span>
+<?}if (($arParams['SHOW_OLD_PRICE'] == 'Y') && ($item['PROPERTIES']['SALE']['VALUE'] == 'да') && ($item['PROPERTIES']['SPECIAL_PRICE']['VALUE'] > 0) && (strtotime($item['PROPERTIES']['SPECIAL_DATE']['VALUE']) < strtotime("now"))) {
 
 $percent_todisp = 100 - round($price['RATIO_BASE_PRICE']*100/$item['PROPERTIES']['SPECIAL_PRICE']['VALUE'], -1, PHP_ROUND_HALF_DOWN);
 ?><span class="product_discount">-<? echo $percent_todisp; ?>%</span>
-<?php }?>             
+<?php }?>
                     <a href="<?=$item['DETAIL_PAGE_URL']?>">
                     <?
                     $img = CFile::ResizeImageGet($item['PREVIEW_PICTURE']['ID'], array('width'=>296, 'height'=>296), BX_RESIZE_IMAGE_EXACT , true);
                     ?>
-                      <img itemprop="image" class="metro-link-product-image lazy" src="<?=$img['src']?>" alt="" data-original="<?=$img['src']?>" onclick="return productClick('<?=$cat['ID']?>' , '0' , '<?=$item['ID']?>')" />       
+                      <img itemprop="image" class="metro-link-product-image lazy" src="<?=$img['src']?>" alt="" data-original="<?=$img['src']?>" onclick="return productClick('<?=$cat['ID']?>' , '0' , '<?=$item['ID']?>')" />
 <?if(date(strtotime($item['PROPERTIES']['DATE_AVAILABLE']['VALUE'])) > strtotime("now")){?>
 								<?php if(($item['PROPERTIES']['STOCK_STATUS']['VALUE'] == 22727 || $item['PROPERTIES']['STOCK_STATUS']['VALUE'] == 89319 )) { ?>
 
@@ -77,7 +77,7 @@ $percent_todisp = 100 - round($price['RATIO_BASE_PRICE']*100/$item['PROPERTIES']
                         <?=$item['NAME']?>
                       </a>
                     </div>
-                    <div class="clearfix"></div>                                                                                 
+                    <div class="clearfix"></div>
                   </div>
                   <div class="metro-link-product-hover">
                     <table>

@@ -28,8 +28,8 @@ use \Bitrix\Main\Localization\Loc;
                 <div class="item" onclick="return productClick('<?=$item['IBLOCK_SECTION_ID']?>' , '0' , '<?=$item['ID']?>')">
                   <a href="<?=$item['DETAIL_PAGE_URL']?>">
 <?if($item['PROPERTIES']['ISNEW']['VALUE'] == 'да' && $curPage != '/'){?>
-                    <span class="product_isnew"><?=Loc::getMessage('LIST_NEW');?></span>
-<?}?>               
+                    <span class="new-label"><?=Loc::getMessage('LIST_NEW');?></span>
+<?}?>
                     <div class="img">
 							<?php if (date(strtotime($item['PROPERTIES']['DATE_AVAILABLE']['VALUE'])) > strtotime("now")) {   ?>
 								<?php if(($item['PROPERTIES']['STOCK_STATUS']['VALUE'] == 22727 || $item['PROPERTIES']['STOCK_STATUS']['VALUE'] == 89319 )) { ?>

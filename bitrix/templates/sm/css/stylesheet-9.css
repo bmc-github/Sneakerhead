@@ -2124,16 +2124,28 @@ li.header-blog-link a {
     color: #fff;
 }
 
-span.product_isnew {
-    border-bottom: 2px solid #f20113;
-    color: #000;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 12px;
+.new-label,
+.sale-label {
+    padding: 3px 6px 2px;
     position: absolute;
-    top: 15px;
-    left: 25px;
-    padding-bottom: 5px;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    background-color: #FF0000;
+    color: #F4F4F4;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: normal;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+}
+
+.new-label--static,
+.sale-label--static {
+    position: static;
+    top: auto;
+    left: auto;
 }
 
 .rub-font {

@@ -200,10 +200,10 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 					<h1><?=($gender?$gender.' ':'').ToLower($cat)?> <span><?=$brand['NAME']?></span> <?=$arResult['NAME']?></h1>
 					<p class="vendorCode">Артикул: <?=$sku?></p>
 <?if($arResult['DISPLAY_PROPERTIES']['ISNEW']['VALUE'] == 'да'){?>
-					<span class="product_isnew" style="position:relative;top:0;left:0;color:#f20113">новинка</span>
+					<span class="new-label sale-label--static">новинка</span>
 <?}
 	if($arResult['DISPLAY_PROPERTIES']['SALE']['VALUE'] == 'да'){?>
-					<span class="product_isnew" style="position:relative;top:0;left:0;color:#f20113">Распродажа</span>
+					<span class="sale-label sale-label--static">Распродажа</span>
 <?}
 	if(!empty($actualItem['MORE_PHOTO'])){?>
 					<div id="Glide" class="glide">

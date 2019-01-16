@@ -8177,6 +8177,10 @@ h1 {
     transition: all linear .2s
 }
 
+.items .item a {
+    margin-top: 0;
+}
+
 @media (max-width: 482px) {
     .items .item {
         width:50%
