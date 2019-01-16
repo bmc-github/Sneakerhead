@@ -1,14 +1,13 @@
 $(document).ready(function () {
    // $('.header_cat_children').columnize({columns: 6});
-    $('<div class="menuAllItems"><a href="/brands/">Все бренды</a></div>').appendTo('.header-categories .allbrands');
     $('<a href="#" class="closeBox" />').click(function(){
         $(this).parent().slideUp(100);
         return false;
     }).appendTo('.header-categories .header_cat_children');
     var timerId;
-    $('.header-categories > ul > li').hover(function(){  
+    $('.header-categories > ul > li').hover(function(){
                 clearTimeout(timerId);
-                if (!$(this).hasClass("activeMenu")){ 
+                if (!$(this).hasClass("activeMenu")){
                     if ($(".activeMenu").length > 0) {
                         $(".activeMenu").removeClass("activeMenu").children('.header_cat_children').hide();
                         $(this).children('.header_cat_children').css('top', function () {
@@ -33,7 +32,7 @@ $(document).ready(function () {
     /* Search */
     $('.button-search').bind('click', function () {
         url = $('base').attr('href') + 'index.php?route=product/search';
-        var search = $('input[name=\'search\']').attr('value');         
+        var search = $('input[name=\'search\']').attr('value');
         if (search) {
             url += '&search=' + encodeURIComponent(search);
         }
@@ -43,7 +42,7 @@ $(document).ready(function () {
     $('#header input[name=\'search\']').bind('keydown', function (e) {
         if (e.keyCode == 13) {
             url = $('base').attr('href') + 'index.php?route=product/search';
-            var search = $('input[name=\'search\']').attr('value');         
+            var search = $('input[name=\'search\']').attr('value');
             if (search) {
                 url += '&search=' + encodeURIComponent(search);
             }
@@ -111,16 +110,16 @@ $(document).ready(function () {
             $(this).remove();
         });
     });
-    
+
      $('.totop').click(function () { // При клике по кнопке "Наверх" попадаем в эту функцию
       /* Плавная прокрутка наверх */
       $('body, html').animate({
         scrollTop: 0
       }, delay);
     });
-    
+
     $(window).scroll(function () {if ($(this).scrollTop() > 50) {$('.totop').show();} else {$('.totop').hide();}});
-    $('.totop').click(function () {$('body,html').animate({scrollTop: 0}, 400); return false;});    
+    $('.totop').click(function () {$('body,html').animate({scrollTop: 0}, 400); return false;});
 });
 
 
@@ -234,10 +233,10 @@ $(".coup").submit(function(){
              },
            complete: function(data) {
            window.location.reload();
-                      
+
            }});
            return false;
     }
-    
+
   });
 
