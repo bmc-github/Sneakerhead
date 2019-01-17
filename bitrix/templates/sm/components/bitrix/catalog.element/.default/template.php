@@ -435,20 +435,20 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 <?  }?>
 					</div>
 <?}?>
-					<div class="available_shops"></div>
+					<div class="available_shops" style="display: none;"></div>
 					<div class="cart waveBlock waves-effect waves-block" <?if(!$actualItem['CATALOG_QUANTITY']) echo 'style="display:none;";'?>>
 						<form data-adr="<?=$_SERVER['REQUEST_URI']?>" method="post" id="frm_add">
 <?if(date(strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'])) > strtotime("now")){
 		if(($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 22727 || $arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 89319 )){?>
-							<button type="button" class="addCart button" id="button-cart" onclick="preorder()">Предзаказ</button>
+							<button type="button" class="addCart button addCart--fixed" id="button-cart" onclick="preorder()">Предзаказ</button>
 <?  }else{?>
-							<button type="button" class="addCart button" id="button-cart" value="" disabled>В продаже с <?=date('d.m', strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE']));?></button>
+							<button type="button" class="addCart button addCart--fixed" id="button-cart" value="" disabled>В продаже с <?=date('d.m', strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE']));?></button>
 <?  }
 	}else{
 		if($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] == 22730){?>
-							<button type="button" class="addCart button" id="button-cart" onclick="preorder()">Добавить в корзину</button>
+							<button type="button" class="addCart button addCart--fixed" id="button-cart" onclick="preorder()">Добавить в корзину</button>
 <?  }else{?>
-							<button type="button" class="addCart button" id="button-cart" onclick="miniup()">Добавить в корзину</button>
+							<button type="button" class="addCart button addCart--fixed" id="button-cart" onclick="miniup()">Добавить в корзину</button>
 <?  }
 	}?>
 							<input type="hidden" name="<?=$arParams['ACTION_VARIABLE']?>" value="ADD2BASKET" />
@@ -461,8 +461,8 @@ if (!empty($arParams['LABEL_PROP_POSITION'])){
 				<?  }
 								}?>
 							</div>
-							<div class="addCart redbutton cart-success" style="display:none;">Добавлено <a href="/shopping-cart/">в корзину</a></div>
-							<div class="addCart redbutton cart-error" style="display:none;">Укажите размер!</div>
+							<div class="addCart redbutton addCart--fixed cart-success" style="display:none;">Добавлено <a href="/shopping-cart/">в корзину</a></div>
+							<div class="addCart redbutton addCart--fixed cart-error" style="display:none;">Укажите размер!</div>
 						</form>
 				<?/*
 if($arResult['PROPERTIES']['STOCK_STATUS']['VALUE'] != 22730 && date(strtotime($arResult['PROPERTIES']['DATE_AVAILABLE']['VALUE'])) < strtotime("now")){?>
@@ -1349,3 +1349,9 @@ console.log($("#frm_add").serialize());
 	return false;
 }
 </script>
+
+<style>
+	.totop {
+		display: none;
+	}
+</style>
