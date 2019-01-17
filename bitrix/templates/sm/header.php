@@ -262,6 +262,13 @@ if($curPage == '/'){
 <?elseif($curPage == '/' || in_array($_SERVER['REAL_FILE_PATH'],array('/catalog/index.php','/catalog/detail.php','/brands/index.php'))):?>
 <?else:?>
     <div class="container <?=$APPLICATION->ShowProperty('class');?>">
+<?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "", array(
+  "START_FROM" => "0",
+  "PATH" => "",
+  "SITE_ID" => "-"),
+  false,
+  array('HIDE_ICONS' => 'Y'));
+?>
 <?/*$APPLICATION->IncludeComponent("bitrix:breadcrumb", "", array(
 		"START_FROM" => "0",
 		"PATH" => "",
