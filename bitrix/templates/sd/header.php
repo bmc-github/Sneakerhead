@@ -122,9 +122,11 @@
   <body><?if($curPage != '/') echo '<!--noindex-->';?>
     <?$APPLICATION->IncludeComponent("h2o:favorites.add", "", array());?>
     <div class="header_wrapper" style="height:136px">
-      <a class="sale-banner" href="/sale/" title="Финальная распродажа">
-        <div class="sale-banner__inner">Финальная распродажа <span class="sale-banner__arrow">&rarr;</span></div>
-      </a>
+      <div class="sale-banner-container">
+        <a class="sale-banner" href="/sale/" title="Финальная распродажа">
+          <div class="sale-banner__inner">Финальная распродажа <span class="sale-banner__arrow">&rarr;</span></div>
+        </a>
+      </div>
       <div class="topline">
         <div class="header-language">
           <form class="ga_language" action="" method="post" enctype="multipart/form-data">
@@ -161,90 +163,92 @@ if($_REQUEST['lang_code'] != 'en'):?>
           <div class="clearfix"></div>
         </div>
       </div>
-      <header>
-        <div class="header-left">
-          <div class="header-logo">
-<?if($curPage != '/'){?>
-            <a href="/" title="<?=GetMessage('H_LOGO_TITLE');?>">
-              <img src="<?=SITE_TEMPLATE_PATH?>/images/logo.svg" alt="<?=GetMessage('H_LOGO_ALT');?>" />
-            </a>
-<?}else{?>
-            <img src="<?=SITE_TEMPLATE_PATH?>/images/logo.svg" alt="<?=GetMessage('H_LOGO_ALT');?>" title="<?=GetMessage('H_LOGO_TITLE');?>" />
-<?}?>
-          </div>
-        </div>
-        <div class="header-main">
-          <div class="header-main-top">
-            <div class="header-main-bottom clearafter">
-              <div class="header-categories">
-<?$APPLICATION->IncludeComponent(
-	"bitrix:catalog.section.list",
-	"topmenu",
-	array(
-		"COMPONENT_TEMPLATE" => "topmenu",
-		"IBLOCK_TYPE" => "catalog",
-		"IBLOCK_ID" => "2",
-		"SECTION_ID" => "",
-		"SECTION_CODE" => "",
-		"COUNT_ELEMENTS" => "N",
-		"TOP_DEPTH" => "2",
-		"SECTION_FIELDS" => array(
-			0 => "",
-			1 => "",
-		),
-		"SECTION_USER_FIELDS" => array(
-			0 => "UF_NAME",
-			1 => "UF_IS_ACTION",
-		),
-		"VIEW_MODE" => "LIST",
-		"SHOW_PARENT_NAME" => "Y",
-		"SECTION_URL" => "",
-		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "36000000",
-		"CACHE_GROUPS" => "Y",
-		"ADD_SECTIONS_CHAIN" => "N"
-	),
-	false
-);
-?>
-              </div><?if($curPage == '/') echo '<!--noindex-->';?>
-              <div class="header-tech-links">
-                <ul>
-                  <li class="header-wish">
-<?$APPLICATION->IncludeComponent("h2o:favorites.line", "", array("URL_LIST" => "/wishlist/"));?>
-		  </li>
-                  <li class="header-cart" id="topcart">
-<?$APPLICATION->IncludeComponent("bitrix:sale.basket.basket.small", "", array(
-        "PATH_TO_BASKET" => "/shopping-cart/",
-        "PATH_TO_ORDER" => "/checkout/",
-        "SHOW_DELAY" => "Y",
-        "SHOW_NOTAVAIL" => "Y",
-        "SHOW_SUBSCRIBE" => "Y"
-  ), false);
-?>
-                  </li>
-                </ul>
-              </div>
-              <div id="wrap">
-<?$APPLICATION->IncludeComponent("bitrix:search.form", ".default", array(
-        "USE_SUGGEST" => "N",
-        "PAGE" => "#SITE_DIR#search/",
-        "COMPONENT_TEMPLATE" => ".default"
-  ), false);
-?>
-              </div>
-              <div class="header-social" style="width: auto;">
-                <ul>
-                  <li><a href="//vk.com/sneakerhead_ru" class="round-icon-link" target="_blank" rel="nofollow"><i class="ri-vk"></i></a></li>
-                  <li><a href="//instagram.com/sneakerheadrussia" class="round-icon-link" target="_blank" rel="nofollow"><i class="ri-instagram"></i></a></li>
-                  <li><a href="//www.facebook.com/pages/SneakerHead-Russia/163152103698950" class="round-icon-link" target="_blank" rel="nofollow"><i class="ri-facebook"></i></a></li>
-                  <li><a href="//www.youtube.com/user/snkrhdstore" class="round-icon-link" target="_blank" rel="nofollow"><i class="ri-youtube"></i></a></li>
-                </ul>
-              </div><?if($curPage == '/') echo '<!--/noindex-->';?>
+      <div class="header-container">
+        <header>
+          <div class="header-left">
+            <div class="header-logo">
+  <?if($curPage != '/'){?>
+              <a href="/" title="<?=GetMessage('H_LOGO_TITLE');?>">
+                <img src="<?=SITE_TEMPLATE_PATH?>/images/logo.svg" alt="<?=GetMessage('H_LOGO_ALT');?>" />
+              </a>
+  <?}else{?>
+              <img src="<?=SITE_TEMPLATE_PATH?>/images/logo.svg" alt="<?=GetMessage('H_LOGO_ALT');?>" title="<?=GetMessage('H_LOGO_TITLE');?>" />
+  <?}?>
             </div>
           </div>
-        </div>
-      </header>
+          <div class="header-main">
+            <div class="header-main-top">
+              <div class="header-main-bottom clearafter">
+                <div class="header-categories">
+  <?$APPLICATION->IncludeComponent(
+    "bitrix:catalog.section.list",
+    "topmenu",
+    array(
+      "COMPONENT_TEMPLATE" => "topmenu",
+      "IBLOCK_TYPE" => "catalog",
+      "IBLOCK_ID" => "2",
+      "SECTION_ID" => "",
+      "SECTION_CODE" => "",
+      "COUNT_ELEMENTS" => "N",
+      "TOP_DEPTH" => "2",
+      "SECTION_FIELDS" => array(
+        0 => "",
+        1 => "",
+      ),
+      "SECTION_USER_FIELDS" => array(
+        0 => "UF_NAME",
+        1 => "UF_IS_ACTION",
+      ),
+      "VIEW_MODE" => "LIST",
+      "SHOW_PARENT_NAME" => "Y",
+      "SECTION_URL" => "",
+      "CACHE_TYPE" => "A",
+      "CACHE_TIME" => "36000000",
+      "CACHE_GROUPS" => "Y",
+      "ADD_SECTIONS_CHAIN" => "N"
+    ),
+    false
+  );
+  ?>
+                </div><?if($curPage == '/') echo '<!--noindex-->';?>
+                <div class="header-tech-links">
+                  <ul>
+                    <li class="header-wish">
+  <?$APPLICATION->IncludeComponent("h2o:favorites.line", "", array("URL_LIST" => "/wishlist/"));?>
+        </li>
+                    <li class="header-cart" id="topcart">
+  <?$APPLICATION->IncludeComponent("bitrix:sale.basket.basket.small", "", array(
+          "PATH_TO_BASKET" => "/shopping-cart/",
+          "PATH_TO_ORDER" => "/checkout/",
+          "SHOW_DELAY" => "Y",
+          "SHOW_NOTAVAIL" => "Y",
+          "SHOW_SUBSCRIBE" => "Y"
+    ), false);
+  ?>
+                    </li>
+                  </ul>
+                </div>
+                <div id="wrap">
+  <?$APPLICATION->IncludeComponent("bitrix:search.form", ".default", array(
+          "USE_SUGGEST" => "N",
+          "PAGE" => "#SITE_DIR#search/",
+          "COMPONENT_TEMPLATE" => ".default"
+    ), false);
+  ?>
+                </div>
+                <div class="header-social" style="width: auto;">
+                  <ul>
+                    <li><a href="//vk.com/sneakerhead_ru" class="round-icon-link" target="_blank" rel="nofollow"><i class="ri-vk"></i></a></li>
+                    <li><a href="//instagram.com/sneakerheadrussia" class="round-icon-link" target="_blank" rel="nofollow"><i class="ri-instagram"></i></a></li>
+                    <li><a href="//www.facebook.com/pages/SneakerHead-Russia/163152103698950" class="round-icon-link" target="_blank" rel="nofollow"><i class="ri-facebook"></i></a></li>
+                    <li><a href="//www.youtube.com/user/snkrhdstore" class="round-icon-link" target="_blank" rel="nofollow"><i class="ri-youtube"></i></a></li>
+                  </ul>
+                </div><?if($curPage == '/') echo '<!--/noindex-->';?>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
     </div>
     <div id="notification"></div><?if($curPage != '/') echo '<!--/noindex-->';?>
 <?if($_SERVER['REAL_FILE_PATH'] == '/blog/index.php' || $curPage == '/blog/'):?>
