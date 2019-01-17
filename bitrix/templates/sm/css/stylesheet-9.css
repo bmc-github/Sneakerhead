@@ -2955,3 +2955,19 @@ display: none;
 .available_shops {
     margin-bottom: 20px;
 }
+
+.discount-badge {
+    width: 37px;
+    height: 37px;
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    z-index: 1;
+    border-radius: 100%;
+    background: #F20113;
+    color: #fff;
+    font-size: 12px;
+    line-height: 36px;
+    letter-spacing: 1px;
+    text-align: center;
+}
